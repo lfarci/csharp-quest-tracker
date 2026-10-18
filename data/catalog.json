@@ -1,0 +1,1297 @@
+{
+  "bookEdition": 5,
+  "revision": "5e-2026-10-18",
+  "sourceUrl": "https://csharpplayersguide.com/assets/content/downloadables/5th-edition/XPTracker.pdf",
+  "parts": [
+    {
+      "id": 1,
+      "title": "The Basics"
+    },
+    {
+      "id": 2,
+      "title": "Object-Oriented Programming"
+    },
+    {
+      "id": 3,
+      "title": "Advanced Features"
+    },
+    {
+      "id": 4,
+      "title": "The Endgame"
+    },
+    {
+      "id": 5,
+      "title": "Bonus Levels"
+    }
+  ],
+  "levelThresholds": [
+    0,
+    200,
+    600,
+    1200,
+    2000,
+    3000,
+    4200,
+    5600,
+    7200,
+    9000
+  ],
+  "challenges": [
+    {
+      "id": "knowledge-check-c",
+      "title": "Knowledge Check - C#",
+      "bookPart": 1,
+      "page": 10,
+      "order": 1,
+      "reward": {
+        "kind": "fixed",
+        "xp": 25
+      }
+    },
+    {
+      "id": "install-visual-studio",
+      "title": "Install Visual Studio",
+      "bookPart": 1,
+      "page": 14,
+      "order": 2,
+      "reward": {
+        "kind": "fixed",
+        "xp": 75
+      }
+    },
+    {
+      "id": "hello-world",
+      "title": "Hello, World!",
+      "bookPart": 1,
+      "page": 19,
+      "order": 3,
+      "reward": {
+        "kind": "fixed",
+        "xp": 50
+      }
+    },
+    {
+      "id": "what-comes-next",
+      "title": "What Comes Next",
+      "bookPart": 1,
+      "page": 24,
+      "order": 4,
+      "reward": {
+        "kind": "fixed",
+        "xp": 50
+      }
+    },
+    {
+      "id": "the-makings-of-a-programmer",
+      "title": "The Makings of a Programmer",
+      "bookPart": 1,
+      "page": 24,
+      "order": 5,
+      "reward": {
+        "kind": "fixed",
+        "xp": 50
+      }
+    },
+    {
+      "id": "consolas-and-telim",
+      "title": "Consolas and Telim",
+      "bookPart": 1,
+      "page": 26,
+      "order": 6,
+      "reward": {
+        "kind": "fixed",
+        "xp": 50
+      }
+    },
+    {
+      "id": "the-thing-namer-3000",
+      "title": "The Thing Namer 3000",
+      "bookPart": 1,
+      "page": 31,
+      "order": 7,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "knowledge-check-variables",
+      "title": "Knowledge Check - Variables",
+      "bookPart": 1,
+      "page": 37,
+      "order": 8,
+      "reward": {
+        "kind": "fixed",
+        "xp": 25
+      }
+    },
+    {
+      "id": "the-variable-shop",
+      "title": "The Variable Shop",
+      "bookPart": 1,
+      "page": 45,
+      "order": 9,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "the-variable-shop-returns",
+      "title": "The Variable Shop Returns",
+      "bookPart": 1,
+      "page": 45,
+      "order": 10,
+      "reward": {
+        "kind": "fixed",
+        "xp": 50
+      }
+    },
+    {
+      "id": "knowledge-check-type-system",
+      "title": "Knowledge Check - Type System",
+      "bookPart": 1,
+      "page": 48,
+      "order": 11,
+      "reward": {
+        "kind": "fixed",
+        "xp": 25
+      }
+    },
+    {
+      "id": "the-triangle-farmer",
+      "title": "The Triangle Farmer",
+      "bookPart": 1,
+      "page": 53,
+      "order": 12,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "the-four-sisters-and-the-duckbear",
+      "title": "The Four Sisters and the Duckbear",
+      "bookPart": 1,
+      "page": 56,
+      "order": 13,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "the-dominion-of-kings",
+      "title": "The Dominion of Kings",
+      "bookPart": 1,
+      "page": 57,
+      "order": 14,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "the-defense-of-consolas",
+      "title": "The Defense of Consolas",
+      "bookPart": 1,
+      "page": 68,
+      "order": 15,
+      "reward": {
+        "kind": "fixed",
+        "xp": 200
+      }
+    },
+    {
+      "id": "repairing-the-clocktower",
+      "title": "Repairing the Clocktower",
+      "bookPart": 1,
+      "page": 75,
+      "order": 16,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "watchtower",
+      "title": "Watchtower",
+      "bookPart": 1,
+      "page": 78,
+      "order": 17,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "buying-inventory",
+      "title": "Buying Inventory",
+      "bookPart": 1,
+      "page": 82,
+      "order": 18,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "discounted-inventory",
+      "title": "Discounted Inventory",
+      "bookPart": 1,
+      "page": 83,
+      "order": 19,
+      "reward": {
+        "kind": "fixed",
+        "xp": 50
+      }
+    },
+    {
+      "id": "the-prototype",
+      "title": "The Prototype",
+      "bookPart": 1,
+      "page": 88,
+      "order": 20,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "the-magic-cannon",
+      "title": "The Magic Cannon",
+      "bookPart": 1,
+      "page": 89,
+      "order": 21,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "the-replicator-of-d-to",
+      "title": "The Replicator of D’To",
+      "bookPart": 1,
+      "page": 94,
+      "order": 22,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "the-laws-of-freach",
+      "title": "The Laws of Freach",
+      "bookPart": 1,
+      "page": 95,
+      "order": 23,
+      "reward": {
+        "kind": "fixed",
+        "xp": 50
+      }
+    },
+    {
+      "id": "taking-a-number",
+      "title": "Taking a Number",
+      "bookPart": 1,
+      "page": 106,
+      "order": 24,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "countdown",
+      "title": "Countdown",
+      "bookPart": 1,
+      "page": 107,
+      "order": 25,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "knowledge-check-memory",
+      "title": "Knowledge Check - Memory",
+      "bookPart": 1,
+      "page": 123,
+      "order": 26,
+      "reward": {
+        "kind": "fixed",
+        "xp": 25
+      }
+    },
+    {
+      "id": "hunting-the-manticore",
+      "title": "Hunting the Manticore",
+      "bookPart": 1,
+      "page": 124,
+      "order": 27,
+      "reward": {
+        "kind": "fixed",
+        "xp": 250
+      }
+    },
+    {
+      "id": "knowledge-check-objects",
+      "title": "Knowledge Check - Objects",
+      "bookPart": 2,
+      "page": 131,
+      "order": 28,
+      "reward": {
+        "kind": "fixed",
+        "xp": 25
+      }
+    },
+    {
+      "id": "simula-s-test",
+      "title": "Simula’s Test",
+      "bookPart": 2,
+      "page": 135,
+      "order": 29,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "simula-s-soups",
+      "title": "Simula’s Soups",
+      "bookPart": 2,
+      "page": 143,
+      "order": 30,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "vin-fletcher-s-arrows",
+      "title": "Vin Fletcher’s Arrows",
+      "bookPart": 2,
+      "page": 153,
+      "order": 31,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "vin-s-trouble",
+      "title": "Vin’s Trouble",
+      "bookPart": 2,
+      "page": 162,
+      "order": 32,
+      "reward": {
+        "kind": "fixed",
+        "xp": 50
+      }
+    },
+    {
+      "id": "the-properties-of-arrows",
+      "title": "The Properties of Arrows",
+      "bookPart": 2,
+      "page": 168,
+      "order": 33,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "arrow-factories",
+      "title": "Arrow Factories",
+      "bookPart": 2,
+      "page": 173,
+      "order": 34,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "the-point",
+      "title": "The Point",
+      "bookPart": 2,
+      "page": 191,
+      "order": 35,
+      "reward": {
+        "kind": "fixed",
+        "xp": 75
+      }
+    },
+    {
+      "id": "the-color",
+      "title": "The Color",
+      "bookPart": 2,
+      "page": 191,
+      "order": 36,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "the-card",
+      "title": "The Card",
+      "bookPart": 2,
+      "page": 191,
+      "order": 37,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "the-locked-door",
+      "title": "The Locked Door",
+      "bookPart": 2,
+      "page": 192,
+      "order": 38,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "the-password-validator",
+      "title": "The Password Validator",
+      "bookPart": 2,
+      "page": 192,
+      "order": 39,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "rock-paper-scissors",
+      "title": "Rock-Paper-Scissors",
+      "bookPart": 2,
+      "page": 193,
+      "order": 40,
+      "reward": {
+        "kind": "fixed",
+        "xp": 150
+      }
+    },
+    {
+      "id": "15-puzzle",
+      "title": "15-Puzzle",
+      "bookPart": 2,
+      "page": 194,
+      "order": 41,
+      "reward": {
+        "kind": "fixed",
+        "xp": 150
+      }
+    },
+    {
+      "id": "hangman",
+      "title": "Hangman",
+      "bookPart": 2,
+      "page": 194,
+      "order": 42,
+      "reward": {
+        "kind": "fixed",
+        "xp": 150
+      }
+    },
+    {
+      "id": "tic-tac-toe",
+      "title": "Tic-Tac-Toe",
+      "bookPart": 2,
+      "page": 195,
+      "order": 43,
+      "reward": {
+        "kind": "fixed",
+        "xp": 300
+      }
+    },
+    {
+      "id": "packing-inventory",
+      "title": "Packing Inventory",
+      "bookPart": 2,
+      "page": 205,
+      "order": 44,
+      "reward": {
+        "kind": "fixed",
+        "xp": 150
+      }
+    },
+    {
+      "id": "labeling-inventory",
+      "title": "Labeling Inventory",
+      "bookPart": 2,
+      "page": 209,
+      "order": 45,
+      "reward": {
+        "kind": "fixed",
+        "xp": 50
+      }
+    },
+    {
+      "id": "the-old-robot",
+      "title": "The Old Robot",
+      "bookPart": 2,
+      "page": 210,
+      "order": 46,
+      "reward": {
+        "kind": "fixed",
+        "xp": 200
+      }
+    },
+    {
+      "id": "robotic-interface",
+      "title": "Robotic Interface",
+      "bookPart": 2,
+      "page": 217,
+      "order": 47,
+      "reward": {
+        "kind": "fixed",
+        "xp": 75
+      }
+    },
+    {
+      "id": "room-coordinates",
+      "title": "Room Coordinates",
+      "bookPart": 2,
+      "page": 225,
+      "order": 48,
+      "reward": {
+        "kind": "fixed",
+        "xp": 50
+      }
+    },
+    {
+      "id": "war-preparations",
+      "title": "War Preparations",
+      "bookPart": 2,
+      "page": 231,
+      "order": 49,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "colored-items",
+      "title": "Colored Items",
+      "bookPart": 2,
+      "page": 240,
+      "order": 50,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "the-fountain-of-objects",
+      "title": "The Fountain of Objects",
+      "bookPart": 2,
+      "page": 242,
+      "order": 51,
+      "reward": {
+        "kind": "fixed",
+        "xp": 500
+      }
+    },
+    {
+      "id": "small-medium-or-large",
+      "title": "Small, Medium, or Large",
+      "bookPart": 2,
+      "page": 244,
+      "order": 52,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "pits",
+      "title": "Pits",
+      "bookPart": 2,
+      "page": 244,
+      "order": 53,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "maelstroms",
+      "title": "Maelstroms",
+      "bookPart": 2,
+      "page": 244,
+      "order": 54,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "amaroks",
+      "title": "Amaroks",
+      "bookPart": 2,
+      "page": 245,
+      "order": 55,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "getting-armed",
+      "title": "Getting Armed",
+      "bookPart": 2,
+      "page": 245,
+      "order": 56,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "getting-help",
+      "title": "Getting Help",
+      "bookPart": 2,
+      "page": 246,
+      "order": 57,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "the-robot-pilot",
+      "title": "The Robot Pilot",
+      "bookPart": 2,
+      "page": 249,
+      "order": 58,
+      "reward": {
+        "kind": "fixed",
+        "xp": 50
+      }
+    },
+    {
+      "id": "time-in-the-cavern",
+      "title": "Time in the Cavern",
+      "bookPart": 2,
+      "page": 251,
+      "order": 59,
+      "reward": {
+        "kind": "fixed",
+        "xp": 50
+      }
+    },
+    {
+      "id": "lists-of-commands",
+      "title": "Lists of Commands",
+      "bookPart": 2,
+      "page": 255,
+      "order": 60,
+      "reward": {
+        "kind": "fixed",
+        "xp": 75
+      }
+    },
+    {
+      "id": "knowledge-check-large-programs",
+      "title": "Knowledge Check - Large Programs",
+      "bookPart": 3,
+      "page": 269,
+      "order": 61,
+      "reward": {
+        "kind": "fixed",
+        "xp": 25
+      }
+    },
+    {
+      "id": "the-feud",
+      "title": "The Feud",
+      "bookPart": 3,
+      "page": 270,
+      "order": 62,
+      "reward": {
+        "kind": "fixed",
+        "xp": 75
+      }
+    },
+    {
+      "id": "dueling-traditions",
+      "title": "Dueling Traditions",
+      "bookPart": 3,
+      "page": 270,
+      "order": 63,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "safer-number-crunching",
+      "title": "Safer Number Crunching",
+      "bookPart": 3,
+      "page": 276,
+      "order": 64,
+      "reward": {
+        "kind": "fixed",
+        "xp": 50
+      }
+    },
+    {
+      "id": "knowledge-check-methods",
+      "title": "Knowledge Check - Methods",
+      "bookPart": 3,
+      "page": 278,
+      "order": 65,
+      "reward": {
+        "kind": "fixed",
+        "xp": 25
+      }
+    },
+    {
+      "id": "better-random",
+      "title": "Better Random",
+      "bookPart": 3,
+      "page": 278,
+      "order": 66,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "exepti-s-game",
+      "title": "Exepti’s Game",
+      "bookPart": 3,
+      "page": 290,
+      "order": 67,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "the-sieve",
+      "title": "The Sieve",
+      "bookPart": 3,
+      "page": 295,
+      "order": 68,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "knowledge-check-events",
+      "title": "Knowledge Check - Events",
+      "bookPart": 3,
+      "page": 301,
+      "order": 69,
+      "reward": {
+        "kind": "fixed",
+        "xp": 25
+      }
+    },
+    {
+      "id": "charberry-trees",
+      "title": "Charberry Trees",
+      "bookPart": 3,
+      "page": 302,
+      "order": 70,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "knowledge-check-lambdas",
+      "title": "Knowledge Check - Lambdas",
+      "bookPart": 3,
+      "page": 307,
+      "order": 71,
+      "reward": {
+        "kind": "fixed",
+        "xp": 25
+      }
+    },
+    {
+      "id": "the-lambda-sieve",
+      "title": "The Lambda Sieve",
+      "bookPart": 3,
+      "page": 307,
+      "order": 72,
+      "reward": {
+        "kind": "fixed",
+        "xp": 50
+      }
+    },
+    {
+      "id": "the-long-game",
+      "title": "The Long Game",
+      "bookPart": 3,
+      "page": 315,
+      "order": 73,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "the-potion-masters-of-pattren",
+      "title": "The Potion Masters of Pattren",
+      "bookPart": 3,
+      "page": 324,
+      "order": 74,
+      "reward": {
+        "kind": "fixed",
+        "xp": 150
+      }
+    },
+    {
+      "id": "knowledge-check-operators",
+      "title": "Knowledge Check - Operators",
+      "bookPart": 3,
+      "page": 331,
+      "order": 75,
+      "reward": {
+        "kind": "fixed",
+        "xp": 25
+      }
+    },
+    {
+      "id": "navigating-operand-city",
+      "title": "Navigating Operand City",
+      "bookPart": 3,
+      "page": 331,
+      "order": 76,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "indexing-operand-city",
+      "title": "Indexing Operand City",
+      "bookPart": 3,
+      "page": 332,
+      "order": 77,
+      "reward": {
+        "kind": "fixed",
+        "xp": 75
+      }
+    },
+    {
+      "id": "converting-directions-to-offsets",
+      "title": "Converting Directions to Offsets",
+      "bookPart": 3,
+      "page": 332,
+      "order": 78,
+      "reward": {
+        "kind": "fixed",
+        "xp": 50
+      }
+    },
+    {
+      "id": "knowledge-check-queries",
+      "title": "Knowledge Check - Queries",
+      "bookPart": 3,
+      "page": 341,
+      "order": 79,
+      "reward": {
+        "kind": "fixed",
+        "xp": 25
+      }
+    },
+    {
+      "id": "the-three-lenses",
+      "title": "The Three Lenses",
+      "bookPart": 3,
+      "page": 342,
+      "order": 80,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "the-repeating-stream",
+      "title": "The Repeating Stream",
+      "bookPart": 3,
+      "page": 349,
+      "order": 81,
+      "reward": {
+        "kind": "fixed",
+        "xp": 150
+      }
+    },
+    {
+      "id": "knowledge-check-async",
+      "title": "Knowledge Check - Async",
+      "bookPart": 3,
+      "page": 359,
+      "order": 82,
+      "reward": {
+        "kind": "fixed",
+        "xp": 25
+      }
+    },
+    {
+      "id": "asynchronous-random-words",
+      "title": "Asynchronous Random Words",
+      "bookPart": 3,
+      "page": 359,
+      "order": 83,
+      "reward": {
+        "kind": "fixed",
+        "xp": 150
+      }
+    },
+    {
+      "id": "many-random-words",
+      "title": "Many Random Words",
+      "bookPart": 3,
+      "page": 360,
+      "order": 84,
+      "reward": {
+        "kind": "fixed",
+        "xp": 50
+      }
+    },
+    {
+      "id": "uniter-of-adds",
+      "title": "Uniter of Adds",
+      "bookPart": 3,
+      "page": 365,
+      "order": 85,
+      "reward": {
+        "kind": "fixed",
+        "xp": 75
+      }
+    },
+    {
+      "id": "the-robot-factory",
+      "title": "The Robot Factory",
+      "bookPart": 3,
+      "page": 366,
+      "order": 86,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "knowledge-check-unsafe-code",
+      "title": "Knowledge Check - Unsafe Code",
+      "bookPart": 3,
+      "page": 372,
+      "order": 87,
+      "reward": {
+        "kind": "fixed",
+        "xp": 25
+      }
+    },
+    {
+      "id": "knowledge-check-other-features",
+      "title": "Knowledge Check - Other Features",
+      "bookPart": 3,
+      "page": 392,
+      "order": 88,
+      "reward": {
+        "kind": "fixed",
+        "xp": 25
+      }
+    },
+    {
+      "id": "colored-console",
+      "title": "Colored Console",
+      "bookPart": 3,
+      "page": 397,
+      "order": 89,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "the-great-humanizer",
+      "title": "The Great Humanizer",
+      "bookPart": 3,
+      "page": 398,
+      "order": 90,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "knowledge-check-compiling",
+      "title": "Knowledge Check - Compiling",
+      "bookPart": 3,
+      "page": 403,
+      "order": 91,
+      "reward": {
+        "kind": "fixed",
+        "xp": 25
+      }
+    },
+    {
+      "id": "knowledge-check-net",
+      "title": "Knowledge Check - .NET",
+      "bookPart": 3,
+      "page": 408,
+      "order": 92,
+      "reward": {
+        "kind": "fixed",
+        "xp": 25
+      }
+    },
+    {
+      "id": "altar-of-publication",
+      "title": "Altar of Publication",
+      "bookPart": 3,
+      "page": 413,
+      "order": 93,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "core-game-building-character",
+      "title": "Core Game: Building Character",
+      "bookPart": 4,
+      "page": 419,
+      "order": 94,
+      "reward": {
+        "kind": "fixed",
+        "xp": 300
+      }
+    },
+    {
+      "id": "core-game-the-true-programmer",
+      "title": "Core Game: The True Programmer",
+      "bookPart": 4,
+      "page": 420,
+      "order": 95,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "core-game-actions-and-players",
+      "title": "Core Game: Actions and Players",
+      "bookPart": 4,
+      "page": 420,
+      "order": 96,
+      "reward": {
+        "kind": "fixed",
+        "xp": 300
+      }
+    },
+    {
+      "id": "core-game-attacks",
+      "title": "Core Game: Attacks",
+      "bookPart": 4,
+      "page": 421,
+      "order": 97,
+      "reward": {
+        "kind": "fixed",
+        "xp": 200
+      }
+    },
+    {
+      "id": "core-game-damage-and-hp",
+      "title": "Core Game: Damage and HP",
+      "bookPart": 4,
+      "page": 421,
+      "order": 98,
+      "reward": {
+        "kind": "fixed",
+        "xp": 150
+      }
+    },
+    {
+      "id": "core-game-death",
+      "title": "Core Game: Death",
+      "bookPart": 4,
+      "page": 422,
+      "order": 99,
+      "reward": {
+        "kind": "fixed",
+        "xp": 150
+      }
+    },
+    {
+      "id": "core-game-battle-series",
+      "title": "Core Game: Battle Series",
+      "bookPart": 4,
+      "page": 422,
+      "order": 100,
+      "reward": {
+        "kind": "fixed",
+        "xp": 150
+      }
+    },
+    {
+      "id": "core-game-the-uncoded-one",
+      "title": "Core Game: The Uncoded One",
+      "bookPart": 4,
+      "page": 422,
+      "order": 101,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "core-game-the-player-decides",
+      "title": "Core Game: The Player Decides",
+      "bookPart": 4,
+      "page": 423,
+      "order": 102,
+      "reward": {
+        "kind": "fixed",
+        "xp": 200
+      }
+    },
+    {
+      "id": "expansion-the-game-s-status",
+      "title": "Expansion: The Game’s Status",
+      "bookPart": 4,
+      "page": 423,
+      "order": 103,
+      "reward": {
+        "kind": "fixed",
+        "xp": 100
+      }
+    },
+    {
+      "id": "expansion-items",
+      "title": "Expansion: Items",
+      "bookPart": 4,
+      "page": 424,
+      "order": 104,
+      "reward": {
+        "kind": "fixed",
+        "xp": 200
+      }
+    },
+    {
+      "id": "expansion-gear",
+      "title": "Expansion: Gear",
+      "bookPart": 4,
+      "page": 424,
+      "order": 105,
+      "reward": {
+        "kind": "fixed",
+        "xp": 300
+      }
+    },
+    {
+      "id": "expansion-stolen-inventory",
+      "title": "Expansion: Stolen Inventory",
+      "bookPart": 4,
+      "page": 425,
+      "order": 106,
+      "reward": {
+        "kind": "fixed",
+        "xp": 200
+      }
+    },
+    {
+      "id": "expansion-vin-fletcher",
+      "title": "Expansion: Vin Fletcher",
+      "bookPart": 4,
+      "page": 426,
+      "order": 107,
+      "reward": {
+        "kind": "fixed",
+        "xp": 200
+      }
+    },
+    {
+      "id": "expansion-attack-modifiers",
+      "title": "Expansion: Attack Modifiers",
+      "bookPart": 4,
+      "page": 426,
+      "order": 108,
+      "reward": {
+        "kind": "fixed",
+        "xp": 200
+      }
+    },
+    {
+      "id": "expansion-damage-types",
+      "title": "Expansion: Damage Types",
+      "bookPart": 4,
+      "page": 426,
+      "order": 109,
+      "reward": {
+        "kind": "fixed",
+        "xp": 200
+      }
+    },
+    {
+      "id": "making-it-yours",
+      "title": "Expansion: Making it Yours",
+      "bookPart": 4,
+      "page": 427,
+      "order": 110,
+      "reward": {
+        "kind": "variable",
+        "notation": "?",
+        "minimum": 50,
+        "maximum": 400
+      }
+    },
+    {
+      "id": "expansion-restoring-balance",
+      "title": "Expansion: Restoring Balance",
+      "bookPart": 4,
+      "page": 428,
+      "order": 111,
+      "reward": {
+        "kind": "fixed",
+        "xp": 150
+      }
+    },
+    {
+      "id": "knowledge-check-visual-studio",
+      "title": "Knowledge Check - Visual Studio",
+      "bookPart": 5,
+      "page": 441,
+      "order": 112,
+      "reward": {
+        "kind": "fixed",
+        "xp": 25
+      }
+    },
+    {
+      "id": "knowledge-check-compiler-errors",
+      "title": "Knowledge Check - Compiler Errors",
+      "bookPart": 5,
+      "page": 446,
+      "order": 113,
+      "reward": {
+        "kind": "fixed",
+        "xp": 25
+      }
+    },
+    {
+      "id": "knowledge-check-debugging",
+      "title": "Knowledge Check - Debugging",
+      "bookPart": 5,
+      "page": 451,
+      "order": 114,
+      "reward": {
+        "kind": "fixed",
+        "xp": 25
+      }
+    }
+  ]
+}

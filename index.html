@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="An unofficial fifth-edition companion for tracking Challenges in The C# Player's Guide.">
+  <title>C# Quest Tracker</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="src/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#challenges">Skip to Challenges</a>
+  <header class="site-header">
+    <div class="edition">The C# Player’s Guide · Fifth edition</div>
+    <h1>C# Quest Tracker</h1>
+    <p>Your adventure, one Challenge at a time.</p>
+  </header>
+  <main id="main">
+    <p id="loading" role="status">Loading the official Challenge catalog…</p>
+    <p id="load-error" role="alert" hidden></p>
+    <div id="tracker" hidden>
+      <section class="dashboard" aria-labelledby="progress-heading">
+        <div class="rank">
+          <h2 id="progress-heading">Character level</h2>
+          <div id="character-level" class="level-value">—</div>
+        </div>
+        <div class="statistics">
+          <dl>
+            <div><dt>Total XP</dt><dd id="total-xp">—</dd></div>
+            <div><dt>Challenges completed</dt><dd id="completed-count">—</dd></div>
+            <div><dt>Tracker completion</dt><dd id="tracker-completion">—</dd></div>
+          </dl>
+          <label for="level-progress" id="level-progress-label">Progress to the next Character level</label>
+          <progress id="level-progress" max="1" value="0"></progress>
+          <p id="next-level"></p>
+        </div>
+      </section>
+      <p class="session-notice" id="save-status" role="status">Checking whether progress can be saved in this browser…</p>
+      <p class="list-intro">Check off the Challenges you complete. You can work in any order. Tracker completion includes every official entry, including optional expansions and bonus checks.</p>
+      <form id="discovery-controls" class="discovery-controls" role="search" aria-label="Find Challenges">
+        <div class="title-search">
+          <label for="challenge-search">Search Challenge titles</label>
+          <input type="search" id="challenge-search" placeholder="For example, Fountain" autocomplete="off" aria-controls="challenges">
+        </div>
+        <fieldset class="completion-filters">
+          <legend>Show Challenges</legend>
+          <div class="filter-options">
+            <label><input type="radio" name="completion-filter" value="all" checked> All</label>
+            <label><input type="radio" name="completion-filter" value="completed"> Completed</label>
+            <label><input type="radio" name="completion-filter" value="remaining"> Remaining</label>
+          </div>
+        </fieldset>
+      </form>
+      <div class="results-summary">
+        <p id="results-count"></p>
+        <button id="reset-view" type="button">Reset view</button>
+      </div>
+      <p id="no-results" class="empty-results" hidden>No Challenges match this view. Try a different title or reset the view to show all Challenges.</p>
+      <details id="progress-backup" class="backup-disclosure">
+        <summary>Progress backup</summary>
+        <section id="recovery-controls" class="backup-controls" aria-labelledby="recovery-heading" hidden>
+          <h2 id="recovery-heading">Recover saved progress</h2>
+          <p>The saved record is not a supported progress file. Download the original data to keep a copy, import a compatible backup, or confirm a fresh start.</p>
+          <button type="button" id="download-recovery-data">Download original recovery data</button>
+          <button type="button" id="start-fresh">Start fresh</button>
+          <p id="recovery-status" role="status" aria-live="polite"></p>
+        </section>
+        <section class="backup-controls" aria-labelledby="backup-heading">
+          <h2 id="backup-heading">Save or transfer progress</h2>
+          <p>Keep a separate copy of your progress. Browser storage can be cleared or unavailable, so keep downloaded backups somewhere safe.</p>
+          <p>Moving progress to another device is manual: export a CSV backup, transfer the file, then choose that file with Import progress backup.</p>
+          <button type="button" id="export-progress">Export progress</button>
+          <label class="import-file-label" for="import-progress-file">Import progress backup</label>
+          <input type="file" id="import-progress-file" accept="text/csv,.csv" aria-describedby="backup-status">
+          <p id="backup-status" role="status" aria-live="polite"></p>
+        </section>
+      </details>
+      <nav id="part-navigation" aria-label="Book parts"></nav>
+      <div id="challenges" tabindex="-1"></div>
+      <p id="action-status" class="sr-only" role="status" aria-live="polite"></p>
+    </div>
+    <noscript><p>Enable JavaScript to load the catalog and calculate your progress.</p></noscript>
+  </main>
+  <dialog id="variable-reward-dialog" aria-labelledby="variable-reward-heading" aria-describedby="variable-reward-explanation">
+    <form id="variable-reward-form" novalidate>
+      <h2 id="variable-reward-heading">Complete Making it Yours</h2>
+      <p id="variable-reward-explanation">The official tracker shows ? XP. Choose the book-permitted reward for your changes: any whole number from 50 through 400 XP.</p>
+      <label for="variable-award">Your XP award</label>
+      <input id="variable-award" name="award" type="number" min="50" max="400" step="1" required inputmode="numeric" aria-describedby="variable-award-error" autofocus>
+      <p id="variable-award-error" role="alert" hidden></p>
+      <div class="dialog-actions">
+        <button type="button" id="cancel-variable-award">Cancel</button>
+        <button type="submit">Complete Challenge</button>
+      </div>
+    </form>
+  </dialog>
+  <dialog id="import-preview-dialog" aria-labelledby="import-preview-heading" aria-describedby="import-preview-explanation">
+    <form id="import-preview-form" novalidate>
+      <h2 id="import-preview-heading">Review progress backup</h2>
+      <p id="import-preview-explanation">Import replaces all current progress; it does not merge Challenges. Review these totals before confirming.</p>
+      <p id="import-catalog-note"></p>
+      <div class="import-comparison">
+        <section id="current-import-summary" aria-labelledby="current-import-heading">
+          <h3 id="current-import-heading">Current progress</h3>
+          <dl>
+            <div><dt>Challenges completed</dt><dd data-summary="completedCount"></dd></div>
+            <div><dt>Total XP</dt><dd data-summary="totalXp"></dd></div>
+            <div><dt>Character level</dt><dd data-summary="characterLevel"></dd></div>
+          </dl>
+        </section>
+        <section id="incoming-import-summary" aria-labelledby="incoming-import-heading">
+          <h3 id="incoming-import-heading">Backup progress</h3>
+          <dl>
+            <div><dt>Challenges completed</dt><dd data-summary="completedCount"></dd></div>
+            <div><dt>Total XP</dt><dd data-summary="totalXp"></dd></div>
+            <div><dt>Character level</dt><dd data-summary="characterLevel"></dd></div>
+          </dl>
+        </section>
+      </div>
+      <p id="import-error" role="alert" tabindex="-1" hidden></p>
+      <div class="dialog-actions">
+        <button type="button" id="cancel-import">Cancel</button>
+        <button type="submit" id="confirm-import">Replace progress</button>
+      </div>
+    </form>
+  </dialog>
+  <dialog id="fresh-start-dialog" aria-labelledby="fresh-start-heading" aria-describedby="fresh-start-explanation">
+    <form id="fresh-start-form" novalidate>
+      <h2 id="fresh-start-heading">Start a fresh tracker?</h2>
+      <p id="fresh-start-explanation">This replaces the saved record with an empty tracker: 0 XP, Character level 1, and no completed Challenges. Download the original recovery data or import a compatible backup first if you may need it.</p>
+      <p id="fresh-start-error" role="alert" tabindex="-1" hidden></p>
+      <div class="dialog-actions">
+        <button type="button" id="cancel-fresh-start">Cancel</button>
+        <button type="submit" id="confirm-fresh-start">Replace with empty progress</button>
+      </div>
+    </form>
+  </dialog>
+  <footer>
+    <p>An unofficial companion to The C# Player’s Guide. Not affiliated with or endorsed by RB Whitaker. <a href="https://csharpplayersguide.com/">Visit the official book website</a>.</p>
+    <p>References: <a href="https://csharpplayersguide.com/assets/content/downloadables/5th-edition/XPTracker.pdf">Official fifth-edition XP Tracker (PDF)</a> · <a href="https://github.com/lfarci/csharp-quest-tracker">C# Quest Tracker on GitHub</a>.</p>
+    <p>Once loaded, this tab works without a connection. Reopening or refreshing offline isn't guaranteed. Progress stays in this browser and is never sent to a server.</p>
+  </footer>
+</body>
+</html>
