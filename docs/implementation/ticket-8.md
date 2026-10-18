@@ -1,0 +1,19 @@
+# Issue #8 implementation handoff
+
+Issue: [Find and complete Challenges comfortably on desktop and mobile](https://github.com/lfarci/csharp-quest-tracker/issues/8).
+
+The existing navy/gold dashboard, Georgia display type and quiet checklist rows remain the design baseline. Title search, native All/Completed/Remaining radio controls, result count, Reset view and a helpful empty state now sit above the Book-part navigation. Controls wrap at small widths, keep visible labels and focus indicators, and support the system's light/dark theme without remote assets. The dashboard's responsive statistics also reflow under 200% text enlargement rather than clipping.
+
+`getView({ search = '', filter = 'all' } = {})` extends the approved public progress-session boundary. Title search is case-insensitive and trims surrounding whitespace. Search and completion filter combine; matching Challenges retain catalog order and empty Book parts are omitted from that view. Dashboard values always describe the complete catalog. These view arguments never enter the authoritative progress record.
+
+`src/app.js` applies the public view by hiding stable checkbox rows, empty Book-part sections and their navigation links. Search and filter controls keep focus. When a completion leaves its active filter, focus moves to the next visible checkbox, then the previous one, or the search field if no checkbox remains. Reset view clears both view controls, restores all Challenges and focuses search. One polite action-status region announces completion or result-count changes; visible result counts and empty-state guidance support readers without assistive technology.
+
+Three public-session discovery tests use a small representative catalog to verify search/order/grouping, combined and live completion filtering, empty results, stable all-entry statistics and unchanged progress records. TDD demonstrated the search and combined-filter tests failing before their implementations. All 19 Node tests passed before integration with the variable-reward slice.
+
+Focused real Chromium 153.0.8010.12 checks verified the actual UI: case-insensitive trimmed search, preserved row/group order, matching part navigation, completion filters, unchanged all-entry totals, keyboard Space completion, native radio arrow navigation, focus when a row leaves the active filter, zero-result guidance, reset, 360px touch interaction, both themes, 200% text, landscape and already-loaded offline searching/completion. No page errors occurred. Mobile light/dark and enlarged-text screenshots were visually inspected, which caught and resolved dashboard clipping that a page-width assertion alone missed.
+
+Supporting session artifacts live outside the repository at `/tmp/csharp-quest-browser/ticket8-smoke.mjs` and `ticket8-{desktop,mobile-light,mobile-dark,mobile-large-text,landscape}.png`. These are verification artifacts, not runtime dependencies. Browser checks inspect accessible labels, checked radio state, status feedback and keyboard behavior; no actual screen-reader run is claimed.
+
+No Challenge-type labels were guessed. The production catalog has no verified per-entry Boss Battle metadata, and the checked [official solutions index](https://csharpplayersguide.com/solutions/5th-edition/) supplies Book levels/titles without those classifications. The [official fifth-edition sample](https://csharpplayersguide.com/TheCSharpPlayersGuide-5thEdition-Sample.pdf), PDF page 24, explains Boss Battle icon semantics but does not establish per-entry classification for this catalog. Supplemental verified types can be added when supported by primary evidence; PDF titles/pages/rewards were not altered. Metadata reuse and public release remain separate unresolved prerequisites.
+
+No publication, push, issue closure or external messages were performed by this slice.

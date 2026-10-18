@@ -1,0 +1,6 @@
+{
+  "name": "csharp-quest-tracker",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node --test" }
+}
