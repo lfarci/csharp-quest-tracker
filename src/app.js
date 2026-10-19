@@ -242,12 +242,6 @@ async function start() {
     for (const radio of document.querySelectorAll('input[name="completion-filter"]')) {
       radio.addEventListener('change', updateDiscovery);
     }
-    byId('reset-view').addEventListener('click', () => {
-      byId('challenge-search').value = '';
-      document.querySelector('input[name="completion-filter"][value="all"]').checked = true;
-      updateDiscovery();
-      byId('challenge-search').focus();
-    });
     byId('loading').hidden = true;
     byId('tracker').hidden = false;
   } catch (error) {
