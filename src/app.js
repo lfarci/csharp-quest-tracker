@@ -76,12 +76,10 @@ function updateChecklist() {
     const visible = parts.some(part => part.id === Number(section.dataset.bookPart));
     section.hidden = !visible;
     if (visible && discoveryIsActive) section.querySelector('.book-part-disclosure').open = true;
-    byId(`part-link-${section.dataset.bookPart}`).hidden = !visible;
   }
   const resultSummary = `${visibleIds.size} ${visibleIds.size === 1 ? 'Challenge' : 'Challenges'} shown`;
   byId('results-count').textContent = resultSummary;
   byId('no-results').hidden = visibleIds.size !== 0;
-  byId('part-navigation').hidden = visibleIds.size === 0;
   updateDisclosureControls();
   if (focusedIndex !== -1 && focused.closest('.challenge').hidden) {
     const next = previouslyVisible.slice(focusedIndex + 1).find(input => !input.closest('.challenge').hidden);
@@ -120,15 +118,6 @@ function updateSaveStatus() {
 
 function renderChecklist() {
   for (const part of getSessionView().parts) {
-    const anchor = document.createElement('a');
-    anchor.id = `part-link-${part.id}`;
-    anchor.href = `#part-${part.id}`;
-    anchor.textContent = `Part ${part.id}`;
-    anchor.addEventListener('click', () => {
-      byId(`part-${part.id}`).closest('.book-part-disclosure').open = true;
-    });
-    byId('part-navigation').append(anchor);
-
     const section = document.createElement('section');
     section.className = 'book-part';
     section.dataset.bookPart = part.id;
