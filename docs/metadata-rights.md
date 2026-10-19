@@ -1,59 +1,63 @@
-# Book metadata rights and attribution
+# Book catalog rights, provenance, and attribution
 
-Evidence reviewed: **18 October 2026**. Related work: [metadata-reuse prerequisite, issue #9](https://github.com/lfarci/csharp-quest-tracker/issues/9), [ticket requirements](tickets/08-establish-metadata-reuse-basis.md), and [catalog authority ADR](adr/0002-official-pdf-tracker-is-authoritative.md).
+Reviewed: **19 October 2026**. Scope: the fifth-edition catalog shipped in `data/catalog.json` (revision `5e-2026-10-18`) and publicly accessible through this repository and its GitHub Pages site.
 
-## Release status
+**Assessment, not a rights-holder license or legal opinion.** The maintainer's approach is to document and manage the limited intellectual-property risk of a functional, unofficial companion, rather than treating the absence of an express permission as proof of infringement. This does **not** establish that every catalog title or the complete collection is unprotected. Anyone needing legal certainty should seek advice or permission.
 
-**Public release remains blocked. Issue #9 is incomplete.** The sources below establish where the tracking metadata comes from, but do not establish a supported reuse basis sufficient for this project's agreed public-release prerequisite. No permission evidence was supplied by the user in the specification or this implementation task. Local implementation and verification may continue under the specification; this document does not authorize publication of the application or catalog.
+Related records: [issue #9](https://github.com/lfarci/csharp-quest-tracker/issues/9), [official tracker catalog verification](catalog-verification.md), and [catalog authority decision](adr/0002-official-pdf-tracker-is-authoritative.md).
 
-This is an evidence record and release decision, not a conclusion about whether a particular copyright exception applies. Attribution, public download availability, and an MIT license on the application's original code do not establish permission to republish the book's complete tracker catalog.
+## Exactly what the project uses
 
-## Material covered by this review
+- The **114 short Challenge titles** and their **five Book parts**, in the official tracker's order.
+- Factual **page references**, **XP rewards**, the `?` variable-reward notation, and **Character-level thresholds**.
+- Stable identifiers invented for the app, used to restore progress correctly.
+- The 50–400 XP bounds for “Expansion: Making it Yours,” verified against the book by the project owner; the separate PDF uses `?`.
 
-The proposed catalog reproduces fifth-edition Challenge titles, ordered membership, Book parts, page references, fixed XP rewards and the variable reward notation, plus Character-level thresholds. Supplementary verified Book level and Challenge-type labels also need coverage if included. Review must address the catalog as a collection as well as individual fields.
+The app **does not reproduce** the exercise prompts, substantial instructional passages, solutions, book PDF, tracker PDF, cover illustrations, maps, or the source PDF's visual layout. It cannot replace the book as a programming course: the reader must use the book to perform each Challenge. It does not grade or reveal solutions. The app is independent, free, and not endorsed by the author.
 
-The scope excludes exercise instructions, substantial passages, solution code, cover art, maps, and the original tracker PDF's visual design. Keep these outside the application and its published assets. Link to official resources instead of bundling them.
+## Sources and legal framework
 
-## Primary-source evidence
+| Primary source | Relevant principle and limit |
+| --- | --- |
+| [Belgian FPS Economy: What is protected by copyright?](https://economie.fgov.be/en/themes/intellectual-property/intellectual-property-rights/copyright-and-related-rights/copyright/copyright-protection-works/what-copyright-protection/what-protected-copyright) | Copyright protects original expression, not ideas or methods; creative choices can matter even in short or functional works. |
+| [Belgian FPS Economy: Database copyright](https://economie.fgov.be/en/themes/intellectual-property/intellectual-property-rights/copyright-and-related-rights/legal-protection-databases/protection-databases/database-copyright-protection) | Copyright in a database depends on originality in the selection or arrangement. Completeness or labour alone is insufficient. |
+| [Belgian FPS Economy: Sui generis database right](https://economie.fgov.be/en/themes/intellectual-property/intellectual-property-rights/copyright-and-related-rights/legal-protection-databases/protection-databases/protection-sui-generis-right/object-and-conditions) | Separate protection is conditional on substantial qualifying investment; it is not automatic for every list. |
+| [CJEU, Football Dataco, C-604/10](https://eur-lex.europa.eu/legal-content/en/SUM/?uri=CELEX%3A62010CJ0604) | Database copyright requires original, freely chosen selection or arrangement; this is distinct from the investment-based right. |
+| [CJEU, British Horseracing Board, C-203/02](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX%3A62002CJ0203) | Investment in **creating** underlying data does not count as investment in **obtaining** pre-existing materials for the database right. Qualifying verification/presentation investment may still matter. |
+| [Official fifth-edition downloads](https://csharpplayersguide.com/downloadables/5th-edition/) | The author freely publishes an XP Tracker for readers; this availability is not itself a redistribution license. |
+| [Official fifth-edition XP Tracker](https://csharpplayersguide.com/assets/content/downloadables/5th-edition/XPTracker.pdf) | Source for the fields reproduced in the app. Its contents and ordering should be reviewed as a whole, not only field by field. |
+| [Official FAQ](https://csharpplayersguide.com/faq.html) | The author encourages learners to share their **own solutions**, including through GitHub. This is relevant community context, **not** an express license for the separately distributed tracker catalog. |
 
-| Source | What was established | Limit of the evidence |
-| --- | --- | --- |
-| [Official fifth-edition downloads](https://csharpplayersguide.com/downloadables/5th-edition/) | The author provides an XP Tracker download. The page carries an RB Whitaker copyright footer. | No explicit license for republication of the tracker metadata was found on this page. |
-| [Official standalone XP tracker](https://csharpplayersguide.com/assets/content/downloadables/5th-edition/XPTracker.pdf) | The two-page tracker supplies catalog membership, ordering, titles, five Book parts, page references and XP. It displays `?` for the variable reward. | No explicit reuse grant was found in the examined PDF. Availability and catalog accuracy are separate from permission evidence. |
-| [Fifth-edition book sample](https://csharpplayersguide.com/TheCSharpPlayersGuide-5thEdition-Sample.pdf), PDF page 3 | The copyright page identifies RB Whitaker, copyright 2012–2022. Its notice reserves rights and describes written permission for reproduction/transmission, with a brief-review-quotation exception. | This notice does not provide a grant covering public republication of the catalog in this application. Do not represent it as permission. |
-| Same [book sample](https://csharpplayersguide.com/TheCSharpPlayersGuide-5thEdition-Sample.pdf), PDF page 25, “Experience Points and Levels” | The author explains how readers check off activities, earn XP and obtain extra tracker copies online. | Reader use of extra tracker copies does not establish the required grant for a separately hosted machine-readable catalog. |
-| [Official fifth-edition solutions index](https://csharpplayersguide.com/solutions/5th-edition/) | Supplies supplementary Book level/title information, explains its educational purpose, and links the author's solution downloads. | No explicit metadata republication grant was found on the index. These titles do not override the standalone tracker under the ADR. |
-| [Author's solutions repository](https://github.com/rbwhitaker/CSharpPlayersGuideSolutions) | The repository identifies itself as the author's solutions for several editions and is marked MIT by GitHub. | A license for that software does not establish that the separately hosted tracker PDF and full catalog are covered. The license file could not be retrieved in this review; no unexamined license text is relied on. Solution code is outside this application's scope. |
-| [Official FAQ](https://csharpplayersguide.com/faq.html) | Encourages readers to share their own solutions, including on GitHub. | Sharing one's own solutions does not establish permission to republish the book's complete metadata collection. |
+Earlier review also examined the [fifth-edition book sample](https://csharpplayersguide.com/TheCSharpPlayersGuide-5thEdition-Sample.pdf), [solutions index](https://csharpplayersguide.com/solutions/5th-edition/), and [author's solutions repository](https://github.com/rbwhitaker/CSharpPlayersGuideSolutions). The book's rights notice and any MIT license applicable to solution **code** do not license all book content or this catalog. No specific public grant for the catalog has been identified, and no author contact has been made.
 
-The [official contact page](https://csharpplayersguide.com/contact.html) links the author's [book issue repository](https://github.com/rbwhitaker/CSharpPlayersGuideEarlyAccess). That repository describes issue tracking for book patches and future editions; no catalog reuse grant was found there. No author contact or outgoing message was made during this review.
+## Application to C# Quest Tracker
 
-The sample's embedded tracker has different page references from the standalone tracker. Use the sample for the rights notice and supporting discussion, and the standalone PDF for catalog verification. The variable reward's 50–400 XP bounds were supplied by the user from the book, as recorded in the [specification](mvp-issue-spec.md); that clarification is not a metadata reuse grant.
+**Lower-risk elements:** numerical XP values and level thresholds, page numbers, identifiers created by this project, and the general idea of tracking a reader's completion. They are functional facts or ideas rather than reproductions of exercise instructions.
 
-## What must resolve the release blocker
+**Residual uncertainty:** individual creative Challenge titles may contain original expression. More importantly, reproducing **all 114 titles in the author's order and grouping** may raise a claim based on an original selection/arrangement or, if qualifying investment is established, a database right. Because the project mirrors the *complete* tracker, it cannot assume the use is insubstantial if such a right applies.
 
-Before closing #9 or publishing the application or catalog, retain independently reviewable evidence for either an applicable rights-holder grant/license or another supported reuse basis explicitly reviewed for this use. Record all of the following here:
+The author encouraging public solutions, the project's educational/noncommercial character, clear attribution, and its need for a purchased book are helpful factual context. **None is an automatic copyright exception or permission.** Conversely, the lack of written permission alone does not prove the use infringes a right. Determining the actual scope of protected material and whether a right is engaged is fact-dependent.
 
-- The evidence itself or a durable source reference, its date, and who supplied or issued it.
-- Coverage of the fifth-edition titles, placement/pages, ordered catalog membership, XP rewards/thresholds and any supplementary fields actually shipped.
-- Coverage of public distribution of the catalog in the source repository and static website, including the proposed hosting and any material restrictions.
-- Exact required attribution, notices, modification conditions, distribution conditions and any limits; apply them in release artifacts.
-- The maintainer's review outcome and the artifact/revision it covers.
+**Maintainer policy:** treat this as an independently built **companion/reference tool with documented residual risk**, not as an unauthorized copy of the textbook and not as definitively cleared by the rights holder. Keep the dataset limited to the reference fields required for tracking. Reassess before adding exercise instructions, graphics, excerpts, commercial monetization, new editions, or substantial additional book metadata. If the author identifies a rights concern, review it promptly and consider changing, removing, or licensing the relevant data.
 
-An evidence-missing note does not complete #9. If a future grant covers less than the proposed catalog, reconcile the application and specification before treating release as cleared. Contacting the author requires separate authorization; this ticket does not authorize it.
+## Attribution
 
-## Attribution prepared for the site and release documentation
+Use the following wording in the site and README:
 
-Use this text with working links in the website footer/about area and release documentation. Add any further conditions once a reuse basis is established; this draft itself grants no rights.
+> C# Quest Tracker is an unofficial companion to **The C# Player's Guide, Fifth Edition**, by **RB Whitaker**. It is not affiliated with or endorsed by RB Whitaker. See the [official book website](https://csharpplayersguide.com/) and [official fifth-edition XP Tracker](https://csharpplayersguide.com/assets/content/downloadables/5th-edition/XPTracker.pdf).
 
-> C# Quest Tracker is an unofficial companion to **The C# Player's Guide, Fifth Edition**, by **RB Whitaker**. It is not affiliated with or endorsed by RB Whitaker. Visit the [official book website](https://csharpplayersguide.com/) and [official fifth-edition XP tracker](https://csharpplayersguide.com/assets/content/downloadables/5th-edition/XPTracker.pdf).
+The existing About page also links to purchase options. Trademark and book-title references identify the resource the app accompanies; they do not claim sponsorship.
 
-## Original code and third-party metadata
+## Licensing boundaries
 
-The project's MIT license applies to original application code. Book-derived titles, placement, XP and catalog content are documented separately in this file and are **not relicensed under the application's MIT license**. Do not describe the complete repository or catalog as MIT-licensed without this boundary.
+- [`LICENSE`](../LICENSE) contains the standard **MIT License** for the project's **original application code** and other original material that its copyright holders may license.
+- The project **does not claim copyright in facts** such as numerical XP values, nor claim ownership of the book's original material.
+- The MIT notice is **not a sublicense or grant of third-party rights** in book-derived names, creative expressions, or any protectable selection/arrangement in `data/catalog.json`. To the extent such rights exist, they remain with their respective holders.
+- Users and downstream projects must separately assess whether their use of third-party content requires permission. **Attribution and an MIT license do not cure infringement.**
+- Progress CSV exports reflect a reader's tracking data and include title reference fields; they are not licenses for independently distributing book content.
 
-Prepared licensing notice for the README and release documentation:
+## Review outcome and limits
 
-> Original application code is licensed under MIT. Book-derived tracking metadata has separate rights and provenance; see [Book metadata rights and attribution](docs/metadata-rights.md). The application's MIT license does not grant rights in that metadata. Public release is pending the documented metadata-reuse prerequisite.
+This document replaces an earlier **project-level blanket release hold** with an explicit and reviewable risk assessment. It does **not** conclude that a permission grant exists, that database protection is inapplicable, or that every possible use of the entire collection is lawful. The repository is public and Pages can deploy from `main`; the technical release workflow has no legal-clearance check.
 
-When the release prerequisite is resolved, update the final sentence to describe the supported basis and its conditions accurately. Keep the code/metadata distinction and unofficial status visible.
+The maintainer may treat completion of this documented assessment and correct code/data licensing boundary as the scope of [issue #9](https://github.com/lfarci/csharp-quest-tracker/issues/9), acknowledging the residual risks above. Seek a qualified Belgian/EU IP opinion or author permission if a definitive clearance is required.
