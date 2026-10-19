@@ -31,7 +31,7 @@ This verification establishes catalog fidelity. It does not establish permission
 
 ## Supplemental activity symbols (19 October 2026)
 
-For visual identification only, the project owner supplied **35 Boss Battle titles**. All 35 map to unique existing catalog IDs. The existing title prefix identifies **19 Knowledge Checks**; the remaining **60** entries are ordinary Challenges. The separate `src/activity-types.js` module records these classifications without modifying `data/catalog.json`, its initial revision, saved progress, XP, or the CSV backup contract.
+For visual identification only, the project owner supplied **35 Boss Battle titles**. All 35 map to unique existing catalog IDs. The existing title prefix identifies **19 Knowledge Checks**; the remaining **60** entries are ordinary Challenges. All 114 entries now have an explicit `type` field in `data/catalog.json` (`challenge`, `boss-battle`, or `knowledge-check`). These are presentational attributes. The existing catalog revision `5e-2026-10-18` is retained because no progress-relevant information (IDs, titles, order, pages, XP, or thresholds) changed; saved progress and CSV backups remain compatible.
 
 The owner listed **Amaroks** and **Getting Armed** on page 244, while the previously verified authoritative tracker catalog gives **page 245** for both. Keep the original catalog's page references unchanged.
 

@@ -12,4 +12,4 @@
 - Do not introduce dependencies or polyfills just to support obsolete browsers.
 - Add or update tests for any observable behavior change.
 
-- `activity-types.js` records supplemental display-only classifications; keep the versioned catalog, progress state, and CSV backup format unchanged when editing activity icons.
+- Activity icons use the `type` field in `data/catalog.json`; do not derive types from hardcoded JavaScript ID lists. Keep classification presentational, leaving XP, progress and CSV backups unchanged.

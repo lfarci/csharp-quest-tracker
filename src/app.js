@@ -2,7 +2,6 @@ import { createProgressSession } from './progress-session.js';
 import { createVariableRewardDialog } from './variable-reward-dialog.js';
 import { loadBrowserProgressSession } from './browser-session.js';
 import { downloadProgressBackup } from './backup-download.js';
-import { activityTypes, getActivityType } from './activity-types.js';
 
 /**
  * Tracker page rendering and user interactions.
@@ -10,8 +9,13 @@ import { activityTypes, getActivityType } from './activity-types.js';
  */
 const byId = id => document.getElementById(id);
 const number = value => value.toLocaleString();
+const activityTypes = {
+  challenge: 'Challenge',
+  'boss-battle': 'Boss Battle',
+  'knowledge-check': 'Knowledge Check',
+};
 
-// Locally hosted symbols distinguish activity types without modifying catalog data.
+// Locally hosted symbols use the activity type supplied by the validated catalog.
 function createActivityIcon(type) {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('class', `activity-type-icon activity-type-icon--${type}`);
@@ -217,7 +221,7 @@ function renderChecklist() {
       checkbox.type = 'checkbox';
       checkbox.id = `challenge-${challenge.id}`;
       checkbox.checked = challenge.completed;
-      const type = getActivityType(challenge);
+      const type = challenge.type ?? 'challenge';
       const icon = createActivityIcon(type);
       const typeLabel = document.createElement('span');
       typeLabel.className = 'sr-only';
