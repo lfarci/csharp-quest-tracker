@@ -97,3 +97,11 @@ test('all HTML pages load the shared early theme script', async () => {
     assert.match(html, /<script src="src\/theme-init\.js"><\/script>/);
   }
 });
+
+test('Pages assembly includes the sitemap and requires manual dispatch', async () => {
+  const workflow = await readProjectFile('.github/workflows/pages.yml');
+
+  assert.match(workflow, /^\s*cp [^\n]*sitemap\.xml _site\/$/m);
+  assert.match(workflow, /^  workflow_dispatch:\s*$/m);
+  assert.doesNotMatch(workflow, /^  push:\s*$/m);
+});
