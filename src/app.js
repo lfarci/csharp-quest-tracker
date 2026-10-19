@@ -52,7 +52,7 @@ function updatePartCompletion() {
 }
 
 function updateDisclosureControls() {
-  const disclosures = [...document.querySelectorAll('.book-part-disclosure')];
+  const disclosures = [...document.querySelectorAll('.book-part:not([hidden]) .book-part-disclosure')];
   const toggleAll = byId('toggle-all-parts');
   const hasOpenPart = disclosures.some(disclosure => disclosure.open);
 
@@ -76,12 +76,10 @@ function updateChecklist() {
     const visible = parts.some(part => part.id === Number(section.dataset.bookPart));
     section.hidden = !visible;
     if (visible && discoveryIsActive) section.querySelector('.book-part-disclosure').open = true;
-    byId(`part-link-${section.dataset.bookPart}`).hidden = !visible;
   }
   const resultSummary = `${visibleIds.size} ${visibleIds.size === 1 ? 'Challenge' : 'Challenges'} shown`;
   byId('results-count').textContent = resultSummary;
   byId('no-results').hidden = visibleIds.size !== 0;
-  byId('part-navigation').hidden = visibleIds.size === 0;
   updateDisclosureControls();
   if (focusedIndex !== -1 && focused.closest('.challenge').hidden) {
     const next = previouslyVisible.slice(focusedIndex + 1).find(input => !input.closest('.challenge').hidden);
@@ -120,15 +118,6 @@ function updateSaveStatus() {
 
 function renderChecklist() {
   for (const part of getSessionView().parts) {
-    const anchor = document.createElement('a');
-    anchor.id = `part-link-${part.id}`;
-    anchor.href = `#part-${part.id}`;
-    anchor.textContent = `Part ${part.id}`;
-    anchor.addEventListener('click', () => {
-      byId(`part-${part.id}`).closest('.book-part-disclosure').open = true;
-    });
-    byId('part-navigation').append(anchor);
-
     const section = document.createElement('section');
     section.className = 'book-part';
     section.dataset.bookPart = part.id;
@@ -243,11 +232,11 @@ async function start() {
       radio.addEventListener('change', updateDiscovery);
     }
     byId('toggle-all-parts').addEventListener('click', () => {
-      const disclosures = [...document.querySelectorAll('.book-part-disclosure')];
+      const disclosures = [...document.querySelectorAll('.book-part:not([hidden]) .book-part-disclosure')];
       const shouldOpen = !disclosures.some(disclosure => disclosure.open);
       for (const disclosure of disclosures) disclosure.open = shouldOpen;
       updateDisclosureControls();
-      byId('action-status').textContent = shouldOpen ? 'All Book parts expanded.' : 'All Book parts collapsed.';
+      byId('action-status').textContent = shouldOpen ? 'Visible Book parts expanded.' : 'Visible Book parts collapsed.';
     });
     byId('loading').hidden = true;
     byId('tracker').hidden = false;
