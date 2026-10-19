@@ -1,5 +1,5 @@
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
   --paper: #f7f8fa;
   --surface: #fff;
   --ink: #182a42;
@@ -27,6 +27,12 @@ button, .filter-options label, .challenge-label { touch-action: manipulation; }
 .site-nav a:first-child { margin-right: auto; }
 .site-nav a { font-size: .9rem; font-weight: 600; }
 .about-content { min-height: 45vh; }
+.settings-page { min-height: 45vh; }
+.appearance-settings { max-width: 34rem; margin-block: 0 2rem; }
+.appearance-settings h2, .settings-section-heading { margin-bottom: 1rem; font-size: 1.25rem; }
+.appearance-settings label { display: block; margin-bottom: .45rem; font-weight: 600; }
+.appearance-settings select { width: min(100%, 24rem); min-height: 2.75rem; padding: .5rem .7rem; border: 1px solid var(--muted); border-radius: .25rem; color: var(--ink); background: var(--surface); font: inherit; }
+.settings-hint { color: var(--muted); font-size: .9rem; }
 .backup-page { min-height: 45vh; padding-bottom: 2rem; }
 .backup-page .backup-controls { margin-block: 1.25rem; padding: clamp(1.25rem, 3vw, 2rem); border: 1px solid var(--line); border-radius: .35rem; background: var(--surface); }
 .backup-page .backup-card > h2 { margin: 0 0 .35rem; font-size: 1.35rem; }
@@ -140,10 +146,14 @@ footer p { max-width: 80ch; }
   .challenge-note { padding-left: 2.8rem; }
 }
 @media (prefers-color-scheme: dark) {
-  :root { --paper: #151e2a; --surface: #1e2b3c; --ink: #e8edf5; --muted: #b2bfd1; --line: #45566d; --notice: #342f21; --accent: #dfc475; --focus: #99c1ff; }
-  .dashboard { background: #26374e; color: #f6f8fc; }
-  .challenge input { accent-color: #b5cbe9; }
+  :root:not([data-theme]) { color-scheme: dark; --paper: #151e2a; --surface: #1e2b3c; --ink: #e8edf5; --muted: #b2bfd1; --line: #45566d; --notice: #342f21; --accent: #dfc475; --focus: #99c1ff; }
+  :root:not([data-theme]) .dashboard { background: #26374e; color: #f6f8fc; }
+  :root:not([data-theme]) .challenge input { accent-color: #b5cbe9; }
 }
+:root[data-theme="dark"] { color-scheme: dark; --paper: #151e2a; --surface: #1e2b3c; --ink: #e8edf5; --muted: #b2bfd1; --line: #45566d; --notice: #342f21; --accent: #dfc475; --focus: #99c1ff; }
+:root[data-theme="dark"] .dashboard { background: #26374e; color: #f6f8fc; }
+:root[data-theme="dark"] .challenge input { accent-color: #b5cbe9; }
+.site-nav .theme-toggle { min-height: 2.25rem; padding: .3rem .65rem; font-size: .85rem; }
 dialog { width: min(100% - 2rem, 30rem); max-height: calc(100% - 2rem); padding: 1.5rem; border: 1px solid var(--line); border-radius: .35rem; background: var(--surface); color: var(--ink); }
 dialog::backdrop { background: rgb(12 25 42 / 65%); }
 dialog h2 { margin-top: 0; line-height: 1.3; font-size: 1.4rem; }
