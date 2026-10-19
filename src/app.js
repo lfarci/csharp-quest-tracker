@@ -20,6 +20,8 @@ function createActivityIcon(type) {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.setAttribute('class', `activity-type-icon activity-type-icon--${type}`);
   svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('width', '20');
+  svg.setAttribute('height', '20');
   svg.setAttribute('aria-hidden', 'true');
   svg.setAttribute('focusable', 'false');
 

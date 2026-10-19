@@ -134,3 +134,17 @@ test('activity icons are local and carry their upstream license notice', async (
   assert.match(license, /Lucide Icons and Contributors/);
   assert.match(readme, /lucide-LICENSE\.txt/);
 });
+
+test('sprite references specify inline SVG dimensions even before CSS loads', async () => {
+  const html = await readProjectFile('index.html');
+  const script = await readProjectFile('src/app.js');
+  const css = await readProjectFile('assets/css/tracker.css');
+  const legend = html.match(/<div class="activity-legend"[\s\S]*?<\/div>/)?.[0];
+
+  assert.ok(legend, 'Activity legend missing');
+  assert.equal((legend.match(/<svg /g) ?? []).length, 3);
+  assert.equal((legend.match(/width="16" height="16" viewBox="0 0 24 24"/g) ?? []).length, 3);
+  assert.match(script, /svg\.setAttribute\('width', '20'\)/);
+  assert.match(script, /svg\.setAttribute\('height', '20'\)/);
+  assert.match(css, /\.activity-legend > span \{[\s\S]*?display: inline-flex;/);
+});

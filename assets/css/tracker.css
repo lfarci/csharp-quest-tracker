@@ -316,16 +316,19 @@ progress::-moz-progress-bar {
 .activity-legend {
   display: flex;
   flex-wrap: wrap;
-  gap: .5rem 1.25rem;
+  align-items: center;
+  gap: .45rem 1.25rem;
   margin-block: .5rem 1rem;
   font-size: .85rem;
   color: var(--muted);
 }
 
-.activity-legend span {
+.activity-legend > span {
   display: inline-flex;
   align-items: center;
+  flex: 0 0 auto;
   gap: .4rem;
+  white-space: nowrap;
 }
 
 .activity-type-icon {
@@ -333,6 +336,8 @@ progress::-moz-progress-bar {
   flex: 0 0 auto;
   width: 1.2rem;
   height: 1.2rem;
+  max-width: 1.2rem;
+  max-height: 1.2rem;
   color: var(--activity-color, var(--type-challenge));
 }
 
@@ -351,6 +356,10 @@ progress::-moz-progress-bar {
 .activity-legend .activity-type-icon {
   width: 1rem;
   height: 1rem;
+  min-width: 1rem;
+  max-width: 1rem;
+  min-height: 1rem;
+  max-height: 1rem;
 }
 
 /* A thin row-edge key reinforces the icon color without making it the only cue. */
