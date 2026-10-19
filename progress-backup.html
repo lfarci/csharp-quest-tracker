@@ -23,22 +23,36 @@
   <main id="main" class="backup-page">
     <p id="loading" role="status">Checking saved progress…</p>
     <p id="load-error" role="alert" hidden></p>
-    <p id="save-status" class="session-notice" role="status" hidden></p>
-    <section id="recovery-controls" class="backup-controls" aria-labelledby="recovery-heading" hidden>
-      <h2 id="recovery-heading">Recover saved progress</h2>
-      <p>The saved record can’t be read as tracker progress. Download the original data to keep a copy, import a compatible backup, or confirm a fresh start.</p>
-      <button type="button" id="download-recovery-data">Download original recovery data</button>
-      <button type="button" id="start-fresh">Start fresh</button>
-      <p id="recovery-status" role="status" aria-live="polite"></p>
+    <p id="save-status" class="session-notice backup-save-status" role="status" hidden></p>
+    <section id="recovery-controls" class="backup-controls recovery-card" aria-labelledby="recovery-heading" hidden>
+      <div>
+        <p class="backup-eyebrow">Action needed</p>
+        <h2 id="recovery-heading">Recover saved progress</h2>
+        <p>The saved record can’t be read as tracker progress. Download the original data to keep a copy, import a compatible backup, or confirm a fresh start.</p>
+      </div>
+      <div class="backup-actions">
+        <button type="button" id="download-recovery-data">Download original data</button>
+        <button type="button" id="start-fresh">Start fresh</button>
+      </div>
+      <p id="recovery-status" class="backup-feedback" role="status" aria-live="polite"></p>
     </section>
-    <section class="backup-controls" aria-labelledby="backup-heading">
+    <section class="backup-controls backup-card" aria-labelledby="backup-heading">
       <h2 id="backup-heading">Save or transfer progress</h2>
-      <p>Browser storage can be cleared or unavailable, so keep downloaded backups somewhere safe.</p>
-      <p>To move progress, export a CSV backup, transfer the file, then import it on the other device. Import replaces current progress; it doesn’t merge Challenges.</p>
-      <button type="button" id="export-progress" disabled>Export progress</button>
-      <label class="import-file-label" for="import-progress-file">Import progress backup</label>
-      <input type="file" id="import-progress-file" accept="text/csv,.csv" aria-describedby="backup-status" disabled>
-      <p id="backup-status" role="status" aria-live="polite"></p>
+      <p>Keep a separate copy: browser storage may be cleared or unavailable.</p>
+      <div class="backup-options">
+        <section class="backup-option" aria-labelledby="export-heading">
+          <h3 id="export-heading">Export a copy</h3>
+          <p>Download your progress as a CSV file and keep it somewhere safe.</p>
+          <button type="button" id="export-progress" disabled>Export progress</button>
+        </section>
+        <section class="backup-option" aria-labelledby="import-heading">
+          <h3 id="import-heading">Import a backup</h3>
+          <p>Choose a CSV backup to replace progress in this browser. Imports don’t merge.</p>
+          <label class="import-file-label" for="import-progress-file">Choose CSV backup</label>
+          <input type="file" id="import-progress-file" accept="text/csv,.csv" aria-describedby="backup-status" disabled>
+        </section>
+      </div>
+      <p id="backup-status" class="backup-feedback" role="status" aria-live="polite"></p>
     </section>
     <p><a href="index.html">← Back to the tracker</a></p>
   </main>
