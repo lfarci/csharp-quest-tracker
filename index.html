@@ -13,6 +13,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
   <link rel="stylesheet" href="styles.css">
+  <script>
+    try { const theme = localStorage.getItem('theme'); if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme; } catch {}
+  </script>
+  <script type="module" src="src/theme.js"></script>
   <script type="module" src="src/app.js"></script>
 </head>
 <body>
@@ -20,7 +24,7 @@
   <header class="site-header">
     <nav class="site-nav" aria-label="Site navigation">
       <a href="index.html" aria-current="page">Tracker</a>
-      <a href="progress-backup.html">Settings</a>
+      <a href="settings.html">Settings</a>
       <a href="about.html">About</a>
     </nav>
     <div class="edition">The C# Player’s Guide · Fifth edition</div>
