@@ -127,7 +127,13 @@ export async function createBrowserProgressSession({ catalog, adapters = {} }) {
       const apply = () => {
         const result = typeof method === 'function'
         ? method({
-          replaceProgress: progress => { session = createProgressSession({ catalog, progress }); statisticsUnavailable = false; } })
+          replaceProgress: progress => {
+            const replacement = createProgressSession({ catalog, progress });
+            // A confirmed replacement cannot rely on an unreadable, synthetic baseline.
+            if (statisticsUnavailable) acceptedProgress = null;
+            session = replacement;
+            statisticsUnavailable = false;
+          } })
         : session[method](...args);
         generation++;
         return result;

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { loadBrowserProgressSession } from '../src/browser-session.js';
 import { downloadProgressBackup } from '../src/backup-download.js';
-import { decodeProgressCsv } from '../src/progress-backup-csv.js';
+import { decodeProgressCsv, encodeProgressCsv } from '../src/progress-backup-csv.js';
 
 const catalog = JSON.parse(await readFile(new URL('../data/catalog.json', import.meta.url), 'utf8'));
 const fixed = catalog.challenges.find(challenge => challenge.reward.kind === 'fixed');
@@ -21,7 +21,10 @@ function browser(t, options = {}) {
   let raw = null;
   const events = new EventTarget();
   const storage = {
-    getItem: () => raw,
+    getItem() {
+      if (options.readError) throw new Error('denied');
+      return raw;
+    },
     setItem(_key, value) {
       if (options.writeError) throw new Error('quota');
       raw = value;
@@ -108,6 +111,40 @@ test('a successful retry removes the unsaved navigation warning', async t => {
   assert.equal(h.beforeLeaving(), false);
   assert.equal(session.getStatus().saved, true);
 });
+
+for (const failure of ['noStorage', 'readError']) {
+  test(`confirming an empty import warns before leaving despite the synthetic empty baseline: ${failure}`, async t => {
+    const options = { [failure]: true };
+    const h = browser(t, options);
+    const { session } = await loadBrowserProgressSession();
+    const contents = encodeProgressCsv({ catalog, progress: { completedChallengeIds: [], variableXpAwards: {} },
+      exportedAt: new Date().toISOString() });
+    assert.equal(h.beforeLeaving(), false);
+    const canceled = session.previewImport(contents);
+    session.cancelImport(canceled);
+    assert.equal(h.beforeLeaving(), false);
+
+    await session.confirmImport(session.previewImport(contents));
+    assert.equal(session.getView().dashboard.totalXp, 0);
+    assert.equal(session.getStatus().saved, false);
+    assert.equal(h.raw, null);
+    assert.equal(h.beforeLeaving(), true, 'confirmed session-only replacement must not disappear without a warning');
+    assert.equal(session.getStatus().hasUnsavedChanges, true);
+
+    options[failure] = false;
+    if (failure === 'noStorage') {
+      // This session has no storage adapter; changing browser capabilities cannot save it.
+      await session.setCompletion(fixed.id, true);
+      await session.setCompletion(fixed.id, false);
+      assert.equal(h.beforeLeaving(), true);
+    } else {
+      await session.setCompletion(fixed.id, false);
+      assert.equal(session.getStatus().saved, true);
+      assert.equal(session.getStatus().hasUnsavedChanges, false);
+      assert.equal(h.beforeLeaving(), false);
+    }
+  });
+}
 
 test('catalog loading failures do not start a session', async t => {
   browser(t);
