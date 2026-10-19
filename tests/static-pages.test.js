@@ -106,3 +106,16 @@ test('Pages assembly includes the sitemap and runs on main pushes or manual disp
   assert.match(workflow, /^    branches:\s*\n      - main\s*$/m);
   assert.match(workflow, /^  workflow_dispatch:\s*$/m);
 });
+
+test('MIT license uses standard text with third-party scope explained separately', async () => {
+  const license = await readProjectFile('LICENSE');
+  const readme = await readProjectFile('README.md');
+  const rights = await readProjectFile('docs/metadata-rights.md');
+
+  assert.ok(license.startsWith('MIT License\n\nCopyright (c) 2026 '));
+  assert.match(license, /Permission is hereby granted, free of charge/);
+  assert.match(readme, /MIT does not sublicense that book-derived content/);
+  assert.match(readme, /docs\/metadata-rights\.md/);
+  assert.match(rights, /sui generis database right/i);
+  assert.match(rights, /original selection\/arrangement/i);
+});

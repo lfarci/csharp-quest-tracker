@@ -4,7 +4,7 @@ An unofficial, browser-local companion for the fifth-edition XP tracker in [The 
 
 ## Use the tracker
 
-The GitHub Pages project site is <https://lfarci.github.io/csharp-quest-tracker/>. Until then, serve this folder locally:
+The GitHub Pages project site is <https://lfarci.github.io/csharp-quest-tracker/>. You can also serve the project locally:
 
 ```sh
 python3 -m http.server 8000
@@ -44,4 +44,8 @@ The production catalog is checked against the [official fifth-edition XP tracker
 
 C# Quest Tracker is an unofficial companion to **The C# Player's Guide, Fifth Edition**, by **RB Whitaker**. It is not affiliated with or endorsed by RB Whitaker. Visit the [official book website](https://csharpplayersguide.com/) and [official fifth-edition XP tracker](https://csharpplayersguide.com/assets/content/downloadables/5th-edition/XPTracker.pdf).
 
-Original application code is licensed under MIT; see [LICENSE](LICENSE). Book-derived tracking metadata has separate rights and provenance and is not relicensed by that file; see [Book metadata rights and attribution](docs/metadata-rights.md). Confirm the reuse prerequisite in issue #9 before publishing book-derived catalog changes. The Pages workflow deploys automatically from `main` and also supports manual runs.
+**Original application code** is provided under the [MIT License](LICENSE). The app's fifth-edition [Challenge catalog](data/catalog.json) is a functional reference dataset based on the book's publicly available XP Tracker. Its titles, grouping and ordering may involve third-party rights; **MIT does not sublicense that book-derived content**. Facts such as XP values and page references are not claimed as original work owned by this project.
+
+See [Catalog rights, provenance and assessment](docs/metadata-rights.md) for the sourced Belgian/EU copyright and database-right analysis, the scope of the reproduced metadata, and residual uncertainty. The project does not reproduce exercises or solutions, and it makes no claim of permission or endorsement from RB Whitaker.
+
+GitHub Pages deployment is automatic on merges to `main`, with an optional manual workflow. Review rights implications before adding new book-derived content.
