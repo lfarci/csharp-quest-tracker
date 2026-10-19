@@ -14,6 +14,7 @@ concurrency:
 
 jobs:
   deploy:
+    if: ${{ vars.METADATA_REUSE_CLEARED == 'true' && vars.PAGES_DEPLOYMENT_AUTHORIZED == 'true' }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -30,8 +31,8 @@ jobs:
       - name: Assemble static site files
         run: |
           mkdir -p _site
-          cp *.html styles.css favicon.svg favicon.ico favicon-16x16.png favicon-32x32.png apple-touch-icon.png android-chrome-192x192.png android-chrome-512x512.png site.webmanifest _site/
-          cp -R src data _site/
+          cp *.html favicon.ico site.webmanifest _site/
+          cp -R src data assets _site/
       - name: Upload only the static application
         uses: actions/upload-pages-artifact@v4
         with:
