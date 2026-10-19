@@ -63,9 +63,15 @@ button:active { background: var(--notice); }
 #part-navigation { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2rem; }
 #part-navigation a { padding: .6rem 1rem; border: 1px solid var(--line); border-radius: .25rem; font-size: .9rem; }
 .book-part { margin-block: 2rem 3rem; }
-.book-part-disclosure > summary { min-height: 2.75rem; padding-bottom: .7rem; border-bottom: 2px solid var(--ink); cursor: pointer; scroll-margin-top: 1rem; }
+.book-part-disclosure > summary { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .75rem 1rem; min-height: 2.75rem; padding-bottom: .7rem; border-bottom: 2px solid var(--ink); cursor: pointer; scroll-margin-top: 1rem; }
 .book-part-disclosure > summary h2 { display: inline; margin: 0; font-size: 1.3rem; }
 .book-part-disclosure > summary:focus-visible { outline-offset: 2px; }
+.part-completion { display: grid; grid-template-columns: auto minmax(4rem, 8rem) auto; align-items: center; gap: .65rem; color: var(--muted); font-size: .82rem; font-weight: 550; }
+.part-completion progress { width: 100%; height: .45rem; margin: 0; background: var(--line); accent-color: var(--accent); }
+.part-completion progress::-webkit-progress-bar { background: var(--line); }
+.part-completion progress::-webkit-progress-value { background: var(--accent); }
+.part-completion progress::-moz-progress-bar { background: var(--accent); }
+.part-completion-percent { min-width: 2.5rem; text-align: right; font-variant-numeric: tabular-nums; }
 .book-part-disclosure .challenge-list { margin-top: 1rem; }
 .challenge-list { margin: 0; padding: 0; list-style: none; background: var(--surface); border: 1px solid var(--line); border-radius: .25rem; }
 .challenge + .challenge { border-top: 1px solid var(--line); }
