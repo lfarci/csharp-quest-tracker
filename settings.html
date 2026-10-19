@@ -22,9 +22,9 @@
 <body>
   <header class="site-header">
     <nav class="site-nav" aria-label="Site navigation">
-      <a href="index.html">Tracker</a>
-      <a href="settings.html" aria-current="page">Settings</a>
+      <a class="site-nav__brand" href="index.html"><img src="favicon.svg" alt=""> <span>Tracker</span></a>
       <a href="about.html">About</a>
+      <a href="settings.html" aria-current="page">Settings</a>
     </nav>
     <div class="edition">The C# Player’s Guide · Fifth edition</div>
     <h1>Settings</h1>
@@ -34,19 +34,23 @@
     <section class="appearance-settings" aria-labelledby="appearance-heading">
       <h2 id="appearance-heading">Appearance</h2>
       <label for="theme-select">Color theme</label>
-      <select id="theme-select">
-        <option value="system">System (follow device setting)</option>
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-      </select>
+      <span class="theme-select-wrap">
+        <select id="theme-select">
+          <option value="system">System (follow device setting)</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </span>
       <p class="settings-hint">System follows your device’s current light or dark appearance.</p>
       <p id="theme-status" class="sr-only" role="status" aria-live="polite"></p>
     </section>
-    <h2 class="settings-section-heading">Progress backup</h2>
-    <p id="loading" role="status">Checking saved progress…</p>
-    <p id="load-error" role="alert" hidden></p>
-    <p id="save-status" class="session-notice backup-save-status" role="status" hidden></p>
-    <section id="recovery-controls" class="backup-controls recovery-card" aria-labelledby="recovery-heading" hidden>
+    <section class="progress-backup-section" aria-labelledby="backup-heading">
+      <h2 id="backup-heading">Save or transfer progress</h2>
+      <p class="settings-hint">Your progress stays on this device. To use it on another device, download a backup file here, then import it there.</p>
+      <p id="loading" role="status">Checking saved progress…</p>
+      <p id="load-error" role="alert" hidden></p>
+      <p id="save-status" class="sr-only" role="status" hidden></p>
+      <section id="recovery-controls" class="backup-controls recovery-card" aria-labelledby="recovery-heading" hidden>
       <div>
         <p class="backup-eyebrow">Action needed</p>
         <h2 id="recovery-heading">Recover saved progress</h2>
@@ -57,10 +61,7 @@
         <button type="button" id="start-fresh">Start fresh</button>
       </div>
       <p id="recovery-status" class="backup-feedback" role="status" aria-live="polite"></p>
-    </section>
-    <section class="backup-controls backup-card" aria-labelledby="backup-heading">
-      <h2 id="backup-heading">Save or transfer progress</h2>
-      <p>Keep a separate copy: browser storage may be cleared or unavailable.</p>
+      </section>
       <div class="backup-options">
         <section class="backup-option" aria-labelledby="export-heading">
           <h3 id="export-heading">Export a copy</h3>

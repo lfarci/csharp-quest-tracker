@@ -127,10 +127,15 @@ function renderChecklist() {
     disclosure.open = true;
     const summary = document.createElement('summary');
     summary.id = `part-${part.id}`;
-    const disclosureIcon = document.createElement('span');
-    disclosureIcon.className = 'part-disclosure-icon';
+    const disclosureIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    disclosureIcon.setAttribute('class', 'part-disclosure-icon');
     disclosureIcon.setAttribute('aria-hidden', 'true');
-    disclosureIcon.textContent = '▸';
+    disclosureIcon.setAttribute('viewBox', '0 0 16 16');
+    disclosureIcon.setAttribute('focusable', 'false');
+    const disclosurePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    disclosurePath.setAttribute('d', 'M5.25 3.5 11 8l-5.75 4.5V3.5Z');
+    disclosurePath.setAttribute('fill', 'currentColor');
+    disclosureIcon.append(disclosurePath);
     const heading = document.createElement('h2');
     heading.id = `part-title-${part.id}`;
     heading.textContent = `Part ${part.id}: ${part.title}`;
