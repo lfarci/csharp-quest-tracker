@@ -44,7 +44,6 @@ button, .filter-options label, .challenge-label { touch-action: manipulation; }
 .backup-actions { display: flex; flex-wrap: wrap; gap: .65rem; }
 .backup-feedback { grid-column: 1 / -1; margin: .25rem 0 0; color: var(--muted); font-size: .9rem; overflow-wrap: anywhere; }
 .backup-feedback:empty { display: none; }
-.backup-link { margin-block: 1.5rem; }
 .about-content section { margin-block: 0 2rem; }
 .about-content h2 { font-size: 1.25rem; }
 .about-content p, .about-content li { max-width: 75ch; }
