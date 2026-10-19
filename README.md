@@ -4,7 +4,7 @@ An unofficial, browser-local companion for the fifth-edition XP tracker in [The 
 
 ## Use the tracker
 
-Once GitHub Pages is manually deployed after release prerequisites are met, the project site will be <https://lfarci.github.io/csharp-quest-tracker/>. Until then, serve this folder locally:
+The GitHub Pages project site is <https://lfarci.github.io/csharp-quest-tracker/>. Until then, serve this folder locally:
 
 ```sh
 python3 -m http.server 8000
@@ -44,4 +44,4 @@ The production catalog is checked against the [official fifth-edition XP tracker
 
 C# Quest Tracker is an unofficial companion to **The C# Player's Guide, Fifth Edition**, by **RB Whitaker**. It is not affiliated with or endorsed by RB Whitaker. Visit the [official book website](https://csharpplayersguide.com/) and [official fifth-edition XP tracker](https://csharpplayersguide.com/assets/content/downloadables/5th-edition/XPTracker.pdf).
 
-Original application code is licensed under MIT; see [LICENSE](LICENSE). Book-derived tracking metadata has separate rights and provenance and is not relicensed by that file; see [Book metadata rights and attribution](docs/metadata-rights.md). Public release remains blocked until the reuse prerequisite in issue #9 is resolved.
+Original application code is licensed under MIT; see [LICENSE](LICENSE). Book-derived tracking metadata has separate rights and provenance and is not relicensed by that file; see [Book metadata rights and attribution](docs/metadata-rights.md). Confirm the reuse prerequisite in issue #9 before publishing book-derived catalog changes. The Pages workflow deploys automatically from `main` and also supports manual runs.

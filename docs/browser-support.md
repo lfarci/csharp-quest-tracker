@@ -18,4 +18,4 @@ Target current stable Chrome, Edge, Firefox and Safari, including their mobile e
 - No `llms.txt` is needed. Human-readable, server-rendered HTML about the project, supported site links and standard metadata are more useful than a speculative machine-facing file.
 - Sitemap and structured data aid discovery and comprehension but do not guarantee crawler access or ranking.
 
-**Publication is still gated.** Keep metadata-reuse evidence and deployment authorization requirements intact; adding discovery metadata does not authorize public release.
+**Release responsibility:** Pushes to `main` trigger GitHub Pages deployment; there is no repository-variable release gate. Confirm metadata-reuse evidence and publication authorization before merging changes.

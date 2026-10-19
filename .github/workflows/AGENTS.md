@@ -4,5 +4,5 @@
 - `check-tests.yml` runs `npm test` on pushes and pull requests.
 - `browser-smoke.yml` tests a locally hosted site in Chromium, Firefox and WebKit on pull requests; browser tooling is CI-only.
 - `pages.yml` stages only the static application. Do not publish directory-scoped `AGENTS.md` files in the artifact.
-- `pages.yml` is manually dispatched only; do not add an automatic push/merge deployment trigger without explicit authorization.
-- Do not initiate Pages deployment until the metadata-reuse prerequisite is satisfied and deployment is separately authorized.
+- `pages.yml` deploys automatically on pushes to `main` and also supports manual dispatch; keep triggers aligned with repository deployment policy.
+- Deployment is no longer protected by repository-variable checks. Changes merged into `main` can be published automatically, so verify metadata-reuse rights and publication authorization before merging.
