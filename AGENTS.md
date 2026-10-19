@@ -9,6 +9,8 @@ The three HTML entry points live at the repository root. JavaScript goes in `src
 ## Readability first
 
 - Optimize for future maintainers, not shortest possible code. Prefer explicit control flow and descriptive names over one-line tricks.
+- Keep functions small and focused; prefer pure functions for business rules, and isolate browser/DOM side effects.
+- Follow DRY and KISS: remove duplication without creating abstraction layers for their own sake. Prefer widely supported native JavaScript APIs.
 - Use consistent two-space indentation in HTML, CSS, and JavaScript. Put one CSS declaration per line and separate logical groups with blank lines.
 - Add section comments and brief explanations of *why* complex logic exists. Avoid comments that restate what the next line obviously does.
 - Split deeply nested HTML into multiple lines, keeping the semantic element structure and stable IDs intact.
@@ -27,6 +29,6 @@ The three HTML entry points live at the repository root. JavaScript goes in `src
 
 Run `npm test` after source, markup or asset changes; keep existing behavior, browser accessibility, mobile display and light/dark appearance. Pull requests also run CI browser smoke tests for Chromium, Firefox and WebKit. Update the Pages assembly paths when public resources move.
 
-Original application code is MIT licensed, but book-derived catalog metadata requires separate reuse evidence (see `docs/metadata-rights.md` and issue #9). Do not contact the author or deploy without authorization. The Pages workflow must require `METADATA_REUSE_CLEARED` and `PAGES_DEPLOYMENT_AUTHORIZED` to both equal `true`.
+Original application code is MIT licensed, but book-derived catalog metadata requires separate reuse evidence (see `docs/metadata-rights.md` and issue #9). Do not contact the author or deploy without authorization. The Pages workflow is manual-only; do not trigger a deployment until metadata reuse is cleared and publication is explicitly authorized.
 
 Read directory-local `AGENTS.md` guidance when working in a directory. Do not add placeholder directories or unused assets.

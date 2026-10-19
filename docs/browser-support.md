@@ -13,7 +13,7 @@ Target current stable Chrome, Edge, Firefox and Safari, including their mobile e
 
 - Public pages use distinct descriptions, canonical project URLs and Open Graph metadata.
 - `index.html` includes a small `WebApplication` JSON-LD block describing only the existing application.
-- `sitemap.xml` lists the public Tracker and About pages, not the personal Settings page. Settings uses `noindex, follow`.
+- `sitemap.xml` lists the Tracker, About and Settings pages; each has a canonical project URL. Settings is included for consistency with the site's navigation and to make backup instructions discoverable.
 - A `robots.txt` under `/csharp-quest-tracker/` would not be the authoritative robots file: crawlers look at the hostname root, outside this project's scope on GitHub Pages. No project-level robots file is added.
 - No `llms.txt` is needed. Human-readable, server-rendered HTML about the project, supported site links and standard metadata are more useful than a speculative machine-facing file.
 - Sitemap and structured data aid discovery and comprehension but do not guarantee crawler access or ranking.

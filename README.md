@@ -4,7 +4,7 @@ An unofficial, browser-local companion for the fifth-edition XP tracker in [The 
 
 ## Use the tracker
 
-Once GitHub Pages is enabled and release prerequisites are met, the project site will be <https://lfarci.github.io/csharp-quest-tracker/>. Until then, serve this folder locally:
+Once GitHub Pages is manually deployed after release prerequisites are met, the project site will be <https://lfarci.github.io/csharp-quest-tracker/>. Until then, serve this folder locally:
 
 ```sh
 python3 -m http.server 8000

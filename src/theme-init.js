@@ -9,5 +9,7 @@ try {
     document.documentElement.dataset.theme = savedTheme;
   }
 } catch {
-  // Private or restricted browsing may disable storage; use the system theme.
+  // Intentionally leave data-theme unset. The stylesheet's
+  // prefers-color-scheme rules then provide the system theme automatically.
+  // There is no saved preference to restore or write.
 }

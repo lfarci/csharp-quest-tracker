@@ -59,6 +59,7 @@ test('manifest icons resolve to existing files', async () => {
 const canonicalUrls = {
   'index.html': 'https://lfarci.github.io/csharp-quest-tracker/',
   'about.html': 'https://lfarci.github.io/csharp-quest-tracker/about.html',
+  'settings.html': 'https://lfarci.github.io/csharp-quest-tracker/settings.html',
 };
 
 test('public pages expose consistent canonical URLs and descriptions', async () => {
@@ -81,15 +82,13 @@ test('the home page exposes valid WebApplication structured data', async () => {
   assert.equal(application.url, canonicalUrls['index.html']);
 });
 
-test('settings is not indexed, and sitemap includes only public pages', async () => {
-  const settings = await readProjectFile('settings.html');
+test('sitemap lists all three canonical pages', async () => {
   const sitemap = await readProjectFile('sitemap.xml');
 
-  assert.match(settings, /<meta name="robots" content="noindex, follow">/);
   for (const url of Object.values(canonicalUrls)) {
     assert.ok(sitemap.includes(`<loc>${url}</loc>`), `Missing sitemap entry ${url}`);
   }
-  assert.ok(!sitemap.includes('settings.html'));
+  assert.equal((sitemap.match(/<loc>/g) ?? []).length, Object.keys(canonicalUrls).length);
 });
 
 test('all HTML pages load the shared early theme script', async () => {
