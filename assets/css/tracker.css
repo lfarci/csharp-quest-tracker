@@ -396,7 +396,7 @@ progress::-moz-progress-bar {
 
 .challenge-label {
   display: grid;
-  grid-template-columns: 1.25rem 1.25rem minmax(0, 1fr) 5.5rem 4.5rem;
+  grid-template-columns: 1.25rem minmax(0, 1fr) 5.5rem 4.5rem;
   align-items: center;
   gap: 1rem;
   min-height: 3.5rem;
@@ -422,7 +422,16 @@ progress::-moz-progress-bar {
 }
 
 .challenge-title {
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+  min-width: 0;
   font-weight: 520;
+}
+
+.challenge-title-text {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .challenge-page, .challenge-reward {
@@ -436,7 +445,7 @@ progress::-moz-progress-bar {
 }
 
 .challenge-note {
-  padding: 0 1rem 1rem 5.5rem;
+  padding: 0 1rem 1rem 3.25rem;
   margin: 0;
   font-size: .85rem;
   color: var(--muted);
@@ -493,7 +502,7 @@ progress::-moz-progress-bar {
   }
 
   .challenge-label {
-    grid-template-columns: 1.25rem 1.25rem minmax(0, 1fr) 3.5rem;
+    grid-template-columns: 1.25rem minmax(0, 1fr) 3.5rem;
     gap: .25rem .75rem;
     padding: .8rem;
   }
@@ -507,17 +516,17 @@ progress::-moz-progress-bar {
   }
 
   .challenge-page {
-    grid-column: 3;
+    grid-column: 2;
     grid-row: 2;
   }
 
   .challenge-reward {
-    grid-column: 4;
+    grid-column: 3;
     grid-row: 1 / 3;
   }
 
   .challenge-note {
-    padding-left: 4.8rem;
+    padding-left: 2.8rem;
   }
 }
 /* System dark-mode adjustments */

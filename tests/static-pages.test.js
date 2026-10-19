@@ -148,3 +148,12 @@ test('sprite references specify inline SVG dimensions even before CSS loads', as
   assert.match(script, /svg\.setAttribute\('height', '20'\)/);
   assert.match(css, /\.activity-legend > span \{[\s\S]*?display: inline-flex;/);
 });
+
+test('activity icons appear inside the title, not as an extra grid column', async () => {
+  const script = await readProjectFile('src/app.js');
+  const css = await readProjectFile('assets/css/tracker.css');
+  assert.match(script, /title\.append\(icon, typeLabel, titleText\)/);
+  assert.match(script, /label\.append\(checkbox, title, page, reward\)/);
+  assert.match(css, /grid-template-columns: 1\.25rem minmax\(0, 1fr\) 5\.5rem 4\.5rem;/);
+  assert.match(css, /\.challenge-title \{[\s\S]*?display: inline-flex;/);
+});

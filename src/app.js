@@ -231,7 +231,10 @@ function renderChecklist() {
       typeLabel.textContent = `${activityTypes[type]}: `;
       const title = document.createElement('span');
       title.className = 'challenge-title';
-      title.textContent = challenge.title;
+      const titleText = document.createElement('span');
+      titleText.className = 'challenge-title-text';
+      titleText.textContent = challenge.title;
+      title.append(icon, typeLabel, titleText);
       const page = document.createElement('span');
       page.className = 'challenge-page';
       page.textContent = `Page ${challenge.page}`;
@@ -241,7 +244,7 @@ function renderChecklist() {
         ? challenge.reward.xp
         : (challenge.selectedXpAward ?? '?');
       reward.textContent = `${selectedAward} XP`;
-      label.append(checkbox, icon, typeLabel, title, page, reward);
+      label.append(checkbox, title, page, reward);
       item.append(label);
       if (challenge.reward.kind === 'variable') {
         const note = document.createElement('p');

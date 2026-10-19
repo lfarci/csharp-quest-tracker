@@ -72,7 +72,7 @@ test('activity icons distinguish types and preserve normal completion', async ({
     ['knowledge-check-c', 'knowledge-check', 'Knowledge Check'],
   ]) {
     const row = page.locator(`[data-challenge-id="${id}"]`);
-    await expect(row.locator('svg.activity-type-icon use'))
+    await expect(row.locator('.challenge-title svg.activity-type-icon use'))
       .toHaveAttribute('href', `assets/icons/activity-types.svg#${type}`);
     await expect(row.locator('input[type="checkbox"]')).toHaveAccessibleName(new RegExp(label + ':'));
   }
@@ -133,7 +133,7 @@ test('the activity legend is compact and icons align inline with labels', async 
     });
     const first = document.querySelector('[data-challenge-id="knowledge-check-c"]');
     const firstIcon = first.querySelector('svg.activity-type-icon');
-    const firstTitle = first.querySelector('.challenge-title');
+    const firstTitle = first.querySelector('.challenge-title-text');
     const a = firstIcon.getBoundingClientRect();
     const b = firstTitle.getBoundingClientRect();
     return {
