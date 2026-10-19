@@ -13,8 +13,7 @@
   <a class="skip-link" href="#challenges">Skip to Challenges</a>
   <header class="site-header">
     <nav class="site-nav" aria-label="Site navigation">
-      <a href="#progress-backup">Progress backup</a>
-      <a href="about.html#references">References</a>
+      <a href="progress-backup.html">Progress backup</a>
       <a href="about.html">About</a>
     </nav>
     <div class="edition">The C# Player’s Guide · Fifth edition</div>
@@ -62,25 +61,7 @@
         <button id="reset-view" type="button">Reset view</button>
       </div>
       <p id="no-results" class="empty-results" hidden>No Challenges match this view. Try a different title or reset the view to show all Challenges.</p>
-      <details id="progress-backup" class="backup-disclosure">
-        <summary>Progress backup</summary>
-        <section id="recovery-controls" class="backup-controls" aria-labelledby="recovery-heading" hidden>
-          <h2 id="recovery-heading">Recover saved progress</h2>
-          <p>The saved record is not a supported progress file. Download the original data to keep a copy, import a compatible backup, or confirm a fresh start.</p>
-          <button type="button" id="download-recovery-data">Download original recovery data</button>
-          <button type="button" id="start-fresh">Start fresh</button>
-          <p id="recovery-status" role="status" aria-live="polite"></p>
-        </section>
-        <section class="backup-controls" aria-labelledby="backup-heading">
-          <h2 id="backup-heading">Save or transfer progress</h2>
-          <p>Keep a separate copy of your progress. Browser storage can be cleared or unavailable, so keep downloaded backups somewhere safe.</p>
-          <p>Moving progress to another device is manual: export a CSV backup, transfer the file, then choose that file with Import progress backup.</p>
-          <button type="button" id="export-progress">Export progress</button>
-          <label class="import-file-label" for="import-progress-file">Import progress backup</label>
-          <input type="file" id="import-progress-file" accept="text/csv,.csv" aria-describedby="backup-status">
-          <p id="backup-status" role="status" aria-live="polite"></p>
-        </section>
-      </details>
+      <p class="backup-link"><a href="progress-backup.html">Manage your progress backup</a></p>
       <nav id="part-navigation" aria-label="Book parts"></nav>
       <div id="challenges" tabindex="-1"></div>
       <p id="action-status" class="sr-only" role="status" aria-live="polite"></p>
@@ -97,47 +78,6 @@
       <div class="dialog-actions">
         <button type="button" id="cancel-variable-award">Cancel</button>
         <button type="submit">Complete Challenge</button>
-      </div>
-    </form>
-  </dialog>
-  <dialog id="import-preview-dialog" aria-labelledby="import-preview-heading" aria-describedby="import-preview-explanation">
-    <form id="import-preview-form" novalidate>
-      <h2 id="import-preview-heading">Review progress backup</h2>
-      <p id="import-preview-explanation">Import replaces all current progress; it does not merge Challenges. Review these totals before confirming.</p>
-      <p id="import-catalog-note"></p>
-      <div class="import-comparison">
-        <section id="current-import-summary" aria-labelledby="current-import-heading">
-          <h3 id="current-import-heading">Current progress</h3>
-          <dl>
-            <div><dt>Challenges completed</dt><dd data-summary="completedCount"></dd></div>
-            <div><dt>Total XP</dt><dd data-summary="totalXp"></dd></div>
-            <div><dt>Character level</dt><dd data-summary="characterLevel"></dd></div>
-          </dl>
-        </section>
-        <section id="incoming-import-summary" aria-labelledby="incoming-import-heading">
-          <h3 id="incoming-import-heading">Backup progress</h3>
-          <dl>
-            <div><dt>Challenges completed</dt><dd data-summary="completedCount"></dd></div>
-            <div><dt>Total XP</dt><dd data-summary="totalXp"></dd></div>
-            <div><dt>Character level</dt><dd data-summary="characterLevel"></dd></div>
-          </dl>
-        </section>
-      </div>
-      <p id="import-error" role="alert" tabindex="-1" hidden></p>
-      <div class="dialog-actions">
-        <button type="button" id="cancel-import">Cancel</button>
-        <button type="submit" id="confirm-import">Replace progress</button>
-      </div>
-    </form>
-  </dialog>
-  <dialog id="fresh-start-dialog" aria-labelledby="fresh-start-heading" aria-describedby="fresh-start-explanation">
-    <form id="fresh-start-form" novalidate>
-      <h2 id="fresh-start-heading">Start a fresh tracker?</h2>
-      <p id="fresh-start-explanation">This replaces the saved record with an empty tracker: 0 XP, Character level 1, and no completed Challenges. Download the original recovery data or import a compatible backup first if you may need it.</p>
-      <p id="fresh-start-error" role="alert" tabindex="-1" hidden></p>
-      <div class="dialog-actions">
-        <button type="button" id="cancel-fresh-start">Cancel</button>
-        <button type="submit" id="confirm-fresh-start">Replace with empty progress</button>
       </div>
     </form>
   </dialog>

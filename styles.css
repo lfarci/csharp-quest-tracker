@@ -26,6 +26,9 @@ button, .filter-options label, .challenge-label { touch-action: manipulation; }
 .site-nav { display: flex; justify-content: flex-end; gap: 1.25rem; margin-bottom: 2.5rem; }
 .site-nav a { font-size: .9rem; font-weight: 600; }
 .about-content { min-height: 45vh; }
+.backup-page { min-height: 45vh; }
+.backup-page .backup-controls { margin-block: 1.5rem; padding: 1.25rem; border: 1px solid var(--line); border-radius: .25rem; background: var(--surface); }
+.backup-link { margin-block: 1.5rem; }
 .about-content section { margin-block: 0 2rem; }
 .about-content h2 { font-size: 1.25rem; }
 .about-content p, .about-content li { max-width: 75ch; }
