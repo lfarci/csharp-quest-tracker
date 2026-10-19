@@ -4,23 +4,39 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <meta name="description" content="Export, import, or recover your C# Quest Tracker progress.">
+  <meta name="description" content="Manage the C# Quest Tracker appearance and progress backups.">
   <title>Settings · C# Quest Tracker</title>
   <link rel="stylesheet" href="styles.css">
+  <script>
+    try { const theme = localStorage.getItem('theme'); if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme; } catch {}
+  </script>
+  <script type="module" src="src/theme.js"></script>
   <script type="module" src="src/backup-page.js"></script>
 </head>
 <body>
   <header class="site-header">
     <nav class="site-nav" aria-label="Site navigation">
       <a href="index.html">Tracker</a>
-      <a href="progress-backup.html" aria-current="page">Settings</a>
+      <a href="settings.html" aria-current="page">Settings</a>
       <a href="about.html">About</a>
     </nav>
     <div class="edition">The C# Player’s Guide · Fifth edition</div>
     <h1>Settings</h1>
-    <p>Export a copy of your progress or transfer it to another device.</p>
+    <p>Manage the tracker’s appearance and saved progress.</p>
   </header>
-  <main id="main" class="backup-page">
+  <main id="main" class="backup-page settings-page">
+    <section class="appearance-settings" aria-labelledby="appearance-heading">
+      <h2 id="appearance-heading">Appearance</h2>
+      <label for="theme-select">Color theme</label>
+      <select id="theme-select">
+        <option value="system">System (follow device setting)</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+      <p class="settings-hint">System follows your device’s current light or dark appearance.</p>
+      <p id="theme-status" class="sr-only" role="status" aria-live="polite"></p>
+    </section>
+    <h2 class="settings-section-heading">Progress backup</h2>
     <p id="loading" role="status">Checking saved progress…</p>
     <p id="load-error" role="alert" hidden></p>
     <p id="save-status" class="session-notice backup-save-status" role="status" hidden></p>
@@ -54,7 +70,6 @@
       </div>
       <p id="backup-status" class="backup-feedback" role="status" aria-live="polite"></p>
     </section>
-    <p><a href="index.html">← Back to the tracker</a></p>
   </main>
   <dialog id="import-preview-dialog" aria-labelledby="import-preview-heading" aria-describedby="import-preview-explanation">
     <form id="import-preview-form" novalidate>
