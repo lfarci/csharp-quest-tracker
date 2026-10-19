@@ -1,15 +1,11 @@
 import { createProgressSession } from './progress-session.js';
 import { createVariableRewardDialog } from './variable-reward-dialog.js';
-import { downloadProgressBackup } from './backup-download.js';
 import { createBrowserProgressSession } from './browser-progress.js';
-import { createImportDialog } from './import-dialog.js';
-import { createRecoveryControls } from './recovery-controls.js';
 
 const byId = id => document.getElementById(id);
 const number = value => value.toLocaleString();
 let session;
 let variableRewardDialog;
-let recoveryControls;
 let catalogForUi;
 
 function getSessionView(options) {
@@ -111,33 +107,6 @@ function updateSaveStatus() {
   byId('save-status').textContent = status.message;
   const blocked = status.stale || status.recoveryNeeded;
   for (const checkbox of document.querySelectorAll('.challenge input[type="checkbox"]')) checkbox.disabled = blocked;
-  byId('import-progress-file').disabled = status.stale;
-  byId('export-progress').disabled = status.recoveryNeeded;
-  recoveryControls?.update(status);
-}
-
-function updateAllChallengeRows() {
-  const challenges = new Map(getSessionView().parts.flatMap(part => part.challenges).map(challenge => [challenge.id, challenge]));
-  for (const [id, challenge] of challenges) {
-    const item = document.querySelector(`[data-challenge-id="${id}"]`);
-    const checkbox = item.querySelector('input');
-    checkbox.checked = challenge.completed;
-    item.classList.toggle('is-complete', challenge.completed);
-    if (challenge.reward.kind === 'variable') item.querySelector('.challenge-reward').textContent = `${challenge.selectedXpAward ?? '?'} XP`;
-  }
-  updateDashboard();
-  updateSaveStatus();
-  updateChecklist();
-}
-
-function updateAfterImport() {
-  updateAllChallengeRows();
-  byId('action-status').textContent = 'Backup progress replaced the current progress.';
-}
-
-function updateAfterFreshStart() {
-  updateAllChallengeRows();
-  byId('action-status').textContent = 'Fresh start confirmed. Progress is empty with 0 XP and Character level 1.';
 }
 
 function renderChecklist() {
@@ -248,18 +217,7 @@ async function start() {
       },
       onStatusChange: () => updateSaveStatus(),
     } });
-    byId('export-progress').addEventListener('click', () => {
-      try {
-        if (!session.getProgress()) throw new Error('Progress needs recovery first.');
-        const filename = downloadProgressBackup(session);
-        byId('backup-status').textContent = `Backup download started: ${filename}`;
-      } catch {
-        byId('backup-status').textContent = 'The backup could not be downloaded. Try exporting again.';
-      }
-    });
     variableRewardDialog = createVariableRewardDialog({ session, onChange: syncChallenge });
-    createImportDialog({ session, onImport: updateAfterImport });
-    recoveryControls = createRecoveryControls({ session, onRecovery: updateAfterFreshStart });
     renderChecklist();
     updateSaveStatus();
     updateDashboard();

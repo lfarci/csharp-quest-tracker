@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Export, import, or recover your C# Quest Tracker progress.">
+  <title>Progress backup · C# Quest Tracker</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="src/backup-page.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="site-nav" aria-label="Site navigation">
+      <a href="index.html">Tracker</a>
+      <a href="progress-backup.html" aria-current="page">Progress backup</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="edition">The C# Player’s Guide · Fifth edition</div>
+    <h1>Progress backup</h1>
+    <p>Export a copy of your progress or transfer it to another device.</p>
+  </header>
+  <main id="main" class="backup-page">
+    <p id="loading" role="status">Checking saved progress…</p>
+    <p id="load-error" role="alert" hidden></p>
+    <p id="save-status" class="session-notice backup-save-status" role="status" hidden></p>
+    <section id="recovery-controls" class="backup-controls recovery-card" aria-labelledby="recovery-heading" hidden>
+      <div>
+        <p class="backup-eyebrow">Action needed</p>
+        <h2 id="recovery-heading">Recover saved progress</h2>
+        <p>The saved record can’t be read as tracker progress. Download the original data to keep a copy, import a compatible backup, or confirm a fresh start.</p>
+      </div>
+      <div class="backup-actions">
+        <button type="button" id="download-recovery-data">Download original data</button>
+        <button type="button" id="start-fresh">Start fresh</button>
+      </div>
+      <p id="recovery-status" class="backup-feedback" role="status" aria-live="polite"></p>
+    </section>
+    <section class="backup-controls backup-card" aria-labelledby="backup-heading">
+      <h2 id="backup-heading">Save or transfer progress</h2>
+      <p>Keep a separate copy: browser storage may be cleared or unavailable.</p>
+      <div class="backup-options">
+        <section class="backup-option" aria-labelledby="export-heading">
+          <h3 id="export-heading">Export a copy</h3>
+          <p>Download your progress as a CSV file and keep it somewhere safe.</p>
+          <button type="button" id="export-progress" disabled>Export progress</button>
+        </section>
+        <section class="backup-option" aria-labelledby="import-heading">
+          <h3 id="import-heading">Import a backup</h3>
+          <p>Choose a CSV backup to replace progress in this browser. Imports don’t merge.</p>
+          <label class="import-file-label" for="import-progress-file">Choose CSV backup</label>
+          <input type="file" id="import-progress-file" accept="text/csv,.csv" aria-describedby="backup-status" disabled>
+        </section>
+      </div>
+      <p id="backup-status" class="backup-feedback" role="status" aria-live="polite"></p>
+    </section>
+    <p><a href="index.html">← Back to the tracker</a></p>
+  </main>
+  <dialog id="import-preview-dialog" aria-labelledby="import-preview-heading" aria-describedby="import-preview-explanation">
+    <form id="import-preview-form" novalidate>
+      <h2 id="import-preview-heading">Review progress backup</h2>
+      <p id="import-preview-explanation">Import replaces all current progress; it does not merge Challenges. Review these totals before confirming.</p>
+      <p id="import-catalog-note"></p>
+      <div class="import-comparison">
+        <section id="current-import-summary" aria-labelledby="current-import-heading">
+          <h3 id="current-import-heading">Current progress</h3>
+          <dl><div><dt>Challenges completed</dt><dd data-summary="completedCount"></dd></div><div><dt>Total XP</dt><dd data-summary="totalXp"></dd></div><div><dt>Character level</dt><dd data-summary="characterLevel"></dd></div></dl>
+        </section>
+        <section id="incoming-import-summary" aria-labelledby="incoming-import-heading">
+          <h3 id="incoming-import-heading">Backup progress</h3>
+          <dl><div><dt>Challenges completed</dt><dd data-summary="completedCount"></dd></div><div><dt>Total XP</dt><dd data-summary="totalXp"></dd></div><div><dt>Character level</dt><dd data-summary="characterLevel"></dd></div></dl>
+        </section>
+      </div>
+      <p id="import-error" role="alert" tabindex="-1" hidden></p>
+      <div class="dialog-actions"><button type="button" id="cancel-import">Cancel</button><button type="submit" id="confirm-import">Replace progress</button></div>
+    </form>
+  </dialog>
+  <dialog id="fresh-start-dialog" aria-labelledby="fresh-start-heading" aria-describedby="fresh-start-explanation">
+    <form id="fresh-start-form" novalidate>
+      <h2 id="fresh-start-heading">Start a fresh tracker?</h2>
+      <p id="fresh-start-explanation">This replaces saved progress with an empty tracker: 0 XP, Character level 1, and no completed Challenges. Download the original recovery data or import a compatible backup first if you may need it.</p>
+      <p id="fresh-start-error" role="alert" tabindex="-1" hidden></p>
+      <div class="dialog-actions"><button type="button" id="cancel-fresh-start">Cancel</button><button type="submit" id="confirm-fresh-start">Replace with empty progress</button></div>
+    </form>
+  </dialog>
+  <footer><p>Progress is stored in this browser and never sent to a server. <a href="about.html">About this project</a>.</p></footer>
+</body>
+</html>
