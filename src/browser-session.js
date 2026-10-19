@@ -5,11 +5,22 @@ export async function loadBrowserProgressSession(onStatusChange) {
   const response = await fetch(new URL('../data/catalog.json', import.meta.url));
   if (!response.ok) throw new Error('The catalog could not be downloaded.');
   const catalog = await response.json();
+  // Feature detection can itself throw in restricted browsing environments.
   let storage;
   let lockManager;
-  try { storage = window.localStorage; } catch { storage = null; }
-  try { lockManager = navigator.locks; } catch { lockManager = null; }
+  try {
+    storage = window.localStorage;
+  } catch {
+    storage = null;
+  }
+
+  try {
+    lockManager = navigator.locks;
+  } catch {
+    lockManager = null;
+  }
   let warningActive = false;
+  // Warn about unsaved in-memory progress, but do not rely on this on mobile.
   const warnBeforeLeaving = event => {
     event.preventDefault();
     event.returnValue = '';

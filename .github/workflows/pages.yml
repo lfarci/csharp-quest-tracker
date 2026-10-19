@@ -33,6 +33,7 @@ jobs:
           mkdir -p _site
           cp *.html favicon.ico site.webmanifest _site/
           cp -R src data assets _site/
+          find _site -name AGENTS.md -type f -delete
       - name: Upload only the static application
         uses: actions/upload-pages-artifact@v4
         with:

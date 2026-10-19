@@ -6,6 +6,7 @@
   <meta name="color-scheme" content="light dark">
   <meta name="description" content="About the C# Quest Tracker, its sources, and project links.">
   <title>About · C# Quest Tracker</title>
+  <!-- Site icons and shared styles -->
   <link rel="icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
@@ -13,14 +14,27 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
   <link rel="stylesheet" href="assets/css/base.css">
+  <!-- Apply the saved theme before the page paints to avoid a color flash. -->
   <script>
-    try { const theme = localStorage.getItem('theme'); if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme; } catch {}
+    try {
+      const theme = localStorage.getItem('theme');
+
+      if (theme === 'light' || theme === 'dark') {
+        document.documentElement.dataset.theme = theme;
+      }
+    } catch {
+      // Storage might be blocked; CSS will use the system preference.
+    }
   </script>
 </head>
 <body>
+  <!-- Shared site navigation and page heading -->
   <header class="site-header">
     <nav class="site-nav" aria-label="Site navigation">
-      <a class="site-nav__brand" href="index.html"><img src="assets/icons/favicon.svg" alt=""> <span>Tracker</span></a>
+      <a class="site-nav__brand" href="index.html">
+        <img src="assets/icons/favicon.svg" alt="">
+        <span>Tracker</span>
+      </a>
       <a href="about.html" aria-current="page">About</a>
       <a href="settings.html">Settings</a>
     </nav>
@@ -29,6 +43,7 @@
     <p>A simple place to keep track of your Challenges and XP.</p>
   </header>
   <main id="main" class="about-content">
+    <!-- About the project, data provenance and author attribution -->
     <section class="about-intro" aria-labelledby="project-heading">
       <h2 id="project-heading">About this project</h2>
       <p>Created by <a href="https://github.com/lfarci" rel="author">lfarci</a> for my girlfriend, who is learning C#. I built this tracker to encourage her to complete the book’s exercises and celebrate her progress, one Challenge at a time.</p>

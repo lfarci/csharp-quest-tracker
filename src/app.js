@@ -3,12 +3,17 @@ import { createVariableRewardDialog } from './variable-reward-dialog.js';
 import { loadBrowserProgressSession } from './browser-session.js';
 import { downloadProgressBackup } from './backup-download.js';
 
+/**
+ * Tracker page rendering and user interactions.
+ * Domain calculations and storage coordination live in the session modules.
+ */
 const byId = id => document.getElementById(id);
 const number = value => value.toLocaleString();
 let session;
 let variableRewardDialog;
 let recoveryView;
 
+// Read the active session, or the safe read-only catalog view during recovery.
 function getSessionView(options) {
   return session.getView(options) ?? recoveryView.getView(options);
 }
@@ -16,7 +21,15 @@ function getSessionView(options) {
 function updateDashboard() {
   const view = session?.getView();
   if (!view?.dashboard) {
-    for (const id of ['character-level', 'total-xp', 'completed-count', 'tracker-completion', 'next-level']) byId(id).textContent = 'Unavailable';
+    for (const id of [
+      'character-level',
+      'total-xp',
+      'completed-count',
+      'tracker-completion',
+      'next-level',
+    ]) {
+      byId(id).textContent = 'Unavailable';
+    }
     byId('level-progress').value = 0;
     byId('level-progress-label').textContent = 'Statistics unavailable until progress is recovered';
     return;
@@ -61,6 +74,10 @@ function updateDisclosureControls() {
   toggleAll.disabled = disclosures.length === 0;
 }
 
+/**
+ * Apply search/filter visibility without changing the underlying progress.
+ * If the user hides the focused row, restore focus to a nearby visible control.
+ */
 function updateChecklist() {
   const focused = document.activeElement;
   const previouslyVisible = [...document.querySelectorAll('.challenge:not([hidden]) input:not(:disabled)')];
@@ -83,15 +100,23 @@ function updateChecklist() {
   byId('no-results').hidden = visibleIds.size !== 0;
   updateDisclosureControls();
   if (focusedIndex !== -1 && focused.closest('.challenge').hidden) {
-    const next = previouslyVisible.slice(focusedIndex + 1).find(input => !input.closest('.challenge').hidden);
-    const previous = previouslyVisible.slice(0, focusedIndex).reverse().find(input => !input.closest('.challenge').hidden);
+    const next = previouslyVisible
+      .slice(focusedIndex + 1)
+      .find(input => !input.closest('.challenge').hidden);
+    const previous = previouslyVisible
+      .slice(0, focusedIndex)
+      .reverse()
+      .find(input => !input.closest('.challenge').hidden);
     (next ?? previous ?? byId('challenge-search')).focus();
   }
   return resultSummary;
 }
 
+// Refresh one row and the related dashboard after a progress change.
 function syncChallenge(id, announce = true) {
-  const challenge = getSessionView().parts.flatMap(part => part.challenges).find(challenge => challenge.id === id);
+  const challenge = getSessionView().parts
+    .flatMap(part => part.challenges)
+    .find(challenge => challenge.id === id);
   if (!challenge) return;
   const item = document.querySelector(`[data-challenge-id="${id}"]`);
   item.querySelector('input').checked = challenge.completed;
@@ -120,6 +145,10 @@ function updateSaveStatus() {
   byId('export-session-progress').hidden = status.recoveryNeeded;
 }
 
+/**
+ * Create the checklist once. Later updates modify checked/hidden states
+ * rather than replacing elements, preserving keyboard focus and listeners.
+ */
 function renderChecklist() {
   for (const part of getSessionView().parts) {
     const section = document.createElement('section');
@@ -174,7 +203,10 @@ function renderChecklist() {
       page.textContent = `Page ${challenge.page}`;
       const reward = document.createElement('span');
       reward.className = 'challenge-reward';
-      reward.textContent = `${challenge.reward.kind === 'fixed' ? challenge.reward.xp : (challenge.selectedXpAward ?? '?')} XP`;
+      const selectedAward = challenge.reward.kind === 'fixed'
+        ? challenge.reward.xp
+        : (challenge.selectedXpAward ?? '?');
+      reward.textContent = `${selectedAward} XP`;
       label.append(checkbox, title, page, reward);
       item.append(label);
       if (challenge.reward.kind === 'variable') {
@@ -195,7 +227,9 @@ function renderChecklist() {
           }
           syncChallenge(challenge.id);
         } catch (error) {
-          const current = getSessionView().parts.flatMap(part => part.challenges).find(item => item.id === challenge.id);
+          const current = getSessionView().parts
+            .flatMap(part => part.challenges)
+            .find(item => item.id === challenge.id);
           checkbox.checked = current?.completed ?? false;
           updateSaveStatus();
           byId('action-status').textContent = error.message;
@@ -210,6 +244,7 @@ function renderChecklist() {
   }
 }
 
+// Bind page interactions once the catalog and browser session are ready.
 async function start() {
   try {
     const loaded = await loadBrowserProgressSession(updateSaveStatus);

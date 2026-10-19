@@ -1,3 +1,7 @@
+/**
+ * Theme selection is optional on each page. The inline HTML script applies
+ * a saved theme early to prevent a flash before this module loads.
+ */
 const selector = document.querySelector('#theme-select');
 
 function readTheme() {

@@ -1,6 +1,9 @@
 /** Validate the complete catalog before a progress session can be presented. */
+// Validate at the boundary before any reader progress is interpreted.
 export function validateCatalog(catalog) {
-  const invalid = () => { throw new Error('The Challenge catalog is invalid. Please reload or try again later.'); };
+  const invalid = () => {
+    throw new Error('The Challenge catalog is invalid. Please reload or try again later.');
+  };
   if (!catalog || catalog.bookEdition !== 5 || typeof catalog.revision !== 'string' ||
       !catalog.revision || !Array.isArray(catalog.parts) || catalog.parts.length !== 5 ||
       !Array.isArray(catalog.challenges) || !catalog.challenges.length ||

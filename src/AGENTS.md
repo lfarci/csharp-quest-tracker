@@ -1,0 +1,8 @@
+# JavaScript source conventions
+
+- Use plain JavaScript ES modules and two-space indentation; avoid frameworks, transpilation and runtime dependencies.
+- Prefer descriptive names, explicit guards, readable object literals and whitespace between logical blocks. Avoid chaining complex state transitions into single lines.
+- Explain subtle behavior and architectural constraints in comments; do not narrate obvious statements.
+- Keep progress rules and XP calculations in `progress-session.js`, browser persistence and stale-tab handling in `browser-progress.js`, and DOM event wiring in UI modules.
+- Preserve storage-failure recovery, accessible status announcements, focus behavior and asynchronous error paths.
+- Add or update tests for any observable behavior change.

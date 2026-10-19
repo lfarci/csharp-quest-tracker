@@ -1,3 +1,7 @@
+/**
+ * Portable CSV backup format. Keep the column order stable for exported
+ * files and validate the entire input before applying any imported progress.
+ */
 const HEADERS = [
   'schemaVersion', 'bookEdition', 'catalogRevision', 'exportedAt',
   'challengeId', 'challengeTitle', 'completed', 'selectedXpAward',
@@ -8,6 +12,7 @@ function escapeField(value) {
   return /[",\r\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
 }
 
+// Parse quoted CSV fields without external dependencies.
 function parseRows(contents) {
   const rows = [];
   let row = [];

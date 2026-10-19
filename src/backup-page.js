@@ -3,6 +3,7 @@ import { downloadProgressBackup } from './backup-download.js';
 import { createImportDialog } from './import-dialog.js';
 import { createRecoveryControls } from './recovery-controls.js';
 
+/** Settings page wiring; persistence and import validation live in session modules. */
 const byId = id => document.getElementById(id);
 let session;
 let recoveryControls;
@@ -18,6 +19,7 @@ function updateStatus() {
   recoveryControls?.update(status);
 }
 
+// Initialize controls only after the persisted browser session is loaded.
 async function start() {
   try {
     ({ session } = await loadBrowserProgressSession(updateStatus));

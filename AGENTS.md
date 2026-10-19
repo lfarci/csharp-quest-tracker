@@ -1,32 +1,32 @@
-# Agent instructions — C# Quest Tracker
+# C# Quest Tracker — agent instructions
 
-## Stack and boundaries
+## Project constraints
 
-- Keep the project a static website built with semantic HTML, CSS and vanilla JavaScript ES modules.
-- No JavaScript UI framework, backend, database, authentication, bundler or build step.
-- Keep the HTML pages at the repository root, application JavaScript in `src/`, catalog in `data/`, and CSS and visual assets in `assets/`.
-- Keep `favicon.ico` and `site.webmanifest` at the root for conventional browser discovery.
-- Use relative asset paths that work beneath the GitHub Pages project path `/csharp-quest-tracker/`.
+Build a small, readable, accessible website with semantic HTML, CSS, and vanilla JavaScript ES modules. No frontend framework, bundler, backend, database, authentication, or runtime dependencies.
 
-## Code responsibilities
+The three HTML entry points live at the repository root. JavaScript goes in `src/`, static styles and icons in `assets/`, and the versioned catalog in `data/`. Use relative URLs that work beneath `/csharp-quest-tracker/`.
 
-- `src/progress-session.js` owns completion rules, XP calculation and derived dashboard data.
-- `src/browser-progress.js` owns browser persistence and cross-tab coordination.
-- Browser-facing modules own DOM interactions and browser capabilities; avoid moving domain rules into them.
-- `data/catalog.json` is the versioned, verified fifth-edition catalog. Do not invent or alter book-derived metadata without source verification.
-- CSV is the portable progress backup format. Browser storage uses JSON; do not silently change either contract.
+## Readability first
 
-## Quality
+- Optimize for future maintainers, not shortest possible code. Prefer explicit control flow and descriptive names over one-line tricks.
+- Use consistent two-space indentation in HTML, CSS, and JavaScript. Put one CSS declaration per line and separate logical groups with blank lines.
+- Add section comments and brief explanations of *why* complex logic exists. Avoid comments that restate what the next line obviously does.
+- Split deeply nested HTML into multiple lines, keeping the semantic element structure and stable IDs intact.
+- Keep CSS design tokens and shared presentation in `assets/css/base.css`; page-specific rules belong in `tracker.css` or `settings.css`.
+- Use native HTML elements, labelled inputs, keyboard-friendly controls, useful error text, visible focus indicators and mobile layouts.
 
-- Prefer minimal, focused changes over speculative abstractions.
-- Preserve keyboard accessibility, semantic HTML, responsive layouts and light/dark theme behavior.
-- Use the built-in Node.js test runner (`npm test`); add or update tests for behavior changes.
-- Keep shared tokens, navigation, and generic controls in `assets/css/base.css`; place page-specific rules and responsive overrides in `tracker.css` or `settings.css`.
-- When moving public files, update HTML, manifest and GitHub Pages staging paths together.
-- Do not introduce runtime dependencies solely for tooling convenience.
+## Responsibility boundaries
 
-## Release and permissions
+- `src/progress-session.js`: completion/XP rules and derived view values.
+- `src/browser-progress.js`: storage, locks, stale-tab prevention, and recovery.
+- UI modules: DOM rendering, events, feedback and browser features rather than XP formulas.
+- `data/catalog.json`: source-verified fifth-edition tracking data. Do not invent or silently change book-derived metadata.
+- CSV is the portable backup format; browser storage uses JSON.
 
-- Book-derived metadata is subject to a separate reuse prerequisite (see `docs/metadata-rights.md` and issue #9); the MIT license covers original application code only.
-- Do not publicly deploy the app, bypass the Pages release gates, or contact the book author without explicit authorization.
-- The Pages workflow requires both `METADATA_REUSE_CLEARED` and `PAGES_DEPLOYMENT_AUTHORIZED` to equal `true`.
+## Verification and release
+
+Run `npm test` after source, markup or asset changes; keep existing behavior, browser accessibility, mobile display and light/dark appearance. Update the Pages assembly paths when public resources move.
+
+Original application code is MIT licensed, but book-derived catalog metadata requires separate reuse evidence (see `docs/metadata-rights.md` and issue #9). Do not contact the author or deploy without authorization. The Pages workflow must require `METADATA_REUSE_CLEARED` and `PAGES_DEPLOYMENT_AUTHORIZED` to both equal `true`.
+
+Read directory-local `AGENTS.md` guidance when working in a directory. Do not add placeholder directories or unused assets.
