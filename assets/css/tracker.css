@@ -1,3 +1,10 @@
+/* Activity colors complement distinct icon shapes and accessible names. */
+:root {
+  --type-challenge: #365d89;
+  --type-boss-battle: #8b5d0f;
+  --type-knowledge-check: #236c6a;
+}
+
 /* Tracker interaction defaults */
 .filter-options label, .challenge-label {
   touch-action: manipulation;
@@ -305,6 +312,69 @@ progress::-moz-progress-bar {
 .book-part-disclosure .challenge-list {
   margin-top: 1rem;
 }
+/* Supplemental activity symbols and compact legend */
+.activity-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .45rem 1.25rem;
+  margin-block: .5rem 1rem;
+  font-size: .85rem;
+  color: var(--muted);
+}
+
+.activity-legend > span {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: .4rem;
+  white-space: nowrap;
+}
+
+.activity-type-icon {
+  display: block;
+  flex: 0 0 auto;
+  width: 1.2rem;
+  height: 1.2rem;
+  max-width: 1.2rem;
+  max-height: 1.2rem;
+  color: var(--activity-color, var(--type-challenge));
+}
+
+.activity-type-icon--challenge {
+  --activity-color: var(--type-challenge);
+}
+
+.activity-type-icon--boss-battle {
+  --activity-color: var(--type-boss-battle);
+}
+
+.activity-type-icon--knowledge-check {
+  --activity-color: var(--type-knowledge-check);
+}
+
+.activity-legend .activity-type-icon {
+  width: 1rem;
+  height: 1rem;
+  min-width: 1rem;
+  max-width: 1rem;
+  min-height: 1rem;
+  max-height: 1rem;
+}
+
+/* A thin row-edge key reinforces the icon color without making it the only cue. */
+.challenge--challenge {
+  --activity-color: var(--type-challenge);
+}
+
+.challenge--boss-battle {
+  --activity-color: var(--type-boss-battle);
+}
+
+.challenge--knowledge-check {
+  --activity-color: var(--type-knowledge-check);
+}
+
 /* Challenge rows and completion */
 .challenge-list {
   margin: 0;
@@ -314,6 +384,10 @@ progress::-moz-progress-bar {
   border: 1px solid var(--line);
   border-radius: .45rem;
   box-shadow: 0 .5rem 1.25rem rgb(24 42 66 / 5%);
+}
+
+.challenge {
+  border-inline-start: 3px solid var(--activity-color);
 }
 
 .challenge + .challenge {
@@ -348,7 +422,16 @@ progress::-moz-progress-bar {
 }
 
 .challenge-title {
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+  min-width: 0;
   font-weight: 520;
+}
+
+.challenge-title-text {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .challenge-page, .challenge-reward {
@@ -469,4 +552,19 @@ progress::-moz-progress-bar {
 
 #variable-award-error {
   font-weight: 600;
+}
+
+/* Make all three colors readable on both system and explicitly selected dark UI. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --type-challenge: #a4c9f1;
+    --type-boss-battle: #edd08b;
+    --type-knowledge-check: #83d5cb;
+  }
+}
+
+:root[data-theme="dark"] {
+  --type-challenge: #a4c9f1;
+  --type-boss-battle: #edd08b;
+  --type-knowledge-check: #83d5cb;
 }

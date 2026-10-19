@@ -16,7 +16,7 @@ async function readProjectFile(path) {
 
 function localReferences(html) {
   const references = [...html.matchAll(/\b(?:href|src)="([^"]+)"/g)]
-    .map(match => match[1]);
+    .map(match => match[1].split('#')[0]);
 
   return references.filter(reference =>
     !reference.startsWith('#') &&
@@ -118,4 +118,42 @@ test('MIT license uses standard text with third-party scope explained separately
   assert.match(readme, /docs\/metadata-rights\.md/);
   assert.match(rights, /sui generis database right/i);
   assert.match(rights, /original selection\/arrangement/i);
+});
+
+test('activity icons are local and carry their upstream license notice', async () => {
+  const html = await readProjectFile('index.html');
+  const svg = await readProjectFile('assets/icons/activity-types.svg');
+  const license = await readProjectFile('assets/licenses/lucide-LICENSE.txt');
+  const readme = await readProjectFile('README.md');
+
+  for (const type of ['challenge', 'boss-battle', 'knowledge-check']) {
+    assert.match(svg, new RegExp('<symbol id="' + type + '"'));
+    assert.ok(html.includes('activity-types.svg#' + type));
+  }
+  assert.match(license, /ISC License/);
+  assert.match(license, /Lucide Icons and Contributors/);
+  assert.match(readme, /lucide-LICENSE\.txt/);
+});
+
+test('sprite references specify inline SVG dimensions even before CSS loads', async () => {
+  const html = await readProjectFile('index.html');
+  const script = await readProjectFile('src/app.js');
+  const css = await readProjectFile('assets/css/tracker.css');
+  const legend = html.match(/<div class="activity-legend"[\s\S]*?<\/div>/)?.[0];
+
+  assert.ok(legend, 'Activity legend missing');
+  assert.equal((legend.match(/<svg /g) ?? []).length, 3);
+  assert.equal((legend.match(/width="16" height="16" viewBox="0 0 24 24"/g) ?? []).length, 3);
+  assert.match(script, /svg\.setAttribute\('width', '20'\)/);
+  assert.match(script, /svg\.setAttribute\('height', '20'\)/);
+  assert.match(css, /\.activity-legend > span \{[\s\S]*?display: inline-flex;/);
+});
+
+test('activity icons appear inside the title, not as an extra grid column', async () => {
+  const script = await readProjectFile('src/app.js');
+  const css = await readProjectFile('assets/css/tracker.css');
+  assert.match(script, /title\.append\(icon, typeLabel, titleText\)/);
+  assert.match(script, /label\.append\(checkbox, title, page, reward\)/);
+  assert.match(css, /grid-template-columns: 1\.25rem minmax\(0, 1fr\) 5\.5rem 4\.5rem;/);
+  assert.match(css, /\.challenge-title \{[\s\S]*?display: inline-flex;/);
 });

@@ -14,7 +14,7 @@ Then visit <http://localhost:8000>. Opening `index.html` directly as a `file:` U
 
 Check a Challenge when you complete it. Challenges can be completed in any order. For “Expansion: Making it Yours,” choose any whole-number award from 50 through 400 XP. The Character level, XP, and completed count recalculate from the selected awards. Tracker completion counts every entry in the official tracker, including optional expansions and bonus checks.
 
-Search and the All, Completed, and Remaining filters only change which rows are visible. They do not change the dashboard totals.
+A blue sword identifies a Challenge, amber crossed swords a Boss Battle, and a teal scroll a Knowledge Check (with lighter colors in dark mode). Search and the All, Completed, and Remaining filters only change which rows are visible. They do not change the dashboard totals.
 
 ## Save and transfer progress
 
@@ -45,5 +45,7 @@ C# Quest Tracker is an unofficial companion to **The C# Player's Guide, Fifth Ed
 **Original application code** is provided under the [MIT License](LICENSE). The app's fifth-edition [Challenge catalog](data/catalog.json) is a functional reference dataset based on the book's publicly available XP Tracker. Its titles, grouping and ordering may involve third-party rights; **MIT does not sublicense that book-derived content**. Facts such as XP values and page references are not claimed as original work owned by this project.
 
 See [Catalog rights, provenance and assessment](docs/metadata-rights.md) for the sourced Belgian/EU copyright and database-right analysis, the scope of the reproduced metadata, and residual uncertainty. The project does not reproduce exercises or solutions, and it makes no claim of permission or endorsement from RB Whitaker.
+
+The activity icons use three [Lucide](https://lucide.dev/) designs under the ISC license; the [complete license notice](assets/licenses/lucide-LICENSE.txt) accompanies the SVGs. This third-party icon license is separate from the project's MIT code license and from the book's content rights.
 
 GitHub Pages deployment is automatic on merges to `main`, with an optional manual workflow. Review rights implications before adding new book-derived content.

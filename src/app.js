@@ -9,6 +9,27 @@ import { downloadProgressBackup } from './backup-download.js';
  */
 const byId = id => document.getElementById(id);
 const number = value => value.toLocaleString();
+const activityTypes = {
+  challenge: 'Challenge',
+  'boss-battle': 'Boss Battle',
+  'knowledge-check': 'Knowledge Check',
+};
+
+// Locally hosted symbols use the activity type supplied by the validated catalog.
+function createActivityIcon(type) {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('class', `activity-type-icon activity-type-icon--${type}`);
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('width', '20');
+  svg.setAttribute('height', '20');
+  svg.setAttribute('aria-hidden', 'true');
+  svg.setAttribute('focusable', 'false');
+
+  const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+  use.setAttribute('href', `assets/icons/activity-types.svg#${type}`);
+  svg.append(use);
+  return svg;
+}
 let session;
 let variableRewardDialog;
 let recoveryView;
@@ -202,9 +223,18 @@ function renderChecklist() {
       checkbox.type = 'checkbox';
       checkbox.id = `challenge-${challenge.id}`;
       checkbox.checked = challenge.completed;
+      const type = challenge.type ?? 'challenge';
+      item.classList.add(`challenge--${type}`);
+      const icon = createActivityIcon(type);
+      const typeLabel = document.createElement('span');
+      typeLabel.className = 'sr-only';
+      typeLabel.textContent = `${activityTypes[type]}: `;
       const title = document.createElement('span');
       title.className = 'challenge-title';
-      title.textContent = challenge.title;
+      const titleText = document.createElement('span');
+      titleText.className = 'challenge-title-text';
+      titleText.textContent = challenge.title;
+      title.append(icon, typeLabel, titleText);
       const page = document.createElement('span');
       page.className = 'challenge-page';
       page.textContent = `Page ${challenge.page}`;

@@ -40,6 +40,7 @@
     {
       "id": "knowledge-check-c",
       "title": "Knowledge Check - C#",
+      "type": "knowledge-check",
       "bookPart": 1,
       "page": 10,
       "order": 1,
@@ -51,6 +52,7 @@
     {
       "id": "install-visual-studio",
       "title": "Install Visual Studio",
+      "type": "challenge",
       "bookPart": 1,
       "page": 14,
       "order": 2,
@@ -62,6 +64,7 @@
     {
       "id": "hello-world",
       "title": "Hello, World!",
+      "type": "challenge",
       "bookPart": 1,
       "page": 19,
       "order": 3,
@@ -73,6 +76,7 @@
     {
       "id": "what-comes-next",
       "title": "What Comes Next",
+      "type": "challenge",
       "bookPart": 1,
       "page": 24,
       "order": 4,
@@ -84,6 +88,7 @@
     {
       "id": "the-makings-of-a-programmer",
       "title": "The Makings of a Programmer",
+      "type": "challenge",
       "bookPart": 1,
       "page": 24,
       "order": 5,
@@ -95,6 +100,7 @@
     {
       "id": "consolas-and-telim",
       "title": "Consolas and Telim",
+      "type": "challenge",
       "bookPart": 1,
       "page": 26,
       "order": 6,
@@ -106,6 +112,7 @@
     {
       "id": "the-thing-namer-3000",
       "title": "The Thing Namer 3000",
+      "type": "challenge",
       "bookPart": 1,
       "page": 31,
       "order": 7,
@@ -117,6 +124,7 @@
     {
       "id": "knowledge-check-variables",
       "title": "Knowledge Check - Variables",
+      "type": "knowledge-check",
       "bookPart": 1,
       "page": 37,
       "order": 8,
@@ -128,6 +136,7 @@
     {
       "id": "the-variable-shop",
       "title": "The Variable Shop",
+      "type": "challenge",
       "bookPart": 1,
       "page": 45,
       "order": 9,
@@ -139,6 +148,7 @@
     {
       "id": "the-variable-shop-returns",
       "title": "The Variable Shop Returns",
+      "type": "challenge",
       "bookPart": 1,
       "page": 45,
       "order": 10,
@@ -150,6 +160,7 @@
     {
       "id": "knowledge-check-type-system",
       "title": "Knowledge Check - Type System",
+      "type": "knowledge-check",
       "bookPart": 1,
       "page": 48,
       "order": 11,
@@ -161,6 +172,7 @@
     {
       "id": "the-triangle-farmer",
       "title": "The Triangle Farmer",
+      "type": "challenge",
       "bookPart": 1,
       "page": 53,
       "order": 12,
@@ -172,6 +184,7 @@
     {
       "id": "the-four-sisters-and-the-duckbear",
       "title": "The Four Sisters and the Duckbear",
+      "type": "challenge",
       "bookPart": 1,
       "page": 56,
       "order": 13,
@@ -183,6 +196,7 @@
     {
       "id": "the-dominion-of-kings",
       "title": "The Dominion of Kings",
+      "type": "challenge",
       "bookPart": 1,
       "page": 57,
       "order": 14,
@@ -194,6 +208,7 @@
     {
       "id": "the-defense-of-consolas",
       "title": "The Defense of Consolas",
+      "type": "challenge",
       "bookPart": 1,
       "page": 68,
       "order": 15,
@@ -205,6 +220,7 @@
     {
       "id": "repairing-the-clocktower",
       "title": "Repairing the Clocktower",
+      "type": "challenge",
       "bookPart": 1,
       "page": 75,
       "order": 16,
@@ -216,6 +232,7 @@
     {
       "id": "watchtower",
       "title": "Watchtower",
+      "type": "challenge",
       "bookPart": 1,
       "page": 78,
       "order": 17,
@@ -227,6 +244,7 @@
     {
       "id": "buying-inventory",
       "title": "Buying Inventory",
+      "type": "challenge",
       "bookPart": 1,
       "page": 82,
       "order": 18,
@@ -238,6 +256,7 @@
     {
       "id": "discounted-inventory",
       "title": "Discounted Inventory",
+      "type": "challenge",
       "bookPart": 1,
       "page": 83,
       "order": 19,
@@ -249,6 +268,7 @@
     {
       "id": "the-prototype",
       "title": "The Prototype",
+      "type": "challenge",
       "bookPart": 1,
       "page": 88,
       "order": 20,
@@ -260,6 +280,7 @@
     {
       "id": "the-magic-cannon",
       "title": "The Magic Cannon",
+      "type": "challenge",
       "bookPart": 1,
       "page": 89,
       "order": 21,
@@ -271,6 +292,7 @@
     {
       "id": "the-replicator-of-d-to",
       "title": "The Replicator of D’To",
+      "type": "challenge",
       "bookPart": 1,
       "page": 94,
       "order": 22,
@@ -282,6 +304,7 @@
     {
       "id": "the-laws-of-freach",
       "title": "The Laws of Freach",
+      "type": "challenge",
       "bookPart": 1,
       "page": 95,
       "order": 23,
@@ -293,6 +316,7 @@
     {
       "id": "taking-a-number",
       "title": "Taking a Number",
+      "type": "challenge",
       "bookPart": 1,
       "page": 106,
       "order": 24,
@@ -304,6 +328,7 @@
     {
       "id": "countdown",
       "title": "Countdown",
+      "type": "challenge",
       "bookPart": 1,
       "page": 107,
       "order": 25,
@@ -315,6 +340,7 @@
     {
       "id": "knowledge-check-memory",
       "title": "Knowledge Check - Memory",
+      "type": "knowledge-check",
       "bookPart": 1,
       "page": 123,
       "order": 26,
@@ -326,6 +352,7 @@
     {
       "id": "hunting-the-manticore",
       "title": "Hunting the Manticore",
+      "type": "boss-battle",
       "bookPart": 1,
       "page": 124,
       "order": 27,
@@ -337,6 +364,7 @@
     {
       "id": "knowledge-check-objects",
       "title": "Knowledge Check - Objects",
+      "type": "knowledge-check",
       "bookPart": 2,
       "page": 131,
       "order": 28,
@@ -348,6 +376,7 @@
     {
       "id": "simula-s-test",
       "title": "Simula’s Test",
+      "type": "challenge",
       "bookPart": 2,
       "page": 135,
       "order": 29,
@@ -359,6 +388,7 @@
     {
       "id": "simula-s-soups",
       "title": "Simula’s Soups",
+      "type": "challenge",
       "bookPart": 2,
       "page": 143,
       "order": 30,
@@ -370,6 +400,7 @@
     {
       "id": "vin-fletcher-s-arrows",
       "title": "Vin Fletcher’s Arrows",
+      "type": "challenge",
       "bookPart": 2,
       "page": 153,
       "order": 31,
@@ -381,6 +412,7 @@
     {
       "id": "vin-s-trouble",
       "title": "Vin’s Trouble",
+      "type": "challenge",
       "bookPart": 2,
       "page": 162,
       "order": 32,
@@ -392,6 +424,7 @@
     {
       "id": "the-properties-of-arrows",
       "title": "The Properties of Arrows",
+      "type": "challenge",
       "bookPart": 2,
       "page": 168,
       "order": 33,
@@ -403,6 +436,7 @@
     {
       "id": "arrow-factories",
       "title": "Arrow Factories",
+      "type": "challenge",
       "bookPart": 2,
       "page": 173,
       "order": 34,
@@ -414,6 +448,7 @@
     {
       "id": "the-point",
       "title": "The Point",
+      "type": "boss-battle",
       "bookPart": 2,
       "page": 191,
       "order": 35,
@@ -425,6 +460,7 @@
     {
       "id": "the-color",
       "title": "The Color",
+      "type": "boss-battle",
       "bookPart": 2,
       "page": 191,
       "order": 36,
@@ -436,6 +472,7 @@
     {
       "id": "the-card",
       "title": "The Card",
+      "type": "boss-battle",
       "bookPart": 2,
       "page": 191,
       "order": 37,
@@ -447,6 +484,7 @@
     {
       "id": "the-locked-door",
       "title": "The Locked Door",
+      "type": "boss-battle",
       "bookPart": 2,
       "page": 192,
       "order": 38,
@@ -458,6 +496,7 @@
     {
       "id": "the-password-validator",
       "title": "The Password Validator",
+      "type": "boss-battle",
       "bookPart": 2,
       "page": 192,
       "order": 39,
@@ -469,6 +508,7 @@
     {
       "id": "rock-paper-scissors",
       "title": "Rock-Paper-Scissors",
+      "type": "boss-battle",
       "bookPart": 2,
       "page": 193,
       "order": 40,
@@ -480,6 +520,7 @@
     {
       "id": "15-puzzle",
       "title": "15-Puzzle",
+      "type": "boss-battle",
       "bookPart": 2,
       "page": 194,
       "order": 41,
@@ -491,6 +532,7 @@
     {
       "id": "hangman",
       "title": "Hangman",
+      "type": "boss-battle",
       "bookPart": 2,
       "page": 194,
       "order": 42,
@@ -502,6 +544,7 @@
     {
       "id": "tic-tac-toe",
       "title": "Tic-Tac-Toe",
+      "type": "boss-battle",
       "bookPart": 2,
       "page": 195,
       "order": 43,
@@ -513,6 +556,7 @@
     {
       "id": "packing-inventory",
       "title": "Packing Inventory",
+      "type": "challenge",
       "bookPart": 2,
       "page": 205,
       "order": 44,
@@ -524,6 +568,7 @@
     {
       "id": "labeling-inventory",
       "title": "Labeling Inventory",
+      "type": "challenge",
       "bookPart": 2,
       "page": 209,
       "order": 45,
@@ -535,6 +580,7 @@
     {
       "id": "the-old-robot",
       "title": "The Old Robot",
+      "type": "challenge",
       "bookPart": 2,
       "page": 210,
       "order": 46,
@@ -546,6 +592,7 @@
     {
       "id": "robotic-interface",
       "title": "Robotic Interface",
+      "type": "challenge",
       "bookPart": 2,
       "page": 217,
       "order": 47,
@@ -557,6 +604,7 @@
     {
       "id": "room-coordinates",
       "title": "Room Coordinates",
+      "type": "challenge",
       "bookPart": 2,
       "page": 225,
       "order": 48,
@@ -568,6 +616,7 @@
     {
       "id": "war-preparations",
       "title": "War Preparations",
+      "type": "challenge",
       "bookPart": 2,
       "page": 231,
       "order": 49,
@@ -579,6 +628,7 @@
     {
       "id": "colored-items",
       "title": "Colored Items",
+      "type": "challenge",
       "bookPart": 2,
       "page": 240,
       "order": 50,
@@ -590,6 +640,7 @@
     {
       "id": "the-fountain-of-objects",
       "title": "The Fountain of Objects",
+      "type": "boss-battle",
       "bookPart": 2,
       "page": 242,
       "order": 51,
@@ -601,6 +652,7 @@
     {
       "id": "small-medium-or-large",
       "title": "Small, Medium, or Large",
+      "type": "boss-battle",
       "bookPart": 2,
       "page": 244,
       "order": 52,
@@ -612,6 +664,7 @@
     {
       "id": "pits",
       "title": "Pits",
+      "type": "boss-battle",
       "bookPart": 2,
       "page": 244,
       "order": 53,
@@ -623,6 +676,7 @@
     {
       "id": "maelstroms",
       "title": "Maelstroms",
+      "type": "boss-battle",
       "bookPart": 2,
       "page": 244,
       "order": 54,
@@ -634,6 +688,7 @@
     {
       "id": "amaroks",
       "title": "Amaroks",
+      "type": "boss-battle",
       "bookPart": 2,
       "page": 245,
       "order": 55,
@@ -645,6 +700,7 @@
     {
       "id": "getting-armed",
       "title": "Getting Armed",
+      "type": "boss-battle",
       "bookPart": 2,
       "page": 245,
       "order": 56,
@@ -656,6 +712,7 @@
     {
       "id": "getting-help",
       "title": "Getting Help",
+      "type": "boss-battle",
       "bookPart": 2,
       "page": 246,
       "order": 57,
@@ -667,6 +724,7 @@
     {
       "id": "the-robot-pilot",
       "title": "The Robot Pilot",
+      "type": "challenge",
       "bookPart": 2,
       "page": 249,
       "order": 58,
@@ -678,6 +736,7 @@
     {
       "id": "time-in-the-cavern",
       "title": "Time in the Cavern",
+      "type": "challenge",
       "bookPart": 2,
       "page": 251,
       "order": 59,
@@ -689,6 +748,7 @@
     {
       "id": "lists-of-commands",
       "title": "Lists of Commands",
+      "type": "challenge",
       "bookPart": 2,
       "page": 255,
       "order": 60,
@@ -700,6 +760,7 @@
     {
       "id": "knowledge-check-large-programs",
       "title": "Knowledge Check - Large Programs",
+      "type": "knowledge-check",
       "bookPart": 3,
       "page": 269,
       "order": 61,
@@ -711,6 +772,7 @@
     {
       "id": "the-feud",
       "title": "The Feud",
+      "type": "challenge",
       "bookPart": 3,
       "page": 270,
       "order": 62,
@@ -722,6 +784,7 @@
     {
       "id": "dueling-traditions",
       "title": "Dueling Traditions",
+      "type": "challenge",
       "bookPart": 3,
       "page": 270,
       "order": 63,
@@ -733,6 +796,7 @@
     {
       "id": "safer-number-crunching",
       "title": "Safer Number Crunching",
+      "type": "challenge",
       "bookPart": 3,
       "page": 276,
       "order": 64,
@@ -744,6 +808,7 @@
     {
       "id": "knowledge-check-methods",
       "title": "Knowledge Check - Methods",
+      "type": "knowledge-check",
       "bookPart": 3,
       "page": 278,
       "order": 65,
@@ -755,6 +820,7 @@
     {
       "id": "better-random",
       "title": "Better Random",
+      "type": "challenge",
       "bookPart": 3,
       "page": 278,
       "order": 66,
@@ -766,6 +832,7 @@
     {
       "id": "exepti-s-game",
       "title": "Exepti’s Game",
+      "type": "challenge",
       "bookPart": 3,
       "page": 290,
       "order": 67,
@@ -777,6 +844,7 @@
     {
       "id": "the-sieve",
       "title": "The Sieve",
+      "type": "challenge",
       "bookPart": 3,
       "page": 295,
       "order": 68,
@@ -788,6 +856,7 @@
     {
       "id": "knowledge-check-events",
       "title": "Knowledge Check - Events",
+      "type": "knowledge-check",
       "bookPart": 3,
       "page": 301,
       "order": 69,
@@ -799,6 +868,7 @@
     {
       "id": "charberry-trees",
       "title": "Charberry Trees",
+      "type": "challenge",
       "bookPart": 3,
       "page": 302,
       "order": 70,
@@ -810,6 +880,7 @@
     {
       "id": "knowledge-check-lambdas",
       "title": "Knowledge Check - Lambdas",
+      "type": "knowledge-check",
       "bookPart": 3,
       "page": 307,
       "order": 71,
@@ -821,6 +892,7 @@
     {
       "id": "the-lambda-sieve",
       "title": "The Lambda Sieve",
+      "type": "challenge",
       "bookPart": 3,
       "page": 307,
       "order": 72,
@@ -832,6 +904,7 @@
     {
       "id": "the-long-game",
       "title": "The Long Game",
+      "type": "challenge",
       "bookPart": 3,
       "page": 315,
       "order": 73,
@@ -843,6 +916,7 @@
     {
       "id": "the-potion-masters-of-pattren",
       "title": "The Potion Masters of Pattren",
+      "type": "challenge",
       "bookPart": 3,
       "page": 324,
       "order": 74,
@@ -854,6 +928,7 @@
     {
       "id": "knowledge-check-operators",
       "title": "Knowledge Check - Operators",
+      "type": "knowledge-check",
       "bookPart": 3,
       "page": 331,
       "order": 75,
@@ -865,6 +940,7 @@
     {
       "id": "navigating-operand-city",
       "title": "Navigating Operand City",
+      "type": "challenge",
       "bookPart": 3,
       "page": 331,
       "order": 76,
@@ -876,6 +952,7 @@
     {
       "id": "indexing-operand-city",
       "title": "Indexing Operand City",
+      "type": "challenge",
       "bookPart": 3,
       "page": 332,
       "order": 77,
@@ -887,6 +964,7 @@
     {
       "id": "converting-directions-to-offsets",
       "title": "Converting Directions to Offsets",
+      "type": "challenge",
       "bookPart": 3,
       "page": 332,
       "order": 78,
@@ -898,6 +976,7 @@
     {
       "id": "knowledge-check-queries",
       "title": "Knowledge Check - Queries",
+      "type": "knowledge-check",
       "bookPart": 3,
       "page": 341,
       "order": 79,
@@ -909,6 +988,7 @@
     {
       "id": "the-three-lenses",
       "title": "The Three Lenses",
+      "type": "challenge",
       "bookPart": 3,
       "page": 342,
       "order": 80,
@@ -920,6 +1000,7 @@
     {
       "id": "the-repeating-stream",
       "title": "The Repeating Stream",
+      "type": "challenge",
       "bookPart": 3,
       "page": 349,
       "order": 81,
@@ -931,6 +1012,7 @@
     {
       "id": "knowledge-check-async",
       "title": "Knowledge Check - Async",
+      "type": "knowledge-check",
       "bookPart": 3,
       "page": 359,
       "order": 82,
@@ -942,6 +1024,7 @@
     {
       "id": "asynchronous-random-words",
       "title": "Asynchronous Random Words",
+      "type": "challenge",
       "bookPart": 3,
       "page": 359,
       "order": 83,
@@ -953,6 +1036,7 @@
     {
       "id": "many-random-words",
       "title": "Many Random Words",
+      "type": "challenge",
       "bookPart": 3,
       "page": 360,
       "order": 84,
@@ -964,6 +1048,7 @@
     {
       "id": "uniter-of-adds",
       "title": "Uniter of Adds",
+      "type": "challenge",
       "bookPart": 3,
       "page": 365,
       "order": 85,
@@ -975,6 +1060,7 @@
     {
       "id": "the-robot-factory",
       "title": "The Robot Factory",
+      "type": "challenge",
       "bookPart": 3,
       "page": 366,
       "order": 86,
@@ -986,6 +1072,7 @@
     {
       "id": "knowledge-check-unsafe-code",
       "title": "Knowledge Check - Unsafe Code",
+      "type": "knowledge-check",
       "bookPart": 3,
       "page": 372,
       "order": 87,
@@ -997,6 +1084,7 @@
     {
       "id": "knowledge-check-other-features",
       "title": "Knowledge Check - Other Features",
+      "type": "knowledge-check",
       "bookPart": 3,
       "page": 392,
       "order": 88,
@@ -1008,6 +1096,7 @@
     {
       "id": "colored-console",
       "title": "Colored Console",
+      "type": "challenge",
       "bookPart": 3,
       "page": 397,
       "order": 89,
@@ -1019,6 +1108,7 @@
     {
       "id": "the-great-humanizer",
       "title": "The Great Humanizer",
+      "type": "challenge",
       "bookPart": 3,
       "page": 398,
       "order": 90,
@@ -1030,6 +1120,7 @@
     {
       "id": "knowledge-check-compiling",
       "title": "Knowledge Check - Compiling",
+      "type": "knowledge-check",
       "bookPart": 3,
       "page": 403,
       "order": 91,
@@ -1041,6 +1132,7 @@
     {
       "id": "knowledge-check-net",
       "title": "Knowledge Check - .NET",
+      "type": "knowledge-check",
       "bookPart": 3,
       "page": 408,
       "order": 92,
@@ -1052,6 +1144,7 @@
     {
       "id": "altar-of-publication",
       "title": "Altar of Publication",
+      "type": "challenge",
       "bookPart": 3,
       "page": 413,
       "order": 93,
@@ -1063,6 +1156,7 @@
     {
       "id": "core-game-building-character",
       "title": "Core Game: Building Character",
+      "type": "boss-battle",
       "bookPart": 4,
       "page": 419,
       "order": 94,
@@ -1074,6 +1168,7 @@
     {
       "id": "core-game-the-true-programmer",
       "title": "Core Game: The True Programmer",
+      "type": "boss-battle",
       "bookPart": 4,
       "page": 420,
       "order": 95,
@@ -1085,6 +1180,7 @@
     {
       "id": "core-game-actions-and-players",
       "title": "Core Game: Actions and Players",
+      "type": "boss-battle",
       "bookPart": 4,
       "page": 420,
       "order": 96,
@@ -1096,6 +1192,7 @@
     {
       "id": "core-game-attacks",
       "title": "Core Game: Attacks",
+      "type": "boss-battle",
       "bookPart": 4,
       "page": 421,
       "order": 97,
@@ -1107,6 +1204,7 @@
     {
       "id": "core-game-damage-and-hp",
       "title": "Core Game: Damage and HP",
+      "type": "boss-battle",
       "bookPart": 4,
       "page": 421,
       "order": 98,
@@ -1118,6 +1216,7 @@
     {
       "id": "core-game-death",
       "title": "Core Game: Death",
+      "type": "boss-battle",
       "bookPart": 4,
       "page": 422,
       "order": 99,
@@ -1129,6 +1228,7 @@
     {
       "id": "core-game-battle-series",
       "title": "Core Game: Battle Series",
+      "type": "boss-battle",
       "bookPart": 4,
       "page": 422,
       "order": 100,
@@ -1140,6 +1240,7 @@
     {
       "id": "core-game-the-uncoded-one",
       "title": "Core Game: The Uncoded One",
+      "type": "boss-battle",
       "bookPart": 4,
       "page": 422,
       "order": 101,
@@ -1151,6 +1252,7 @@
     {
       "id": "core-game-the-player-decides",
       "title": "Core Game: The Player Decides",
+      "type": "boss-battle",
       "bookPart": 4,
       "page": 423,
       "order": 102,
@@ -1162,6 +1264,7 @@
     {
       "id": "expansion-the-game-s-status",
       "title": "Expansion: The Game’s Status",
+      "type": "boss-battle",
       "bookPart": 4,
       "page": 423,
       "order": 103,
@@ -1173,6 +1276,7 @@
     {
       "id": "expansion-items",
       "title": "Expansion: Items",
+      "type": "boss-battle",
       "bookPart": 4,
       "page": 424,
       "order": 104,
@@ -1184,6 +1288,7 @@
     {
       "id": "expansion-gear",
       "title": "Expansion: Gear",
+      "type": "boss-battle",
       "bookPart": 4,
       "page": 424,
       "order": 105,
@@ -1195,6 +1300,7 @@
     {
       "id": "expansion-stolen-inventory",
       "title": "Expansion: Stolen Inventory",
+      "type": "boss-battle",
       "bookPart": 4,
       "page": 425,
       "order": 106,
@@ -1206,6 +1312,7 @@
     {
       "id": "expansion-vin-fletcher",
       "title": "Expansion: Vin Fletcher",
+      "type": "boss-battle",
       "bookPart": 4,
       "page": 426,
       "order": 107,
@@ -1217,6 +1324,7 @@
     {
       "id": "expansion-attack-modifiers",
       "title": "Expansion: Attack Modifiers",
+      "type": "boss-battle",
       "bookPart": 4,
       "page": 426,
       "order": 108,
@@ -1228,6 +1336,7 @@
     {
       "id": "expansion-damage-types",
       "title": "Expansion: Damage Types",
+      "type": "boss-battle",
       "bookPart": 4,
       "page": 426,
       "order": 109,
@@ -1239,6 +1348,7 @@
     {
       "id": "making-it-yours",
       "title": "Expansion: Making it Yours",
+      "type": "boss-battle",
       "bookPart": 4,
       "page": 427,
       "order": 110,
@@ -1252,6 +1362,7 @@
     {
       "id": "expansion-restoring-balance",
       "title": "Expansion: Restoring Balance",
+      "type": "boss-battle",
       "bookPart": 4,
       "page": 428,
       "order": 111,
@@ -1263,6 +1374,7 @@
     {
       "id": "knowledge-check-visual-studio",
       "title": "Knowledge Check - Visual Studio",
+      "type": "knowledge-check",
       "bookPart": 5,
       "page": 441,
       "order": 112,
@@ -1274,6 +1386,7 @@
     {
       "id": "knowledge-check-compiler-errors",
       "title": "Knowledge Check - Compiler Errors",
+      "type": "knowledge-check",
       "bookPart": 5,
       "page": 446,
       "order": 113,
@@ -1285,6 +1398,7 @@
     {
       "id": "knowledge-check-debugging",
       "title": "Knowledge Check - Debugging",
+      "type": "knowledge-check",
       "bookPart": 5,
       "page": 451,
       "order": 114,

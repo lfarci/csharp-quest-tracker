@@ -1,6 +1,7 @@
 /** Validate the official catalog before interpreting any saved reader progress. */
 
 const VALID_CHALLENGE_ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const VALID_ACTIVITY_TYPES = new Set(['challenge', 'boss-battle', 'knowledge-check']);
 
 function invalidCatalog() {
   throw new Error('The Challenge catalog is invalid. Please reload or try again later.');
@@ -54,6 +55,7 @@ function isValidChallenge(challenge, index, partIds, seenIds) {
     VALID_CHALLENGE_ID.test(challenge.id) &&
     !seenIds.has(challenge.id) &&
     isNonEmptyText(challenge.title) &&
+    (challenge.type === undefined || VALID_ACTIVITY_TYPES.has(challenge.type)) &&
     Number.isSafeInteger(challenge.page) &&
     challenge.page > 0 &&
     challenge.order === index + 1 &&

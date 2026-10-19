@@ -11,3 +11,5 @@
 - Prefer platform APIs supported in the current major browsers; use feature detection and a clear fallback when an API is unavailable.
 - Do not introduce dependencies or polyfills just to support obsolete browsers.
 - Add or update tests for any observable behavior change.
+
+- Activity icons use the `type` field in `data/catalog.json`; do not derive types from hardcoded JavaScript ID lists. Keep classification presentational, leaving XP, progress and CSV backups unchanged.

@@ -28,3 +28,11 @@ The rendered ladder on PDF page 1 shows increments of 200, 400, 600, 800, 1,000,
 Identifiers are stable application identifiers, initially derived from the official titles; future display-title corrections must not regenerate them. `making-it-yours` is the reserved identifier from the specification. Catalog validation rejects duplicate IDs, invalid rewards, missing parts, and inconsistent ordering before progress is exposed. Behavioral tests supplement this source check; structural assertions alone do not establish transcription accuracy.
 
 This verification establishes catalog fidelity. It does not establish permission to republish book metadata. Metadata reuse evidence remains a separate release prerequisite, and this catalog has not been pushed or deployed as part of issue #2.
+
+## Supplemental activity symbols (19 October 2026)
+
+For visual identification only, the project owner supplied **35 Boss Battle titles**. All 35 map to unique existing catalog IDs. The existing title prefix identifies **19 Knowledge Checks**; the remaining **60** entries are ordinary Challenges. All 114 entries now have an explicit `type` field in `data/catalog.json` (`challenge`, `boss-battle`, or `knowledge-check`). These are presentational attributes. The existing catalog revision `5e-2026-10-18` is retained because no progress-relevant information (IDs, titles, order, pages, XP, or thresholds) changed; saved progress and CSV backups remain compatible.
+
+The owner listed **Amaroks** and **Getting Armed** on page 244, while the previously verified authoritative tracker catalog gives **page 245** for both. Keep the original catalog's page references unchanged.
+
+The activity icon symbols now use the open-source [Lucide](https://lucide.dev/) **sword**, **swords**, and **scroll-text** shapes (ISC-licensed; [complete upstream license included locally](../assets/licenses/lucide-LICENSE.txt)). Their outlines are paired with restrained blue, amber, and teal activity colors and a subtle row-edge accent; dark mode uses lighter contrasts. Neither icon nor color alone is required to understand the types: the legend names all three, and screen readers hear the type in each activity label. No book artwork is copied.
