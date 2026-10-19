@@ -1,9 +1,7 @@
 name: Publish static site to GitHub Pages
 
+# Publication requires an explicit manual run after the rights prerequisite is met.
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 permissions: {}
@@ -30,8 +28,10 @@ jobs:
       - name: Assemble static site files
         run: |
           mkdir -p _site
-          cp *.html styles.css favicon.svg favicon.ico favicon-16x16.png favicon-32x32.png apple-touch-icon.png android-chrome-192x192.png android-chrome-512x512.png site.webmanifest _site/
-          cp -R src data _site/
+          cp *.html favicon.ico site.webmanifest sitemap.xml _site/
+          test -f _site/sitemap.xml
+          cp -R src data assets _site/
+          find _site -name AGENTS.md -type f -delete
       - name: Upload only the static application
         uses: actions/upload-pages-artifact@v4
         with:

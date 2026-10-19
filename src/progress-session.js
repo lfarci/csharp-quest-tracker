@@ -1,10 +1,11 @@
 import { validateCatalog } from './catalog.js';
 import { encodeProgressCsv } from './progress-backup-csv.js';
 
-/** The public application boundary. All dashboard values are derived from progress. */
+/** The domain boundary. Dashboard values are always derived from source progress. */
 export function createProgressSession({ catalog, progress = {} }) {
   validateCatalog(catalog);
   catalog = structuredClone(catalog);
+  // Completion and variable awards are the only mutable domain state.
   const completed = new Set(progress.completedChallengeIds ?? []);
   if (progress.variableXpAwards !== undefined &&
       (!progress.variableXpAwards || typeof progress.variableXpAwards !== 'object' || Array.isArray(progress.variableXpAwards))) {
@@ -35,8 +36,11 @@ export function createProgressSession({ catalog, progress = {} }) {
   return {
     getProgress() {
       return {
-        schemaVersion: 1, bookEdition: catalog.bookEdition, catalogRevision: catalog.revision,
-        completedChallengeIds: [...completed], variableXpAwards: { ...variableXpAwards },
+        schemaVersion: 1,
+        bookEdition: catalog.bookEdition,
+        catalogRevision: catalog.revision,
+        completedChallengeIds: [...completed],
+        variableXpAwards: { ...variableXpAwards },
       };
     },
     exportBackup() {
@@ -73,11 +77,25 @@ export function createProgressSession({ catalog, progress = {} }) {
         if (pendingVariableChallengeId === id) pendingVariableChallengeId = null;
       }
     },
+    /**
+     * Build a new view from current progress. Filters affect visible challenges,
+     * not the XP totals or the completion percentage.
+     */
     getView({ search = '', filter = 'all' } = {}) {
       const titleSearch = search.trim().toLowerCase();
-      const totalXp = catalog.challenges.reduce((sum, challenge) =>
-        sum + (completed.has(challenge.id) ? (challenge.reward.kind === 'fixed' ? challenge.reward.xp : variableXpAwards[challenge.id]) : 0), 0);
-      const levelIndex = catalog.levelThresholds.findLastIndex(threshold => totalXp >= threshold);
+      const totalXp = catalog.challenges.reduce((sum, challenge) => {
+        if (!completed.has(challenge.id)) return sum;
+        const reward = challenge.reward.kind === 'fixed'
+          ? challenge.reward.xp
+          : variableXpAwards[challenge.id];
+        return sum + reward;
+      }, 0);
+      // Thresholds are sorted, so the first threshold above XP ends the search.
+      let levelIndex = 0;
+      for (let index = 1; index < catalog.levelThresholds.length; index++) {
+        if (totalXp < catalog.levelThresholds[index]) break;
+        levelIndex = index;
+      }
       const currentThreshold = catalog.levelThresholds[levelIndex];
       const nextThreshold = catalog.levelThresholds[levelIndex + 1];
       return {

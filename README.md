@@ -4,7 +4,7 @@ An unofficial, browser-local companion for the fifth-edition XP tracker in [The 
 
 ## Use the tracker
 
-Once GitHub Pages is enabled and release prerequisites are met, the project site will be <https://lfarci.github.io/csharp-quest-tracker/>. Until then, serve this folder locally:
+Once GitHub Pages is manually deployed after release prerequisites are met, the project site will be <https://lfarci.github.io/csharp-quest-tracker/>. Until then, serve this folder locally:
 
 ```sh
 python3 -m http.server 8000
@@ -30,11 +30,13 @@ An already-loaded tab can keep tracking without an internet connection. Offline 
 
 ## Project
 
-This is a static HTML, CSS, and JavaScript application with a JSON catalog. It has no build step, backend, database, authentication, framework, or runtime dependency. Run the checks with Node.js:
+This is a static HTML, CSS, and JavaScript application with a JSON catalog. It has no build step, backend, database, authentication, framework, or runtime dependency. Run the unit and static reference checks with Node.js:
 
 ```sh
 npm test
 ```
+
+Pull requests also run browser smoke checks in Chromium, Firefox and WebKit. Browser tooling is installed in CI only, not shipped to visitors.
 
 The production catalog is checked against the [official fifth-edition XP tracker](https://csharpplayersguide.com/assets/content/downloadables/5th-edition/XPTracker.pdf); see [catalog verification](docs/catalog-verification.md). For implementation details and decisions, see [the MVP specification](docs/mvp-issue-spec.md) and [the issue plan](docs/ticket-plan.md).
 

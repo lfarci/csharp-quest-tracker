@@ -1,40 +1,116 @@
-/** Validate the complete catalog before a progress session can be presented. */
+/** Validate the official catalog before interpreting any saved reader progress. */
+
+const VALID_CHALLENGE_ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
+function invalidCatalog() {
+  throw new Error('The Challenge catalog is invalid. Please reload or try again later.');
+}
+
+function isNonEmptyText(value) {
+  return typeof value === 'string' && value.trim().length > 0;
+}
+
+function hasValidShape(catalog) {
+  if (!catalog || catalog.bookEdition !== 5 || !isNonEmptyText(catalog.revision)) {
+    return false;
+  }
+
+  if (!Array.isArray(catalog.parts) || catalog.parts.length !== 5) {
+    return false;
+  }
+
+  if (!Array.isArray(catalog.challenges) || catalog.challenges.length === 0) {
+    return false;
+  }
+
+  return Array.isArray(catalog.levelThresholds) &&
+    catalog.levelThresholds.length === 10 &&
+    catalog.levelThresholds[0] === 0;
+}
+
+function hasValidThresholds(thresholds) {
+  for (let index = 0; index < thresholds.length; index++) {
+    const threshold = thresholds[index];
+
+    if (!Number.isSafeInteger(threshold)) return false;
+    if (index > 0 && threshold <= thresholds[index - 1]) return false;
+  }
+
+  return true;
+}
+
+function isValidPart(part, seenIds) {
+  return part !== null &&
+    typeof part === 'object' &&
+    Number.isSafeInteger(part.id) &&
+    !seenIds.has(part.id) &&
+    isNonEmptyText(part.title);
+}
+
+function isValidChallenge(challenge, index, partIds, seenIds) {
+  if (!challenge || typeof challenge !== 'object') return false;
+
+  return typeof challenge.id === 'string' &&
+    VALID_CHALLENGE_ID.test(challenge.id) &&
+    !seenIds.has(challenge.id) &&
+    isNonEmptyText(challenge.title) &&
+    Number.isSafeInteger(challenge.page) &&
+    challenge.page > 0 &&
+    challenge.order === index + 1 &&
+    partIds.has(challenge.bookPart) &&
+    challenge.reward !== null &&
+    typeof challenge.reward === 'object';
+}
+
+function isValidReward(challenge) {
+  const { reward } = challenge;
+
+  if (reward.kind === 'fixed') {
+    return Number.isSafeInteger(reward.xp) &&
+      reward.xp > 0 &&
+      challenge.id !== 'making-it-yours';
+  }
+
+  if (reward.kind === 'variable') {
+    return challenge.id === 'making-it-yours' &&
+      reward.notation === '?' &&
+      reward.minimum === 50 &&
+      reward.maximum === 400;
+  }
+
+  return false;
+}
+
+/**
+ * Keep validation strict, but separate independent rules into focused
+ * predicates so errors never leave a partially trusted catalog behind.
+ */
 export function validateCatalog(catalog) {
-  const invalid = () => { throw new Error('The Challenge catalog is invalid. Please reload or try again later.'); };
-  if (!catalog || catalog.bookEdition !== 5 || typeof catalog.revision !== 'string' ||
-      !catalog.revision || !Array.isArray(catalog.parts) || catalog.parts.length !== 5 ||
-      !Array.isArray(catalog.challenges) || !catalog.challenges.length ||
-      !Array.isArray(catalog.levelThresholds) || catalog.levelThresholds.length !== 10 ||
-      catalog.levelThresholds[0] !== 0) invalid();
-  catalog.levelThresholds.forEach((threshold, index) => {
-    if (!Number.isSafeInteger(threshold) || (index && threshold <= catalog.levelThresholds[index - 1])) invalid();
-  });
+  if (!hasValidShape(catalog)) invalidCatalog();
+  if (!hasValidThresholds(catalog.levelThresholds)) invalidCatalog();
+
   const partIds = new Set();
   for (const part of catalog.parts) {
-    if (!part || !Number.isSafeInteger(part.id) || partIds.has(part.id) ||
-        typeof part.title !== 'string' || !part.title.trim()) invalid();
+    if (!isValidPart(part, partIds)) invalidCatalog();
     partIds.add(part.id);
   }
-  const ids = new Set();
+
+  const seenChallengeIds = new Set();
   let previousPartIndex = -1;
-  let variableCount = 0;
-  catalog.challenges.forEach((challenge, index) => {
-    if (!challenge || typeof challenge.id !== 'string' || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(challenge.id) ||
-        ids.has(challenge.id) || typeof challenge.title !== 'string' || !challenge.title.trim() ||
-        !Number.isSafeInteger(challenge.page) || challenge.page < 1 ||
-        challenge.order !== index + 1 || !partIds.has(challenge.bookPart) || !challenge.reward) invalid();
-    ids.add(challenge.id);
+  let variableRewardCount = 0;
+
+  for (const [index, challenge] of catalog.challenges.entries()) {
+    if (!isValidChallenge(challenge, index, partIds, seenChallengeIds)) invalidCatalog();
+    if (!isValidReward(challenge)) invalidCatalog();
+
     const partIndex = catalog.parts.findIndex(part => part.id === challenge.bookPart);
-    if (partIndex < previousPartIndex) invalid();
+    if (partIndex < previousPartIndex) invalidCatalog();
+
     previousPartIndex = partIndex;
-    const reward = challenge.reward;
-    if (reward.kind === 'fixed') {
-      if (!Number.isSafeInteger(reward.xp) || reward.xp <= 0 || challenge.id === 'making-it-yours') invalid();
-    } else if (reward.kind === 'variable') {
-      variableCount++;
-      if (challenge.id !== 'making-it-yours' || reward.notation !== '?' ||
-          reward.minimum !== 50 || reward.maximum !== 400) invalid();
-    } else invalid();
-  });
-  if (variableCount !== 1) invalid();
+    seenChallengeIds.add(challenge.id);
+
+    if (challenge.reward.kind === 'variable') variableRewardCount++;
+  }
+
+  if (variableRewardCount !== 1) invalidCatalog();
 }

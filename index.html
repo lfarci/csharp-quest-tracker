@@ -4,26 +4,51 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <meta name="description" content="An unofficial fifth-edition companion for tracking Challenges in The C# Player's Guide.">
+  <meta name="description" content="Track Challenges, XP and character levels for The C# Player's Guide, Fifth Edition. A free, unofficial browser-local tracker with CSV backups.">
   <title>C# Quest Tracker</title>
+  <link rel="canonical" href="https://lfarci.github.io/csharp-quest-tracker/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="C# Quest Tracker">
+  <meta property="og:title" content="C# Quest Tracker | Fifth Edition XP Companion">
+  <meta property="og:description" content="Track Challenges, XP and character levels for The C# Player's Guide, Fifth Edition. A free, unofficial browser-local tracker with CSV backups.">
+  <meta property="og:url" content="https://lfarci.github.io/csharp-quest-tracker/">
+  <!-- Site icons and shared styles -->
   <link rel="icon" href="favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
-  <link rel="stylesheet" href="styles.css">
-  <script>
-    try { const theme = localStorage.getItem('theme'); if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme; } catch {}
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/tracker.css">
+  <!-- Describes the app to search engines and other structured-data readers. -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "C# Quest Tracker",
+      "url": "https://lfarci.github.io/csharp-quest-tracker/",
+      "description": "An unofficial, browser-local tracker for Challenges and XP in The C# Player's Guide, Fifth Edition.",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Any",
+      "isAccessibleForFree": true,
+      "inLanguage": "en"
+    }
   </script>
+  <!-- Synchronous shared script prevents a flash of the wrong theme. -->
+  <script src="src/theme-init.js"></script>
   <script type="module" src="src/theme.js"></script>
   <script type="module" src="src/app.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#challenges">Skip to Challenges</a>
+  <!-- Shared site navigation and page heading -->
   <header class="site-header">
     <nav class="site-nav" aria-label="Site navigation">
-      <a class="site-nav__brand" href="index.html" aria-current="page"><img src="favicon.svg" alt=""> <span>Tracker</span></a>
+      <a class="site-nav__brand" href="index.html" aria-current="page">
+        <img src="assets/icons/favicon.svg" alt="">
+        <span>Tracker</span>
+      </a>
       <a href="about.html">About</a>
       <a href="settings.html">Settings</a>
     </nav>
@@ -35,6 +60,7 @@
     <p id="loading" role="status">Loading the official Challenge catalog…</p>
     <p id="load-error" role="alert" hidden></p>
     <div id="tracker" hidden>
+      <!-- XP summary, updated from the in-memory progress session -->
       <section class="dashboard" aria-labelledby="progress-heading">
         <div class="rank">
           <h2 id="progress-heading">Character level</h2>
@@ -42,9 +68,18 @@
         </div>
         <div class="statistics">
           <dl>
-            <div><dt>Total XP</dt><dd id="total-xp">—</dd></div>
-            <div><dt>Challenges completed</dt><dd id="completed-count">—</dd></div>
-            <div><dt>Tracker completion</dt><dd id="tracker-completion">—</dd></div>
+            <div>
+              <dt>Total XP</dt>
+              <dd id="total-xp">—</dd>
+            </div>
+            <div>
+              <dt>Challenges completed</dt>
+              <dd id="completed-count">—</dd>
+            </div>
+            <div>
+              <dt>Tracker completion</dt>
+              <dd id="tracker-completion">—</dd>
+            </div>
           </dl>
           <label for="level-progress" id="level-progress-label">Progress to the next Character level</label>
           <progress id="level-progress" max="1" value="0"></progress>
@@ -58,6 +93,7 @@
         <p id="session-backup-status" class="backup-feedback" role="status"></p>
       </div>
       <p class="list-intro">Check off the Challenges you complete. You can work in any order. Tracker completion includes every official entry, including optional expansions and bonus checks.</p>
+      <!-- Search and completion filters do not affect dashboard totals. -->
       <form id="discovery-controls" class="discovery-controls" role="search" aria-label="Find Challenges">
         <div class="title-search">
           <label for="challenge-search">Search Challenge titles</label>
@@ -82,14 +118,28 @@
       <div id="challenges" tabindex="-1"></div>
       <p id="action-status" class="sr-only" role="status" aria-live="polite"></p>
     </div>
-    <noscript><p>Enable JavaScript to load the catalog and calculate your progress.</p></noscript>
+    <noscript>
+      <p>Enable JavaScript to load the catalog and calculate your progress.</p>
+    </noscript>
   </main>
+  <!-- Award selection for the one variable-XP challenge -->
   <dialog id="variable-reward-dialog" aria-labelledby="variable-reward-heading" aria-describedby="variable-reward-explanation">
     <form id="variable-reward-form" novalidate>
       <h2 id="variable-reward-heading">Complete Making it Yours</h2>
       <p id="variable-reward-explanation">The official tracker shows ? XP. Choose the book-permitted reward for your changes: any whole number from 50 through 400 XP.</p>
       <label for="variable-award">Your XP award</label>
-      <input id="variable-award" name="award" type="number" min="50" max="400" step="1" required inputmode="numeric" aria-describedby="variable-award-error" autofocus>
+      <input
+        id="variable-award"
+        name="award"
+        type="number"
+        min="50"
+        max="400"
+        step="1"
+        inputmode="numeric"
+        aria-describedby="variable-award-error"
+        required
+        autofocus
+      >
       <p id="variable-award-error" role="alert" hidden></p>
       <div class="dialog-actions">
         <button type="button" id="cancel-variable-award">Cancel</button>

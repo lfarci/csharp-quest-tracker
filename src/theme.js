@@ -1,3 +1,7 @@
+/**
+ * Theme selection is optional on each page. theme-init.js applies a saved
+ * theme before painting to prevent a flash before this module loads.
+ */
 const selector = document.querySelector('#theme-select');
 
 function readTheme() {

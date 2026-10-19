@@ -4,25 +4,36 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <meta name="description" content="Manage the C# Quest Tracker appearance and progress backups.">
+  <meta name="description" content="Manage local progress backups, imports and appearance settings in C# Quest Tracker.">
   <title>Settings · C# Quest Tracker</title>
+  <link rel="canonical" href="https://lfarci.github.io/csharp-quest-tracker/settings.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="C# Quest Tracker">
+  <meta property="og:title" content="Settings | C# Quest Tracker">
+  <meta property="og:description" content="Manage local progress backups, imports and appearance settings in C# Quest Tracker.">
+  <meta property="og:url" content="https://lfarci.github.io/csharp-quest-tracker/settings.html">
+  <!-- Site icons and shared styles -->
   <link rel="icon" href="favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
-  <link rel="stylesheet" href="styles.css">
-  <script>
-    try { const theme = localStorage.getItem('theme'); if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme; } catch {}
-  </script>
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/settings.css">
+  <!-- Synchronous shared script prevents a flash of the wrong theme. -->
+  <script src="src/theme-init.js"></script>
   <script type="module" src="src/theme.js"></script>
   <script type="module" src="src/backup-page.js"></script>
 </head>
 <body>
+  <!-- Shared site navigation and page heading -->
   <header class="site-header">
     <nav class="site-nav" aria-label="Site navigation">
-      <a class="site-nav__brand" href="index.html"><img src="favicon.svg" alt=""> <span>Tracker</span></a>
+      <a class="site-nav__brand" href="index.html">
+        <img src="assets/icons/favicon.svg" alt="">
+        <span>Tracker</span>
+      </a>
       <a href="about.html">About</a>
       <a href="settings.html" aria-current="page">Settings</a>
     </nav>
@@ -31,6 +42,7 @@
     <p>Manage the tracker’s appearance and saved progress.</p>
   </header>
   <main id="main" class="backup-page settings-page">
+    <!-- Theme selection, followed by local progress backup and recovery -->
     <section class="appearance-settings" aria-labelledby="appearance-heading">
       <h2 id="appearance-heading">Appearance</h2>
       <label for="theme-select">Color theme</label>
@@ -51,16 +63,16 @@
       <p id="load-error" role="alert" hidden></p>
       <p id="save-status" class="sr-only" role="status" hidden></p>
       <section id="recovery-controls" class="backup-controls recovery-card" aria-labelledby="recovery-heading" hidden>
-      <div>
-        <p class="backup-eyebrow">Action needed</p>
-        <h2 id="recovery-heading">Recover saved progress</h2>
-        <p>The saved record can’t be read as tracker progress. Download the original data to keep a copy, import a compatible backup, or confirm a fresh start.</p>
-      </div>
-      <div class="backup-actions">
-        <button type="button" id="download-recovery-data">Download original data</button>
-        <button type="button" id="start-fresh">Start fresh</button>
-      </div>
-      <p id="recovery-status" class="backup-feedback" role="status" aria-live="polite"></p>
+        <div>
+          <p class="backup-eyebrow">Action needed</p>
+          <h2 id="recovery-heading">Recover saved progress</h2>
+          <p>The saved record can’t be read as tracker progress. Download the original data to keep a copy, import a compatible backup, or confirm a fresh start.</p>
+        </div>
+        <div class="backup-actions">
+          <button type="button" id="download-recovery-data">Download original data</button>
+          <button type="button" id="start-fresh">Start fresh</button>
+        </div>
+        <p id="recovery-status" class="backup-feedback" role="status" aria-live="polite"></p>
       </section>
       <div class="backup-options">
         <section class="backup-option" aria-labelledby="export-heading">
@@ -72,12 +84,19 @@
           <h3 id="import-heading">Import a backup</h3>
           <p>Choose a CSV backup to replace progress in this browser. Imports don’t merge.</p>
           <label class="import-file-label" for="import-progress-file">Choose CSV backup</label>
-          <input type="file" id="import-progress-file" accept="text/csv,.csv" aria-describedby="backup-status" disabled>
+          <input
+            type="file"
+            id="import-progress-file"
+            accept="text/csv,.csv"
+            aria-describedby="backup-status"
+            disabled
+          >
         </section>
       </div>
       <p id="backup-status" class="backup-feedback" role="status" aria-live="polite"></p>
     </section>
   </main>
+  <!-- Confirm imported progress before replacing the stored record. -->
   <dialog id="import-preview-dialog" aria-labelledby="import-preview-heading" aria-describedby="import-preview-explanation">
     <form id="import-preview-form" novalidate>
       <h2 id="import-preview-heading">Review progress backup</h2>
@@ -86,25 +105,60 @@
       <div class="import-comparison">
         <section id="current-import-summary" aria-labelledby="current-import-heading">
           <h3 id="current-import-heading">Current progress</h3>
-          <dl><div><dt>Challenges completed</dt><dd data-summary="completedCount"></dd></div><div><dt>Total XP</dt><dd data-summary="totalXp"></dd></div><div><dt>Character level</dt><dd data-summary="characterLevel"></dd></div></dl>
+          <dl>
+            <div>
+              <dt>Challenges completed</dt>
+              <dd data-summary="completedCount"></dd>
+            </div>
+            <div>
+              <dt>Total XP</dt>
+              <dd data-summary="totalXp"></dd>
+            </div>
+            <div>
+              <dt>Character level</dt>
+              <dd data-summary="characterLevel"></dd>
+            </div>
+          </dl>
         </section>
         <section id="incoming-import-summary" aria-labelledby="incoming-import-heading">
           <h3 id="incoming-import-heading">Backup progress</h3>
-          <dl><div><dt>Challenges completed</dt><dd data-summary="completedCount"></dd></div><div><dt>Total XP</dt><dd data-summary="totalXp"></dd></div><div><dt>Character level</dt><dd data-summary="characterLevel"></dd></div></dl>
+          <dl>
+            <div>
+              <dt>Challenges completed</dt>
+              <dd data-summary="completedCount"></dd>
+            </div>
+            <div>
+              <dt>Total XP</dt>
+              <dd data-summary="totalXp"></dd>
+            </div>
+            <div>
+              <dt>Character level</dt>
+              <dd data-summary="characterLevel"></dd>
+            </div>
+          </dl>
         </section>
       </div>
       <p id="import-error" role="alert" tabindex="-1" hidden></p>
-      <div class="dialog-actions"><button type="button" id="cancel-import">Cancel</button><button type="submit" id="confirm-import">Replace progress</button></div>
+      <div class="dialog-actions">
+        <button type="button" id="cancel-import">Cancel</button>
+        <button type="submit" id="confirm-import">Replace progress</button>
+      </div>
     </form>
   </dialog>
+  <!-- Destructive recovery requires a separate confirmation. -->
   <dialog id="fresh-start-dialog" aria-labelledby="fresh-start-heading" aria-describedby="fresh-start-explanation">
     <form id="fresh-start-form" novalidate>
       <h2 id="fresh-start-heading">Start a fresh tracker?</h2>
       <p id="fresh-start-explanation">This replaces saved progress with an empty tracker: 0 XP, Character level 1, and no completed Challenges. Download the original recovery data or import a compatible backup first if you may need it.</p>
       <p id="fresh-start-error" role="alert" tabindex="-1" hidden></p>
-      <div class="dialog-actions"><button type="button" id="cancel-fresh-start">Cancel</button><button type="submit" id="confirm-fresh-start">Replace with empty progress</button></div>
+      <div class="dialog-actions">
+        <button type="button" id="cancel-fresh-start">Cancel</button>
+        <button type="submit" id="confirm-fresh-start">Replace with empty progress</button>
+      </div>
     </form>
   </dialog>
-  <footer><p>Progress is stored in this browser and never sent to a server. <a href="about.html">About this project</a>.</p></footer>
+  <footer>
+    <p>Progress is stored in this browser and never sent to a server. <a href="about.html">About this project</a>.</p>
+  </footer>
 </body>
 </html>

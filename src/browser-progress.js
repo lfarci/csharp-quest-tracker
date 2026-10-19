@@ -1,21 +1,39 @@
 import { createProgressSession } from './progress-session.js';
 import { decodeProgressCsv } from './progress-backup-csv.js';
 
+/**
+ * Local persistence, cross-tab coordination and failure recovery.
+ * The progress session remains the sole source of XP and level calculations.
+ */
 export const PROGRESS_STORAGE_KEY = 'csharp-quest-tracker:progress:v1';
 export const PROGRESS_LOCK_NAME = 'csharp-quest-tracker:progress';
 
 class StaleProgressError extends Error {
-  constructor() { super('Progress changed in another tab. Reload this page before editing again.'); }
+  constructor() {
+    super('Progress changed in another tab. Reload this page before editing again.');
+  }
 }
 
 function emptyProgress(catalog) {
-  return { schemaVersion: 1, bookEdition: catalog.bookEdition, catalogRevision: catalog.revision,
-    completedChallengeIds: [], variableXpAwards: {} };
+  return {
+    schemaVersion: 1,
+    bookEdition: catalog.bookEdition,
+    catalogRevision: catalog.revision,
+    completedChallengeIds: [],
+    variableXpAwards: {},
+  };
 }
 
 function decodeStored(raw, catalog) {
   const stored = JSON.parse(raw);
-  const keys = ['schemaVersion', 'bookEdition', 'catalogRevision', 'completedChallengeIds', 'variableXpAwards', 'internalWriteId'];
+  const keys = [
+    'schemaVersion',
+    'bookEdition',
+    'catalogRevision',
+    'completedChallengeIds',
+    'variableXpAwards',
+    'internalWriteId',
+  ];
   if (!stored || typeof stored !== 'object' || Array.isArray(stored) ||
       Object.keys(stored).some(key => !keys.includes(key)) || keys.some(key => !(key in stored)) ||
       stored.schemaVersion !== 1 || stored.bookEdition !== catalog.bookEdition || stored.catalogRevision !== catalog.revision ||
@@ -60,7 +78,9 @@ export async function createBrowserProgressSession({ catalog, adapters = {} }) {
   let recoveryNeeded = false;
   let statisticsUnavailable = false;
   let saved = Boolean(lockManager?.request && storage);
-  let message = saved ? 'Your progress stays on this device. To use it on another device, download a backup file here, then import it there.' : "Your progress isn't saved. This browser can't safely save changes across tabs. Download a backup to keep your latest progress.";
+  let message = saved
+    ? 'Your progress stays on this device. To use it on another device, download a backup file here, then import it there.'
+    : "Your progress isn't saved. This browser can't safely save changes across tabs. Download a backup to keep your latest progress.";
   let queue = Promise.resolve();
   let generation = 0;
   const previewStates = new WeakMap();
@@ -102,6 +122,7 @@ export async function createBrowserProgressSession({ catalog, adapters = {} }) {
     }
   }
 
+  // Compare source progress only; search/filter state and pending dialogs are not persisted.
   function hasUnsavedChanges() {
     const progress = session?.getProgress();
     if (!progress) return false;
@@ -111,8 +132,14 @@ export async function createBrowserProgressSession({ catalog, adapters = {} }) {
         progress.variableXpAwards[id] !== acceptedProgress.variableXpAwards[id]);
   }
   function getStatus() {
-    return { saved, stale, recoveryNeeded, recoveryDataAvailable: recoveryRaw !== null,
-      hasUnsavedChanges: hasUnsavedChanges(), message };
+    return {
+      saved,
+      stale,
+      recoveryNeeded,
+      recoveryDataAvailable: recoveryRaw !== null,
+      hasUnsavedChanges: hasUnsavedChanges(),
+      message,
+    };
   }
   function getProgress() { return session?.getProgress() ?? null; }
   function getView(options) {
@@ -122,6 +149,10 @@ export async function createBrowserProgressSession({ catalog, adapters = {} }) {
     return statisticsUnavailable ? { ...view, dashboard: null } : view;
   }
 
+  /**
+   * Serialize mutations, coordinate cross-tab writes, and retain a usable
+   * in-memory session if storage or locking is unavailable.
+   */
   function perform(method, args, { allowRecovery = false } = {}) {
     const operation = async () => {
       const apply = () => {
@@ -140,6 +171,7 @@ export async function createBrowserProgressSession({ catalog, adapters = {} }) {
       };
       if (stale) throw new StaleProgressError();
       if (recoveryNeeded && !allowRecovery) throw new Error('Saved progress needs recovery before it can be edited.');
+      // Without both safe locking and storage, never claim changes were saved.
       if (!lockManager?.request || !storage) {
         apply();
         saved = false;
@@ -160,6 +192,7 @@ export async function createBrowserProgressSession({ catalog, adapters = {} }) {
           reading = true;
           const current = storage.getItem(PROGRESS_STORAGE_KEY);
           reading = false;
+          // Another tab has written since this session loaded; refuse to overwrite it.
           if (current !== acceptedRaw) {
             stale = true;
             saved = false;
