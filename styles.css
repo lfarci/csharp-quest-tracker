@@ -89,7 +89,7 @@ progress::-moz-progress-bar { background: #e5c976; }
 .filter-options label:has(input:checked) { background: var(--ink); color: var(--surface); border-color: var(--ink); }
 .filter-options input { margin: 0; accent-color: var(--focus); }
 .filter-options label:has(input:focus-visible) { outline: 3px solid var(--focus); outline-offset: 3px; }
-.results-summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: .75rem; }
+.results-summary { margin-bottom: .75rem; }
 .results-summary p { color: var(--muted); font-size: .9rem; margin: 0; }
 button { min-height: 2.75rem; padding: .5rem .8rem; border: 1px solid var(--muted); border-radius: .25rem; color: var(--ink); background: var(--surface); cursor: pointer; }
 button:hover, .challenge-label:hover { background: var(--paper); }
