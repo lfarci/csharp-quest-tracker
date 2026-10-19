@@ -20,17 +20,18 @@
 <body>
   <header class="site-header">
     <nav class="site-nav" aria-label="Site navigation">
-      <a href="index.html">Tracker</a>
-      <a href="settings.html">Settings</a>
+      <a class="site-nav__brand" href="index.html"><img src="favicon.svg" alt=""> <span>Tracker</span></a>
       <a href="about.html" aria-current="page">About</a>
+      <a href="settings.html">Settings</a>
     </nav>
     <div class="edition">The C# Player’s Guide · Fifth edition</div>
-    <h1>About the tracker</h1>
+    <h1>About</h1>
     <p>A simple place to keep track of your Challenges and XP.</p>
   </header>
   <main id="main" class="about-content">
-    <section aria-labelledby="project-heading">
+    <section class="about-intro" aria-labelledby="project-heading">
       <h2 id="project-heading">About this project</h2>
+      <p>Created by <a href="https://github.com/lfarci" rel="author">lfarci</a> for my girlfriend, who is learning C#. I built this tracker to encourage her to complete the book’s exercises and celebrate her progress, one Challenge at a time.</p>
       <p>C# Quest Tracker is an unofficial companion to <em>The C# Player’s Guide, Fifth Edition</em>, by RB Whitaker. It is not affiliated with or endorsed by RB Whitaker.</p>
       <p class="book-cta">
         <a href="https://rbwhitaker.gumroad.com/l/zGNbnc">Buy the PDF edition</a>
@@ -39,7 +40,7 @@
       <p>Your progress is stored in this browser and is never sent to a server. Once the tracker has loaded, the current tab works offline; reopening or refreshing while offline isn’t guaranteed.</p>
       <p><a href="https://github.com/lfarci/csharp-quest-tracker">View the project on GitHub</a>. Original application code is licensed under MIT; book-derived tracking metadata has separate rights and provenance.</p>
     </section>
-    <section id="references" aria-labelledby="references-heading">
+    <section class="reference-card" id="references" aria-labelledby="references-heading">
       <h2 id="references-heading">References</h2>
       <ul>
         <li><a href="https://csharpplayersguide.com/">The C# Player’s Guide official website</a></li>
@@ -47,7 +48,6 @@
         <li><a href="https://csharpplayersguide.com/solutions/5th-edition/">Official fifth-edition solutions</a></li>
       </ul>
     </section>
-    <p><a href="index.html">← Back to the tracker</a></p>
   </main>
   <footer>
     <p>Unofficial companion; not affiliated with or endorsed by RB Whitaker.</p>
