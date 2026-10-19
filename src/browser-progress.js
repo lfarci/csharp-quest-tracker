@@ -59,7 +59,7 @@ export async function createBrowserProgressSession({ catalog, adapters = {} }) {
   let recoveryNeeded = false;
   let statisticsUnavailable = false;
   let saved = Boolean(lockManager?.request && storage);
-  let message = saved ? 'Progress is saved in this browser.' : "Progress isn't saved. This browser cannot safely coordinate saves across tabs; export a backup to keep your latest progress.";
+  let message = saved ? 'Progress is saved only in this browser on this device. To move it, download a progress backup and import it on the other device.' : "Progress isn't saved. This browser cannot safely coordinate saves across tabs; export a backup to keep your latest progress.";
   let queue = Promise.resolve();
   let generation = 0;
   const previewStates = new WeakMap();
@@ -154,7 +154,7 @@ export async function createBrowserProgressSession({ catalog, adapters = {} }) {
           recoveryRaw = null;
           saved = true;
           recoveryNeeded = false;
-          message = 'Progress is saved in this browser.';
+          message = 'Progress is saved only in this browser on this device. To move it, download a progress backup and import it on the other device.';
           emitStatus();
         });
       } catch (error) {
