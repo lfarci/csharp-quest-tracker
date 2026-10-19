@@ -1,8 +1,7 @@
 import { validateCatalog } from './catalog.js';
 import { encodeProgressCsv } from './progress-backup-csv.js';
 
-/** The public application boundary. All dashboard values are derived from progress. */
-// Keep mutation and derived statistics together so the UI never stores totals.
+/** The domain boundary. Dashboard values are always derived from source progress. */
 export function createProgressSession({ catalog, progress = {} }) {
   validateCatalog(catalog);
   catalog = structuredClone(catalog);
@@ -91,7 +90,12 @@ export function createProgressSession({ catalog, progress = {} }) {
           : variableXpAwards[challenge.id];
         return sum + reward;
       }, 0);
-      const levelIndex = catalog.levelThresholds.findLastIndex(threshold => totalXp >= threshold);
+      // Thresholds are sorted, so the first threshold above XP ends the search.
+      let levelIndex = 0;
+      for (let index = 1; index < catalog.levelThresholds.length; index++) {
+        if (totalXp < catalog.levelThresholds[index]) break;
+        levelIndex = index;
+      }
       const currentThreshold = catalog.levelThresholds[levelIndex];
       const nextThreshold = catalog.levelThresholds[levelIndex + 1];
       return {

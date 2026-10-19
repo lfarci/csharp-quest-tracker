@@ -5,4 +5,6 @@
 - Explain subtle behavior and architectural constraints in comments; do not narrate obvious statements.
 - Keep progress rules and XP calculations in `progress-session.js`, browser persistence and stale-tab handling in `browser-progress.js`, and DOM event wiring in UI modules.
 - Preserve storage-failure recovery, accessible status announcements, focus behavior and asynchronous error paths.
+- Prefer platform APIs supported in the current major browsers; use feature detection and a clear fallback when an API is unavailable.
+- Do not introduce dependencies or polyfills just to support obsolete browsers.
 - Add or update tests for any observable behavior change.

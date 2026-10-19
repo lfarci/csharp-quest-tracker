@@ -8,6 +8,8 @@ The application is a static site. The root HTML pages load shared `assets/css/ba
 
 Issue #9 remains unresolved. `docs/metadata-rights.md` records the sources and the limit of the evidence: catalog fidelity and attribution do not establish a reuse grant for the book-derived catalog. The workflow is prepared but no deployment has been run. Keep both repository release-gate variables unset or set to a value other than `true` until the agreed reuse prerequisite is resolved and separate deployment authorization is given. Do not publish the application or catalog before then.
 
+The PR browser-smoke workflow serves the static files locally and tests Chromium, Firefox and WebKit independently; these engine-level checks complement, but do not replace, manual Safari and Edge checks.
+
 ## Verification completed locally
 
 - `npm test`: all 54 behavior tests pass on the integrated release-preparation branch.

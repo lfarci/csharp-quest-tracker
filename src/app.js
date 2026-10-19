@@ -112,11 +112,18 @@ function updateChecklist() {
   return resultSummary;
 }
 
+// Reuse the same lookup for checkbox updates and failed save recovery.
+function findChallenge(id) {
+  for (const part of getSessionView().parts) {
+    const challenge = part.challenges.find(item => item.id === id);
+    if (challenge) return challenge;
+  }
+  return null;
+}
+
 // Refresh one row and the related dashboard after a progress change.
 function syncChallenge(id, announce = true) {
-  const challenge = getSessionView().parts
-    .flatMap(part => part.challenges)
-    .find(challenge => challenge.id === id);
+  const challenge = findChallenge(id);
   if (!challenge) return;
   const item = document.querySelector(`[data-challenge-id="${id}"]`);
   item.querySelector('input').checked = challenge.completed;
@@ -127,8 +134,8 @@ function syncChallenge(id, announce = true) {
   updateDashboard();
   updateSaveStatus();
   const resultSummary = updateChecklist();
-  if (announce && session.getView()?.dashboard) {
-    const { dashboard } = session.getView();
+  const dashboard = announce ? session.getView()?.dashboard : null;
+  if (dashboard) {
     byId('action-status').textContent = `${challenge.title} ${challenge.completed ? 'completed' : 'marked remaining'}. ${number(dashboard.totalXp)} XP. Character level ${dashboard.characterLevel}. ${resultSummary}.`;
   } else if (announce) {
     byId('action-status').textContent = `${challenge.title} ${challenge.completed ? 'completed' : 'marked remaining'} in this session. Saved progress statistics are unavailable.`;
@@ -227,9 +234,7 @@ function renderChecklist() {
           }
           syncChallenge(challenge.id);
         } catch (error) {
-          const current = getSessionView().parts
-            .flatMap(part => part.challenges)
-            .find(item => item.id === challenge.id);
+          const current = findChallenge(challenge.id);
           checkbox.checked = current?.completed ?? false;
           updateSaveStatus();
           byId('action-status').textContent = error.message;

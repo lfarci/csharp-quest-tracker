@@ -4,8 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <meta name="description" content="About the C# Quest Tracker, its sources, and project links.">
+  <meta name="description" content="Learn how C# Quest Tracker works, where progress is saved, and how this unofficial companion relates to The C# Player's Guide.">
   <title>About · C# Quest Tracker</title>
+  <link rel="canonical" href="https://lfarci.github.io/csharp-quest-tracker/about.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="C# Quest Tracker">
+  <meta property="og:title" content="About C# Quest Tracker | Unofficial C# Learning Companion">
+  <meta property="og:description" content="Learn how C# Quest Tracker works, where progress is saved, and how this unofficial companion relates to The C# Player's Guide.">
+  <meta property="og:url" content="https://lfarci.github.io/csharp-quest-tracker/about.html">
   <!-- Site icons and shared styles -->
   <link rel="icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
@@ -14,18 +20,8 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
   <link rel="stylesheet" href="assets/css/base.css">
-  <!-- Apply the saved theme before the page paints to avoid a color flash. -->
-  <script>
-    try {
-      const theme = localStorage.getItem('theme');
-
-      if (theme === 'light' || theme === 'dark') {
-        document.documentElement.dataset.theme = theme;
-      }
-    } catch {
-      // Storage might be blocked; CSS will use the system preference.
-    }
-  </script>
+  <!-- Synchronous shared script prevents a flash of the wrong theme. -->
+  <script src="src/theme-init.js"></script>
 </head>
 <body>
   <!-- Shared site navigation and page heading -->

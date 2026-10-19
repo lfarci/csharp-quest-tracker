@@ -9,7 +9,7 @@ const HEADERS = [
 
 function escapeField(value) {
   const text = String(value);
-  return /[",\r\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
+  return /[",\r\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
 }
 
 // Parse quoted CSV fields without external dependencies.
@@ -69,7 +69,9 @@ function parseRows(contents) {
     row.push(field);
     rows.push(row);
   }
-  if (rows.at(-1)?.length === 1 && rows.at(-1)[0] === '') rows.pop();
+  if (rows.length && rows[rows.length - 1].length === 1 && rows[rows.length - 1][0] === '') {
+    rows.pop();
+  }
   return rows;
 }
 

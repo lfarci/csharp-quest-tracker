@@ -55,3 +55,46 @@ test('manifest icons resolve to existing files', async () => {
     );
   }
 });
+
+const canonicalUrls = {
+  'index.html': 'https://lfarci.github.io/csharp-quest-tracker/',
+  'about.html': 'https://lfarci.github.io/csharp-quest-tracker/about.html',
+};
+
+test('public pages expose consistent canonical URLs and descriptions', async () => {
+  for (const [page, canonical] of Object.entries(canonicalUrls)) {
+    const html = await readProjectFile(page);
+
+    assert.match(html, /<meta name="description" content="[^"]+">/);
+    assert.ok(html.includes(`<link rel="canonical" href="${canonical}">`));
+    assert.ok(html.includes(`<meta property="og:url" content="${canonical}">`));
+  }
+});
+
+test('the home page exposes valid WebApplication structured data', async () => {
+  const html = await readProjectFile('index.html');
+  const json = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+
+  assert.ok(json, 'Structured data block not found');
+  const application = JSON.parse(json[1]);
+  assert.equal(application['@type'], 'WebApplication');
+  assert.equal(application.url, canonicalUrls['index.html']);
+});
+
+test('settings is not indexed, and sitemap includes only public pages', async () => {
+  const settings = await readProjectFile('settings.html');
+  const sitemap = await readProjectFile('sitemap.xml');
+
+  assert.match(settings, /<meta name="robots" content="noindex, follow">/);
+  for (const url of Object.values(canonicalUrls)) {
+    assert.ok(sitemap.includes(`<loc>${url}</loc>`), `Missing sitemap entry ${url}`);
+  }
+  assert.ok(!sitemap.includes('settings.html'));
+});
+
+test('all HTML pages load the shared early theme script', async () => {
+  for (const page of Object.keys(pageStyles)) {
+    const html = await readProjectFile(page);
+    assert.match(html, /<script src="src\/theme-init\.js"><\/script>/);
+  }
+});

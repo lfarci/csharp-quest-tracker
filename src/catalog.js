@@ -1,5 +1,4 @@
-/** Validate the complete catalog before a progress session can be presented. */
-// Validate at the boundary before any reader progress is interpreted.
+/** Validate the complete catalog before reader progress is interpreted. */
 export function validateCatalog(catalog) {
   const invalid = () => {
     throw new Error('The Challenge catalog is invalid. Please reload or try again later.');

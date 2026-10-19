@@ -1,0 +1,39 @@
+name: Browser smoke tests
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser-smoke:
+    name: ${{ matrix.browser }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      # Browser tooling is test-only; the static application has no runtime dependencies.
+      - name: Install Playwright test tooling
+        run: npm install --no-save --no-package-lock @playwright/test@1.56.1
+
+      - name: Install browser engine
+        run: npx playwright install --with-deps ${{ matrix.browser }}
+
+      - name: Test locally served static site
+        run: |
+          python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/quest-http.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          npx playwright test tests/browser-smoke.spec.cjs --browser=${{ matrix.browser }} --reporter=line --workers=1

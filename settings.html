@@ -4,8 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <meta name="description" content="Manage the C# Quest Tracker appearance and progress backups.">
+  <meta name="description" content="Manage local progress backups, imports and appearance settings in C# Quest Tracker.">
   <title>Settings · C# Quest Tracker</title>
+  <!-- Settings are accessible to readers but not useful as search results. -->
+  <meta name="robots" content="noindex, follow">
   <!-- Site icons and shared styles -->
   <link rel="icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
@@ -15,18 +17,8 @@
   <link rel="manifest" href="site.webmanifest">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/settings.css">
-  <!-- Apply the saved theme before the page paints to avoid a color flash. -->
-  <script>
-    try {
-      const theme = localStorage.getItem('theme');
-
-      if (theme === 'light' || theme === 'dark') {
-        document.documentElement.dataset.theme = theme;
-      }
-    } catch {
-      // Storage might be blocked; CSS will use the system preference.
-    }
-  </script>
+  <!-- Synchronous shared script prevents a flash of the wrong theme. -->
+  <script src="src/theme-init.js"></script>
   <script type="module" src="src/theme.js"></script>
   <script type="module" src="src/backup-page.js"></script>
 </head>

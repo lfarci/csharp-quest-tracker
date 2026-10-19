@@ -4,8 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <meta name="description" content="An unofficial fifth-edition companion for tracking Challenges in The C# Player's Guide.">
+  <meta name="description" content="Track Challenges, XP and character levels for The C# Player's Guide, Fifth Edition. A free, unofficial browser-local tracker with CSV backups.">
   <title>C# Quest Tracker</title>
+  <link rel="canonical" href="https://lfarci.github.io/csharp-quest-tracker/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="C# Quest Tracker">
+  <meta property="og:title" content="C# Quest Tracker | Fifth Edition XP Companion">
+  <meta property="og:description" content="Track Challenges, XP and character levels for The C# Player's Guide, Fifth Edition. A free, unofficial browser-local tracker with CSV backups.">
+  <meta property="og:url" content="https://lfarci.github.io/csharp-quest-tracker/">
   <!-- Site icons and shared styles -->
   <link rel="icon" href="favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
@@ -15,18 +21,22 @@
   <link rel="manifest" href="site.webmanifest">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/tracker.css">
-  <!-- Apply the saved theme before the page paints to avoid a color flash. -->
-  <script>
-    try {
-      const theme = localStorage.getItem('theme');
-
-      if (theme === 'light' || theme === 'dark') {
-        document.documentElement.dataset.theme = theme;
-      }
-    } catch {
-      // Storage might be blocked; CSS will use the system preference.
+  <!-- Describes the app to search engines and other structured-data readers. -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "C# Quest Tracker",
+      "url": "https://lfarci.github.io/csharp-quest-tracker/",
+      "description": "An unofficial, browser-local tracker for Challenges and XP in The C# Player's Guide, Fifth Edition.",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Any",
+      "isAccessibleForFree": true,
+      "inLanguage": "en"
     }
   </script>
+  <!-- Synchronous shared script prevents a flash of the wrong theme. -->
+  <script src="src/theme-init.js"></script>
   <script type="module" src="src/theme.js"></script>
   <script type="module" src="src/app.js"></script>
 </head>

@@ -25,7 +25,7 @@ The three HTML entry points live at the repository root. JavaScript goes in `src
 
 ## Verification and release
 
-Run `npm test` after source, markup or asset changes; keep existing behavior, browser accessibility, mobile display and light/dark appearance. Update the Pages assembly paths when public resources move.
+Run `npm test` after source, markup or asset changes; keep existing behavior, browser accessibility, mobile display and light/dark appearance. Pull requests also run CI browser smoke tests for Chromium, Firefox and WebKit. Update the Pages assembly paths when public resources move.
 
 Original application code is MIT licensed, but book-derived catalog metadata requires separate reuse evidence (see `docs/metadata-rights.md` and issue #9). Do not contact the author or deploy without authorization. The Pages workflow must require `METADATA_REUSE_CLEARED` and `PAGES_DEPLOYMENT_AUTHORIZED` to both equal `true`.
 
