@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="C# Quest Tracker shield">
+  <path d="M50 4 C38 11 24 15 8 18 V52 C8 73 25 88 50 97 C75 88 92 73 92 52 V18 C76 15 62 11 50 4 Z" fill="#E5C976"/>
+  <path d="M50 11 C39 17 26 20 15 23 V52 C15 69 28 82 50 89 C72 82 85 69 85 52 V23 C74 20 61 17 50 11 Z" fill="#182A42"/>
+  <text x="50" y="65" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif" font-size="42" font-weight="bold" letter-spacing="-3.8" fill="#E5C976">C#</text>
+</svg>
