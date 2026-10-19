@@ -1,20 +1,21 @@
 import { createProgressSession } from './progress-session.js';
 import { createVariableRewardDialog } from './variable-reward-dialog.js';
-import { createBrowserProgressSession } from './browser-progress.js';
+import { loadBrowserProgressSession } from './browser-session.js';
+import { downloadProgressBackup } from './backup-download.js';
 
 const byId = id => document.getElementById(id);
 const number = value => value.toLocaleString();
 let session;
 let variableRewardDialog;
-let catalogForUi;
+let recoveryView;
 
 function getSessionView(options) {
-  return session?.getView(options) ?? createProgressSession({ catalog: catalogForUi }).getView(options);
+  return session.getView(options) ?? recoveryView.getView(options);
 }
 
 function updateDashboard() {
   const view = session?.getView();
-  if (!view) {
+  if (!view?.dashboard) {
     for (const id of ['character-level', 'total-xp', 'completed-count', 'tracker-completion', 'next-level']) byId(id).textContent = 'Unavailable';
     byId('level-progress').value = 0;
     byId('level-progress-label').textContent = 'Statistics unavailable until progress is recovered';
@@ -101,7 +102,7 @@ function syncChallenge(id, announce = true) {
   updateDashboard();
   updateSaveStatus();
   const resultSummary = updateChecklist();
-  if (announce && session.getView()) {
+  if (announce && session.getView()?.dashboard) {
     const { dashboard } = session.getView();
     byId('action-status').textContent = `${challenge.title} ${challenge.completed ? 'completed' : 'marked remaining'}. ${number(dashboard.totalXp)} XP. Character level ${dashboard.characterLevel}. ${resultSummary}.`;
   } else if (announce) {
@@ -114,6 +115,9 @@ function updateSaveStatus() {
   const status = session.getStatus();
   const blocked = status.stale || status.recoveryNeeded;
   for (const checkbox of document.querySelectorAll('.challenge input[type="checkbox"]')) checkbox.disabled = blocked;
+  byId('session-notice').hidden = status.saved;
+  byId('save-status').textContent = status.saved ? '' : status.message;
+  byId('export-session-progress').hidden = status.recoveryNeeded;
 }
 
 function renderChecklist() {
@@ -208,28 +212,22 @@ function renderChecklist() {
 
 async function start() {
   try {
-    const response = await fetch(new URL('../data/catalog.json', import.meta.url));
-    if (!response.ok) throw new Error('The catalog could not be downloaded.');
-    catalogForUi = await response.json();
-    let storage;
-    let lockManager;
-    try { storage = window.localStorage; } catch { storage = null; }
-    try { lockManager = navigator.locks; } catch { lockManager = null; }
-    session = await createBrowserProgressSession({ catalog: catalogForUi, adapters: {
-      storage,
-      lockManager,
-      onStorageChange: listener => {
-        const handle = event => listener(event);
-        window.addEventListener('storage', handle);
-        return () => window.removeEventListener('storage', handle);
-      },
-      onStatusChange: () => updateSaveStatus(),
-    } });
+    const loaded = await loadBrowserProgressSession(updateSaveStatus);
+    session = loaded.session;
+    // Only damaged saved progress needs a read-only catalog placeholder.
+    if (!session.getView()) recoveryView = createProgressSession({ catalog: loaded.catalog });
     variableRewardDialog = createVariableRewardDialog({ session, onChange: syncChallenge });
     renderChecklist();
     updateSaveStatus();
     updateDashboard();
     updateChecklist();
+    byId('export-session-progress').addEventListener('click', () => {
+      try {
+        byId('session-backup-status').textContent = `Backup download started: ${downloadProgressBackup(session)}`;
+      } catch {
+        byId('session-backup-status').textContent = 'The backup could not be downloaded. Try exporting again.';
+      }
+    });
     byId('discovery-controls').addEventListener('submit', event => event.preventDefault());
     const updateDiscovery = () => { byId('action-status').textContent = `${updateChecklist()}.`; };
     byId('challenge-search').addEventListener('input', updateDiscovery);

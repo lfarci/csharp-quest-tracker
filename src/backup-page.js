@@ -1,4 +1,4 @@
-import { createBrowserProgressSession } from './browser-progress.js';
+import { loadBrowserProgressSession } from './browser-session.js';
 import { downloadProgressBackup } from './backup-download.js';
 import { createImportDialog } from './import-dialog.js';
 import { createRecoveryControls } from './recovery-controls.js';
@@ -12,6 +12,7 @@ function updateStatus() {
   const status = session.getStatus();
   byId('save-status').textContent = status.message;
   byId('save-status').hidden = false;
+  byId('save-status').classList.toggle('sr-only', status.saved);
   byId('export-progress').disabled = status.recoveryNeeded;
   byId('import-progress-file').disabled = status.stale;
   recoveryControls?.update(status);
@@ -19,26 +20,9 @@ function updateStatus() {
 
 async function start() {
   try {
-    const response = await fetch(new URL('../data/catalog.json', import.meta.url));
-    if (!response.ok) throw new Error('The catalog could not be downloaded.');
-    const catalog = await response.json();
-    let storage;
-    let lockManager;
-    try { storage = window.localStorage; } catch { storage = null; }
-    try { lockManager = navigator.locks; } catch { lockManager = null; }
-    session = await createBrowserProgressSession({ catalog, adapters: {
-      storage,
-      lockManager,
-      onStorageChange: listener => {
-        const handle = event => listener(event);
-        window.addEventListener('storage', handle);
-        return () => window.removeEventListener('storage', handle);
-      },
-      onStatusChange: updateStatus,
-    } });
+    ({ session } = await loadBrowserProgressSession(updateStatus));
     byId('export-progress').addEventListener('click', () => {
       try {
-        if (!session.getProgress()) throw new Error('Progress needs recovery first.');
         byId('backup-status').textContent = `Backup download started: ${downloadProgressBackup(session)}`;
       } catch {
         byId('backup-status').textContent = 'The backup could not be downloaded. Try exporting again.';

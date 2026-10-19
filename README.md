@@ -20,7 +20,7 @@ Search and the All, Completed, and Remaining filters only change which rows are 
 
 Where browser storage and cross-tab locks are available, each accepted change saves locally and returns after a normal refresh. If another tab saves first, the older tab is marked stale and its editing controls stop working. Reload it to continue from the latest saved progress.
 
-The tracker explains when a browser cannot safely save. Your already-loaded tab remains usable, and you can export its current session as a progress backup. A confirmed import or recovery reset can also remain session-only after a write failure. Download a backup before clearing browser data; clearing site data can erase the saved tracker record.
+The tracker explains when a browser cannot safely save. Your already-loaded tab remains usable; choose **Export this tab’s progress** in its warning to download the current session before leaving. Settings opens a separate session and cannot export another page’s unsaved changes. The browser is asked to warn before leaving a page with unsaved changes, but this warning is not guaranteed (especially on mobile). A confirmed import or recovery reset can also remain session-only after a write failure. Download a backup before clearing browser data; clearing site data can erase the saved tracker record.
 
 To move progress between devices, export a CSV backup, transfer the file yourself, then select it with **Import progress backup**. Import shows the current and incoming completed counts, XP, and Character levels. Confirming replaces the current progress; it never merges records. Invalid or incompatible backups leave current progress unchanged.
 

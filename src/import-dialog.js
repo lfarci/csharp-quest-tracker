@@ -2,7 +2,6 @@
 export function createImportDialog({ session, onImport }) {
   const picker = document.getElementById('import-progress-file');
   const dialog = document.getElementById('import-preview-dialog');
-  const summary = document.getElementById('import-preview-summary');
   const error = document.getElementById('import-error');
   const form = document.getElementById('import-preview-form');
   const cancel = document.getElementById('cancel-import');
@@ -66,10 +65,9 @@ export function createImportDialog({ session, onImport }) {
     } catch (cause) {
       error.textContent = cause.message;
       error.hidden = false;
-      error.focus?.();
+      error.focus();
     } finally {
       confirm.disabled = false;
     }
   });
-  return { focus: () => picker.focus() };
 }

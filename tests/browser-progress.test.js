@@ -115,22 +115,79 @@ test('missing locks and storage failures fall back to usable session progress wi
     const session = await createBrowserProgressSession({ catalog, adapters: h.adapters });
     await session.setCompletion('fixed', true);
     if (options.readError) {
-      assert.equal(session.getView(), null);
+      assert.equal(session.getView().dashboard, null);
       assert.deepEqual(session.getProgress().completedChallengeIds, ['fixed']);
     } else assert.equal(session.getView().dashboard.totalXp, 150);
     assert.equal(session.getStatus().saved, false);
+    assert.equal(session.getStatus().hasUnsavedChanges, true);
     assert.match(session.getStatus().message, /isn't saved/i);
   }
 });
 
-test('the shared protected-write boundary supports replacement while retaining stale-state checks', async () => {
+test('unavailable storage hides only saved statistics, not session completions, filters, or pending awards', async () => {
+  for (const adapters of [{}, harness(null, { readError: new Error('denied') }).adapters]) {
+    const session = await createBrowserProgressSession({ catalog, adapters });
+    assert.equal(session.getView().dashboard, null);
+    assert.equal(session.getStatus().hasUnsavedChanges, false);
+    await session.setCompletion('fixed', true);
+    const completed = session.getView({ filter: 'completed' }).parts.flatMap(part => part.challenges);
+    assert.deepEqual(completed.map(challenge => challenge.id), ['fixed']);
+    assert.equal(completed[0].completed, true);
+    assert.deepEqual(session.getView({ search: 'fixed', filter: 'remaining' }).parts, []);
+
+    await session.setCompletion('making-it-yours', true);
+    assert.equal(session.getView().pendingVariableChallengeId, 'making-it-yours');
+    await session.submitVariableAward('making-it-yours', 237);
+    const challenge = session.getView({ search: 'making', filter: 'completed' }).parts[0].challenges[0];
+    assert.equal(challenge.completed, true);
+    assert.equal(challenge.selectedXpAward, 237);
+    assert.equal(session.getView().pendingVariableChallengeId, null);
+    assert.equal(session.getView().dashboard, null);
+    assert.equal(session.getStatus().hasUnsavedChanges, true);
+  }
+});
+
+test('unsaved changes track source progress, not pending interactions or completion ordering', async () => {
+  const session = await createBrowserProgressSession({ catalog });
+  await session.setCompletion('making-it-yours', true);
+  assert.equal(session.getStatus().hasUnsavedChanges, false);
+  session.cancelVariableAward();
+  await session.setCompletion('fixed', true);
+  assert.equal(session.getStatus().hasUnsavedChanges, true);
+  await session.setCompletion('fixed', false);
+  assert.equal(session.getStatus().hasUnsavedChanges, false);
+
   const h = harness();
-  const a = await createBrowserProgressSession({ catalog, adapters: h.adapters });
-  const b = await createBrowserProgressSession({ catalog, adapters: h.adapters });
-  await a.protectedWrite(({ replaceProgress }) => replaceProgress({ completedChallengeIds: ['fixed'] }));
-  assert.equal(a.getView().dashboard.totalXp, 150);
-  await assert.rejects(b.protectedWrite(({ replaceProgress }) => replaceProgress({ completedChallengeIds: [] })), /stale|reload/i);
-  assert.deepEqual(JSON.parse(h.raw).completedChallengeIds, ['fixed']);
+  const savedSession = await createBrowserProgressSession({ catalog, adapters: h.adapters });
+  await savedSession.setCompletion('fixed', true);
+  await savedSession.setCompletion('making-it-yours', true);
+  await savedSession.submitVariableAward('making-it-yours', 237);
+  assert.equal(savedSession.getStatus().hasUnsavedChanges, false);
+  h.options.writeError = new Error('quota');
+  await savedSession.setCompletion('fixed', false);
+  assert.equal(savedSession.getStatus().hasUnsavedChanges, true);
+  await savedSession.setCompletion('fixed', true);
+  assert.equal(savedSession.getStatus().hasUnsavedChanges, false);
+  await savedSession.setCompletion('making-it-yours', false);
+  await savedSession.setCompletion('making-it-yours', true);
+  await savedSession.submitVariableAward('making-it-yours', 300);
+  assert.equal(savedSession.getStatus().hasUnsavedChanges, true);
+  h.options.writeError = null;
+  await savedSession.setCompletion('fixed', true);
+  assert.equal(savedSession.getStatus().hasUnsavedChanges, false);
+});
+
+test('a successful save after storage becomes readable restores reliable statistics', async () => {
+  const h = harness(null, { readError: new Error('denied') });
+  const session = await createBrowserProgressSession({ catalog, adapters: h.adapters });
+  await session.setCompletion('fixed', true);
+  assert.equal(session.getView().dashboard, null);
+  assert.equal(session.getStatus().hasUnsavedChanges, true);
+  h.options.readError = null;
+  await session.setCompletion('fixed', true);
+  assert.equal(session.getView().dashboard.totalXp, 150);
+  assert.equal(session.getStatus().saved, true);
+  assert.equal(session.getStatus().hasUnsavedChanges, false);
 });
 
 test('malformed and incompatible storage are preserved and expose recovery-needed without fabricated statistics', async () => {

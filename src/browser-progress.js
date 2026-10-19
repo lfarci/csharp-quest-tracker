@@ -47,12 +47,13 @@ function parseBackup(contents, catalog) {
   }
 }
 
-/** Browser persistence boundary. The session remains the sole owner of XP calculations. */
+/** Browser persistence seam. The session remains the sole owner of XP calculations. */
 export async function createBrowserProgressSession({ catalog, adapters = {} }) {
   const storage = adapters.storage;
   const lockManager = adapters.lockManager;
   const identify = adapters.createIdentity ?? defaultIdentity;
   let session;
+  let acceptedProgress;
   let acceptedRaw = null;
   let recoveryRaw = null;
   let stale = false;
@@ -64,7 +65,7 @@ export async function createBrowserProgressSession({ catalog, adapters = {} }) {
   let generation = 0;
   const previewStates = new WeakMap();
 
-  const emitStatus = () => adapters.onStatusChange?.({ saved, stale, recoveryNeeded, recoveryDataAvailable: recoveryRaw !== null, message });
+  const emitStatus = () => adapters.onStatusChange?.(getStatus());
   adapters.onStorageChange?.(event => {
     if (event.key !== PROGRESS_STORAGE_KEY && event.key !== null) return;
     if (event.key === null || event.newValue !== acceptedRaw) {
@@ -101,15 +102,31 @@ export async function createBrowserProgressSession({ catalog, adapters = {} }) {
     }
   }
 
-  function getStatus() { return { saved, stale, recoveryNeeded, recoveryDataAvailable: recoveryRaw !== null, message }; }
+  function hasUnsavedChanges() {
+    const progress = session?.getProgress();
+    if (!progress) return false;
+    if (!acceptedProgress) return true;
+    return progress.completedChallengeIds.length !== acceptedProgress.completedChallengeIds.length ||
+      progress.completedChallengeIds.some(id => !acceptedProgress.completedChallengeIds.includes(id) ||
+        progress.variableXpAwards[id] !== acceptedProgress.variableXpAwards[id]);
+  }
+  function getStatus() {
+    return { saved, stale, recoveryNeeded, recoveryDataAvailable: recoveryRaw !== null,
+      hasUnsavedChanges: hasUnsavedChanges(), message };
+  }
   function getProgress() { return session?.getProgress() ?? null; }
-  function getView(options) { return statisticsUnavailable ? null : session?.getView(options) ?? null; }
+  function getView(options) {
+    const view = session?.getView(options);
+    if (!view) return null;
+    // Unreadable saved progress must not hide usable in-memory interactions.
+    return statisticsUnavailable ? { ...view, dashboard: null } : view;
+  }
 
   function perform(method, args, { allowRecovery = false } = {}) {
     const operation = async () => {
       const apply = () => {
         const result = typeof method === 'function'
-        ? method({ session, getProgress: () => session.getProgress(),
+        ? method({
           replaceProgress: progress => { session = createProgressSession({ catalog, progress }); statisticsUnavailable = false; } })
         : session[method](...args);
         generation++;
@@ -151,6 +168,8 @@ export async function createBrowserProgressSession({ catalog, adapters = {} }) {
           storage.setItem(PROGRESS_STORAGE_KEY, encoded);
           wroteSuccessfully = true;
           acceptedRaw = encoded;
+          acceptedProgress = session.getProgress();
+          statisticsUnavailable = false;
           recoveryRaw = null;
           saved = true;
           recoveryNeeded = false;
@@ -193,15 +212,15 @@ export async function createBrowserProgressSession({ catalog, adapters = {} }) {
   }
 
   if (!session && !recoveryNeeded) session = createProgressSession({ catalog });
+  acceptedProgress = session?.getProgress() ?? null;
   emitStatus();
   return {
     getStatus, getProgress, getView,
     setCompletion: (id, value) => perform('setCompletion', [id, value]),
     submitVariableAward: (id, award) => perform('submitVariableAward', [id, award]),
-    protectedWrite: (operation, options) => perform(operation, [], options),
     previewImport(contents) {
       const incomingSession = parseBackup(contents, catalog);
-      const summarize = view => view ? {
+      const summarize = view => view?.dashboard ? {
         completedCount: view.dashboard.completedCount,
         totalXp: view.dashboard.totalXp,
         characterLevel: view.dashboard.characterLevel,
