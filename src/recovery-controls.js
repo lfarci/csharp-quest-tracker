@@ -14,13 +14,8 @@ export function createRecoveryControls({ session, onRecovery }) {
   let review;
 
   function update(availability) {
-    const statusValue = typeof availability === 'boolean' ? { recoveryDataAvailable: availability } : availability;
-    section.hidden = !statusValue.recoveryDataAvailable;
-    if (!section.hidden) {
-      const disclosure = section.closest('details');
-      if (disclosure) disclosure.open = true;
-    }
-    trigger.disabled = statusValue.stale;
+    section.hidden = !availability.recoveryDataAvailable;
+    trigger.disabled = availability.stale;
   }
 
   function close() {
