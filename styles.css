@@ -23,7 +23,8 @@ button, .filter-options label, .challenge-label { touch-action: manipulation; }
 [hidden] { display: none !important; }
 .site-header, main, footer { width: min(100% - 2.5rem, 64rem); margin-inline: auto; }
 .site-header { padding-block: 3.5rem 2rem; }
-.site-nav { display: flex; justify-content: flex-end; gap: 1.25rem; margin-bottom: 2.5rem; }
+.site-nav { display: flex; justify-content: flex-start; gap: 1.25rem; margin-bottom: 2.5rem; }
+.site-nav a:first-child { margin-right: auto; }
 .site-nav a { font-size: .9rem; font-weight: 600; }
 .about-content { min-height: 45vh; }
 .backup-page { min-height: 45vh; padding-bottom: 2rem; }
@@ -48,6 +49,9 @@ button, .filter-options label, .challenge-label { touch-action: manipulation; }
 .about-content h2 { font-size: 1.25rem; }
 .about-content p, .about-content li { max-width: 75ch; }
 .about-content li + li { margin-top: .5rem; }
+.book-cta { display: flex; flex-wrap: wrap; gap: .65rem; margin-block: 1.25rem !important; }
+.book-cta a { display: inline-block; padding: .65rem .95rem; border: 1px solid var(--ink); border-radius: .25rem; background: var(--ink); color: var(--surface); font-weight: 650; text-decoration: none; }
+.book-cta a:hover { opacity: .88; text-decoration: underline; }
 .edition { color: var(--muted); font-size: .9rem; }
 h1, .level-value { font-family: Georgia, "Times New Roman", serif; }
 h1 { margin: .35rem 0 .4rem; font-size: clamp(2.2rem, 6vw, 3.6rem); line-height: 1.1; letter-spacing: -.035em; }
