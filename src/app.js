@@ -2,6 +2,7 @@ import { createProgressSession } from './progress-session.js';
 import { createVariableRewardDialog } from './variable-reward-dialog.js';
 import { loadBrowserProgressSession } from './browser-session.js';
 import { downloadProgressBackup } from './backup-download.js';
+import { activityTypes, getActivityType } from './activity-types.js';
 
 /**
  * Tracker page rendering and user interactions.
@@ -9,6 +10,20 @@ import { downloadProgressBackup } from './backup-download.js';
  */
 const byId = id => document.getElementById(id);
 const number = value => value.toLocaleString();
+
+// Locally hosted symbols distinguish activity types without modifying catalog data.
+function createActivityIcon(type) {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('class', `activity-type-icon activity-type-icon--${type}`);
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('aria-hidden', 'true');
+  svg.setAttribute('focusable', 'false');
+
+  const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+  use.setAttribute('href', `assets/icons/activity-types.svg#${type}`);
+  svg.append(use);
+  return svg;
+}
 let session;
 let variableRewardDialog;
 let recoveryView;
@@ -202,6 +217,11 @@ function renderChecklist() {
       checkbox.type = 'checkbox';
       checkbox.id = `challenge-${challenge.id}`;
       checkbox.checked = challenge.completed;
+      const type = getActivityType(challenge);
+      const icon = createActivityIcon(type);
+      const typeLabel = document.createElement('span');
+      typeLabel.className = 'sr-only';
+      typeLabel.textContent = `${activityTypes[type]}: `;
       const title = document.createElement('span');
       title.className = 'challenge-title';
       title.textContent = challenge.title;
@@ -214,7 +234,7 @@ function renderChecklist() {
         ? challenge.reward.xp
         : (challenge.selectedXpAward ?? '?');
       reward.textContent = `${selectedAward} XP`;
-      label.append(checkbox, title, page, reward);
+      label.append(checkbox, icon, typeLabel, title, page, reward);
       item.append(label);
       if (challenge.reward.kind === 'variable') {
         const note = document.createElement('p');

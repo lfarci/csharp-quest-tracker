@@ -16,7 +16,7 @@ async function readProjectFile(path) {
 
 function localReferences(html) {
   const references = [...html.matchAll(/\b(?:href|src)="([^"]+)"/g)]
-    .map(match => match[1]);
+    .map(match => match[1].split('#')[0]);
 
   return references.filter(reference =>
     !reference.startsWith('#') &&

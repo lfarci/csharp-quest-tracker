@@ -11,3 +11,5 @@
 - Prefer platform APIs supported in the current major browsers; use feature detection and a clear fallback when an API is unavailable.
 - Do not introduce dependencies or polyfills just to support obsolete browsers.
 - Add or update tests for any observable behavior change.
+
+- `activity-types.js` records supplemental display-only classifications; keep the versioned catalog, progress state, and CSV backup format unchanged when editing activity icons.

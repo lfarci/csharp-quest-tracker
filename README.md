@@ -14,7 +14,7 @@ Then visit <http://localhost:8000>. Opening `index.html` directly as a `file:` U
 
 Check a Challenge when you complete it. Challenges can be completed in any order. For “Expansion: Making it Yours,” choose any whole-number award from 50 through 400 XP. The Character level, XP, and completed count recalculate from the selected awards. Tracker completion counts every entry in the official tracker, including optional expansions and bonus checks.
 
-Search and the All, Completed, and Remaining filters only change which rows are visible. They do not change the dashboard totals.
+A sword identifies a Challenge, crossed swords a Boss Battle, and a scroll a Knowledge Check. Search and the All, Completed, and Remaining filters only change which rows are visible. They do not change the dashboard totals.
 
 ## Save and transfer progress
 

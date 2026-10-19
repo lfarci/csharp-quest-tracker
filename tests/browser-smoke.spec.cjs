@@ -61,3 +61,22 @@ test('small-screen layout does not overflow horizontally', async ({ page }) => {
     expect(fitsViewport, `Horizontal overflow on ${path}`).toBe(true);
   }
 });
+
+test('activity icons distinguish types and preserve normal completion', async ({ page }) => {
+  await page.goto('/index.html');
+  await expect(page.locator('#tracker')).toBeVisible();
+
+  for (const [id, type, label] of [
+    ['hello-world', 'challenge', 'Challenge'],
+    ['hunting-the-manticore', 'boss-battle', 'Boss Battle'],
+    ['knowledge-check-c', 'knowledge-check', 'Knowledge Check'],
+  ]) {
+    const row = page.locator(`[data-challenge-id="${id}"]`);
+    await expect(row.locator('svg.activity-type-icon use'))
+      .toHaveAttribute('href', `assets/icons/activity-types.svg#${type}`);
+    await expect(row.locator('input[type="checkbox"]')).toHaveAccessibleName(new RegExp(label + ':'));
+  }
+
+  await page.locator('[data-challenge-id="hunting-the-manticore"] input').check();
+  await expect(page.locator('#completed-count')).toHaveText('1 / 114');
+});

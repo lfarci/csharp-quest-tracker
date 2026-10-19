@@ -28,3 +28,11 @@ The rendered ladder on PDF page 1 shows increments of 200, 400, 600, 800, 1,000,
 Identifiers are stable application identifiers, initially derived from the official titles; future display-title corrections must not regenerate them. `making-it-yours` is the reserved identifier from the specification. Catalog validation rejects duplicate IDs, invalid rewards, missing parts, and inconsistent ordering before progress is exposed. Behavioral tests supplement this source check; structural assertions alone do not establish transcription accuracy.
 
 This verification establishes catalog fidelity. It does not establish permission to republish book metadata. Metadata reuse evidence remains a separate release prerequisite, and this catalog has not been pushed or deployed as part of issue #2.
+
+## Supplemental activity symbols (19 October 2026)
+
+For visual identification only, the project owner supplied **35 Boss Battle titles**. All 35 map to unique existing catalog IDs. The existing title prefix identifies **19 Knowledge Checks**; the remaining **60** entries are ordinary Challenges. The separate `src/activity-types.js` module records these classifications without modifying `data/catalog.json`, its initial revision, saved progress, XP, or the CSV backup contract.
+
+The owner listed **Amaroks** and **Getting Armed** on page 244, while the previously verified authoritative tracker catalog gives **page 245** for both. Keep the original catalog's page references unchanged.
+
+A locally hosted, original SVG symbol set depicts a sword, crossed swords, and a scroll. It does not copy the book's icon artwork.
