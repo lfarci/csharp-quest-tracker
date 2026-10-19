@@ -1,15 +1,11 @@
 import { createProgressSession } from './progress-session.js';
 import { createVariableRewardDialog } from './variable-reward-dialog.js';
-import { downloadProgressBackup } from './backup-download.js';
 import { createBrowserProgressSession } from './browser-progress.js';
-import { createImportDialog } from './import-dialog.js';
-import { createRecoveryControls } from './recovery-controls.js';
 
 const byId = id => document.getElementById(id);
 const number = value => value.toLocaleString();
 let session;
 let variableRewardDialog;
-let recoveryControls;
 let catalogForUi;
 
 function getSessionView(options) {
@@ -38,12 +34,30 @@ function updateDashboard() {
     : `${number(dashboard.xpRemaining)} XP to Character level ${dashboard.characterLevel + 1}`;
 }
 
+function updatePartCompletion() {
+  const { parts } = getSessionView();
+  for (const part of parts) {
+    const section = document.querySelector(`[data-book-part="${part.id}"]`);
+    if (!section) continue;
+    const completed = part.challenges.filter(challenge => challenge.completed).length;
+    const total = part.challenges.length;
+    const percentage = total ? Math.round(completed / total * 100) : 0;
+    section.querySelector('.part-completion-count').textContent = `${completed} of ${total} completed`;
+    const progress = section.querySelector('.part-completion-progress');
+    progress.value = completed;
+    progress.max = total || 1;
+    progress.setAttribute('aria-label', `Part ${part.id} completion`);
+    section.querySelector('.part-completion-percent').textContent = `${percentage}%`;
+  }
+}
+
 function updateChecklist() {
   const focused = document.activeElement;
   const previouslyVisible = [...document.querySelectorAll('.challenge:not([hidden]) input:not(:disabled)')];
   const focusedIndex = previouslyVisible.indexOf(focused);
   const filter = document.querySelector('input[name="completion-filter"]:checked').value;
   const { parts } = getSessionView({ search: byId('challenge-search').value, filter });
+  updatePartCompletion();
   const visibleIds = new Set(parts.flatMap(part => part.challenges.map(challenge => challenge.id)));
   const discoveryIsActive = byId('challenge-search').value.trim() !== '' || filter !== 'all';
   for (const row of document.querySelectorAll('.challenge')) {
@@ -93,33 +107,6 @@ function updateSaveStatus() {
   byId('save-status').textContent = status.message;
   const blocked = status.stale || status.recoveryNeeded;
   for (const checkbox of document.querySelectorAll('.challenge input[type="checkbox"]')) checkbox.disabled = blocked;
-  byId('import-progress-file').disabled = status.stale;
-  byId('export-progress').disabled = status.recoveryNeeded;
-  recoveryControls?.update(status);
-}
-
-function updateAllChallengeRows() {
-  const challenges = new Map(getSessionView().parts.flatMap(part => part.challenges).map(challenge => [challenge.id, challenge]));
-  for (const [id, challenge] of challenges) {
-    const item = document.querySelector(`[data-challenge-id="${id}"]`);
-    const checkbox = item.querySelector('input');
-    checkbox.checked = challenge.completed;
-    item.classList.toggle('is-complete', challenge.completed);
-    if (challenge.reward.kind === 'variable') item.querySelector('.challenge-reward').textContent = `${challenge.selectedXpAward ?? '?'} XP`;
-  }
-  updateDashboard();
-  updateSaveStatus();
-  updateChecklist();
-}
-
-function updateAfterImport() {
-  updateAllChallengeRows();
-  byId('action-status').textContent = 'Backup progress replaced the current progress.';
-}
-
-function updateAfterFreshStart() {
-  updateAllChallengeRows();
-  byId('action-status').textContent = 'Fresh start confirmed. Progress is empty with 0 XP and Character level 1.';
 }
 
 function renderChecklist() {
@@ -145,7 +132,17 @@ function renderChecklist() {
     const heading = document.createElement('h2');
     heading.id = `part-title-${part.id}`;
     heading.textContent = `Part ${part.id}: ${part.title}`;
-    summary.append(heading);
+    const completion = document.createElement('span');
+    completion.className = 'part-completion';
+    const count = document.createElement('span');
+    count.className = 'part-completion-count';
+    const percent = document.createElement('span');
+    percent.className = 'part-completion-percent';
+    const progress = document.createElement('progress');
+    progress.className = 'part-completion-progress';
+    progress.max = part.challenges.length || 1;
+    completion.append(count, progress, percent);
+    summary.append(heading, completion);
     const list = document.createElement('ul');
     list.className = 'challenge-list';
     for (const challenge of part.challenges) {
@@ -220,18 +217,7 @@ async function start() {
       },
       onStatusChange: () => updateSaveStatus(),
     } });
-    byId('export-progress').addEventListener('click', () => {
-      try {
-        if (!session.getProgress()) throw new Error('Progress needs recovery first.');
-        const filename = downloadProgressBackup(session);
-        byId('backup-status').textContent = `Backup download started: ${filename}`;
-      } catch {
-        byId('backup-status').textContent = 'The backup could not be downloaded. Try exporting again.';
-      }
-    });
     variableRewardDialog = createVariableRewardDialog({ session, onChange: syncChallenge });
-    createImportDialog({ session, onImport: updateAfterImport });
-    recoveryControls = createRecoveryControls({ session, onRecovery: updateAfterFreshStart });
     renderChecklist();
     updateSaveStatus();
     updateDashboard();

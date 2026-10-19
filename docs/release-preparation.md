@@ -1,12 +1,12 @@
 # Release preparation
 
-The application is a static site. GitHub Pages needs only `index.html`, `styles.css`, `src/`, and `data/`; the app loads its stylesheet, JavaScript modules, and catalog through relative paths, so it works beneath the project-site path `/csharp-quest-tracker/`. The expected URL is <https://lfarci.github.io/csharp-quest-tracker/>. There is no build command, backend, runtime package install, account, or paid service.
+The application is a static site. GitHub Pages needs all root-level HTML pages, `styles.css`, `src/`, and `data/`; the workflow copies root-level `*.html` files automatically so new pages are included without editing the workflow. The app loads its stylesheet, JavaScript modules, and catalog through relative paths, so it works beneath the project-site path `/csharp-quest-tracker/`. The expected URL is <https://lfarci.github.io/csharp-quest-tracker/>. There is no build command, backend, runtime package install, account, or paid service.
 
-`.github/workflows/pages.yml` is a manually dispatched workflow. It runs deployment only when dispatched from `main`, stages just the four application paths above, and deploys that artifact to the `github-pages` environment. It does not deploy from feature or integration branches. To enable it after the release prerequisites are met, configure the repository's Pages source to GitHub Actions and run **Publish static site to GitHub Pages** from the Actions tab on `main`.
+`.github/workflows/pages.yml` deploys on pushes to `main` and also supports manual dispatch. It stages the complete static application and deploys that artifact to the `github-pages` environment; it does not deploy from feature or integration branches. Both triggers are gated: the repository variables `METADATA_REUSE_CLEARED` and `PAGES_DEPLOYMENT_AUTHORIZED` must each be set to the exact value `true`. Configure them only after the metadata-reuse prerequisite is resolved and separate deployment authorization is given. Until then, the deploy job is skipped. Configure the repository's Pages source to GitHub Actions before deployment.
 
 ## Release gate
 
-Issue #9 remains unresolved. `docs/metadata-rights.md` records the sources and the limit of the evidence: catalog fidelity and attribution do not establish a reuse grant for the book-derived catalog. The workflow is prepared but no deployment has been run. Do not publish the application or catalog until the agreed reuse prerequisite is resolved and the separate deployment authorization is given.
+Issue #9 remains unresolved. `docs/metadata-rights.md` records the sources and the limit of the evidence: catalog fidelity and attribution do not establish a reuse grant for the book-derived catalog. The workflow is prepared but no deployment has been run. Keep both repository release-gate variables unset or set to a value other than `true` until the agreed reuse prerequisite is resolved and separate deployment authorization is given. Do not publish the application or catalog before then.
 
 ## Verification completed locally
 
