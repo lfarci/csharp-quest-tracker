@@ -51,6 +51,15 @@ function updatePartCompletion() {
   }
 }
 
+function updateDisclosureControls() {
+  const disclosures = [...document.querySelectorAll('.book-part-disclosure')];
+  const toggleAll = byId('toggle-all-parts');
+  const hasOpenPart = disclosures.some(disclosure => disclosure.open);
+
+  toggleAll.textContent = hasOpenPart ? 'Close all parts' : 'Open all parts';
+  toggleAll.disabled = disclosures.length === 0;
+}
+
 function updateChecklist() {
   const focused = document.activeElement;
   const previouslyVisible = [...document.querySelectorAll('.challenge:not([hidden]) input:not(:disabled)')];
@@ -73,6 +82,7 @@ function updateChecklist() {
   byId('results-count').textContent = resultSummary;
   byId('no-results').hidden = visibleIds.size !== 0;
   byId('part-navigation').hidden = visibleIds.size === 0;
+  updateDisclosureControls();
   if (focusedIndex !== -1 && focused.closest('.challenge').hidden) {
     const next = previouslyVisible.slice(focusedIndex + 1).find(input => !input.closest('.challenge').hidden);
     const previous = previouslyVisible.slice(0, focusedIndex).reverse().find(input => !input.closest('.challenge').hidden);
@@ -128,6 +138,10 @@ function renderChecklist() {
     disclosure.open = true;
     const summary = document.createElement('summary');
     summary.id = `part-${part.id}`;
+    const disclosureIcon = document.createElement('span');
+    disclosureIcon.className = 'part-disclosure-icon';
+    disclosureIcon.setAttribute('aria-hidden', 'true');
+    disclosureIcon.textContent = '▸';
     const heading = document.createElement('h2');
     heading.id = `part-title-${part.id}`;
     heading.textContent = `Part ${part.id}: ${part.title}`;
@@ -141,7 +155,7 @@ function renderChecklist() {
     progress.className = 'part-completion-progress';
     progress.max = part.challenges.length || 1;
     completion.append(count, progress, percent);
-    summary.append(heading, completion);
+    summary.append(disclosureIcon, heading, completion);
     const list = document.createElement('ul');
     list.className = 'challenge-list';
     for (const challenge of part.challenges) {
@@ -192,6 +206,7 @@ function renderChecklist() {
       list.append(item);
     }
     disclosure.append(summary, list);
+    disclosure.addEventListener('toggle', updateDisclosureControls);
     section.append(disclosure);
     byId('challenges').append(section);
   }
@@ -227,6 +242,13 @@ async function start() {
     for (const radio of document.querySelectorAll('input[name="completion-filter"]')) {
       radio.addEventListener('change', updateDiscovery);
     }
+    byId('toggle-all-parts').addEventListener('click', () => {
+      const disclosures = [...document.querySelectorAll('.book-part-disclosure')];
+      const shouldOpen = !disclosures.some(disclosure => disclosure.open);
+      for (const disclosure of disclosures) disclosure.open = shouldOpen;
+      updateDisclosureControls();
+      byId('action-status').textContent = shouldOpen ? 'All Book parts expanded.' : 'All Book parts collapsed.';
+    });
     byId('loading').hidden = true;
     byId('tracker').hidden = false;
   } catch (error) {
