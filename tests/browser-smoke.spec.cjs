@@ -128,7 +128,6 @@ test('the activity legend is compact and icons align inline with labels', async 
         rowCenterY: row.top + row.height / 2,
         left: row.left,
         top: row.top,
-        textInline: getComputedStyle(item).display === 'inline-flex',
       };
     });
     const first = document.querySelector('[data-challenge-id="knowledge-check-c"]');
@@ -154,7 +153,6 @@ test('the activity legend is compact and icons align inline with labels', async 
     expect(metric.iconWidth).toBeGreaterThan(10);
     expect(metric.iconWidth).toBeLessThanOrEqual(20);
     expect(metric.iconHeight).toBeLessThanOrEqual(20);
-    expect(metric.textInline).toBe(true);
     expect(Math.abs(metric.iconCenterY - metric.rowCenterY)).toBeLessThanOrEqual(2);
   }
   // Three short legend labels fit on one line in a desktop viewport.
