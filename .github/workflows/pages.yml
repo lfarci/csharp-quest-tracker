@@ -1,6 +1,9 @@
 name: Publish static site to GitHub Pages
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions: {}
@@ -11,7 +14,10 @@ concurrency:
 
 jobs:
   deploy:
-    if: github.ref == 'refs/heads/main'
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      vars.METADATA_REUSE_CLEARED == 'true' &&
+      vars.PAGES_DEPLOYMENT_AUTHORIZED == 'true'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -28,7 +34,7 @@ jobs:
       - name: Assemble static site files
         run: |
           mkdir -p _site
-          cp index.html styles.css _site/
+          cp index.html progress-backup.html about.html styles.css _site/
           cp -R src data _site/
       - name: Upload only the static application
         uses: actions/upload-pages-artifact@v4
