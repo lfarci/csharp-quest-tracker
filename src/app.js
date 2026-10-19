@@ -52,7 +52,7 @@ function updatePartCompletion() {
 }
 
 function updateDisclosureControls() {
-  const disclosures = [...document.querySelectorAll('.book-part-disclosure')];
+  const disclosures = [...document.querySelectorAll('.book-part:not([hidden]) .book-part-disclosure')];
   const toggleAll = byId('toggle-all-parts');
   const hasOpenPart = disclosures.some(disclosure => disclosure.open);
 
@@ -232,11 +232,11 @@ async function start() {
       radio.addEventListener('change', updateDiscovery);
     }
     byId('toggle-all-parts').addEventListener('click', () => {
-      const disclosures = [...document.querySelectorAll('.book-part-disclosure')];
+      const disclosures = [...document.querySelectorAll('.book-part:not([hidden]) .book-part-disclosure')];
       const shouldOpen = !disclosures.some(disclosure => disclosure.open);
       for (const disclosure of disclosures) disclosure.open = shouldOpen;
       updateDisclosureControls();
-      byId('action-status').textContent = shouldOpen ? 'All Book parts expanded.' : 'All Book parts collapsed.';
+      byId('action-status').textContent = shouldOpen ? 'Visible Book parts expanded.' : 'Visible Book parts collapsed.';
     });
     byId('loading').hidden = true;
     byId('tracker').hidden = false;
