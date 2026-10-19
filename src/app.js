@@ -90,7 +90,6 @@ function syncChallenge(id, announce = true) {
 function updateSaveStatus() {
   if (!session) return;
   const status = session.getStatus();
-  byId('save-status').textContent = status.message;
   const blocked = status.stale || status.recoveryNeeded;
   for (const checkbox of document.querySelectorAll('.challenge input[type="checkbox"]')) checkbox.disabled = blocked;
   byId('import-progress-file').disabled = status.stale;
