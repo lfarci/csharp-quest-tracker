@@ -21,6 +21,7 @@
 - Prefer minimal, focused changes over speculative abstractions.
 - Preserve keyboard accessibility, semantic HTML, responsive layouts and light/dark theme behavior.
 - Use the built-in Node.js test runner (`npm test`); add or update tests for behavior changes.
+- Keep shared tokens, navigation, and generic controls in `assets/css/base.css`; place page-specific rules and responsive overrides in `tracker.css` or `settings.css`.
 - When moving public files, update HTML, manifest and GitHub Pages staging paths together.
 - Do not introduce runtime dependencies solely for tooling convenience.
 

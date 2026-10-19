@@ -1,0 +1,287 @@
+.appearance-settings, .backup-page .backup-card {
+  border: 1px solid var(--line);
+  border-radius: .5rem;
+  background: var(--surface);
+  box-shadow: 0 .55rem 1.35rem rgb(0 0 0 / 5%);
+}
+.settings-page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  align-items: start;
+  gap: 1.25rem;
+  padding-bottom: 2rem;
+}
+.appearance-settings {
+  max-width: none;
+  margin: 0;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border-top-color: var(--gold);
+}
+.appearance-settings h2, .settings-section-heading {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+}
+.settings-section-heading {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+}
+.settings-section-heading::before {
+  content: "";
+  width: .65rem;
+  height: .65rem;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+}
+.progress-backup-section {
+  display: grid;
+  gap: 1rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--line);
+  border-top-color: var(--gold);
+  border-radius: .5rem;
+  background: var(--surface);
+  box-shadow: 0 .55rem 1.35rem rgb(0 0 0 / 5%);
+}
+.progress-backup-section > h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+.progress-backup-section > .settings-hint {
+  margin: 0;
+}
+.progress-backup-section > .backup-options {
+  margin-top: .25rem;
+}
+.progress-backup-section > #loading, .progress-backup-section > #load-error {
+  margin: 0;
+}
+.progress-backup-section .backup-controls {
+  margin: 0;
+}
+.appearance-settings label {
+  display: block;
+  margin-bottom: .45rem;
+  font-weight: 600;
+}
+.theme-select-wrap {
+  position: relative;
+  display: block;
+  width: min(100%, 24rem);
+}
+.appearance-settings select {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: .5rem 2.75rem .5rem .7rem;
+  border: 1px solid var(--muted);
+  border-radius: .25rem;
+  appearance: none;
+  color: var(--ink);
+  background: var(--surface);
+  font: inherit;
+}
+.theme-select-wrap::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: .95rem;
+  width: .7rem;
+  height: .45rem;
+  pointer-events: none;
+  background: var(--muted);
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='m1 1 5 5 5-5' fill='none' stroke='black' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'/%3E%3C/svg%3E") center / contain no-repeat;
+  transform: translateY(-40%);
+}
+.settings-hint {
+  color: var(--muted);
+  font-size: .9rem;
+}
+.backup-page {
+  padding-bottom: 2rem;
+}
+.backup-page .backup-controls {
+  margin: 0;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--line);
+  border-radius: .5rem;
+  background: var(--surface);
+}
+.backup-page .backup-card > h2 {
+  margin: 0 0 .35rem;
+  font-size: 1.35rem;
+}
+.backup-page .backup-card > p {
+  margin-top: .35rem;
+  color: var(--muted);
+}
+.backup-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+.backup-option {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .65rem;
+  min-width: 0;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: .4rem;
+  background: var(--paper);
+  transition: border-color 150ms ease, transform 150ms ease;
+}
+.backup-option:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.backup-option h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+.backup-option p {
+  flex: 1;
+  margin: 0;
+  color: var(--muted);
+  font-size: .9rem;
+}
+.backup-option button, .backup-option .import-file-label {
+  margin-top: .25rem;
+}
+.backup-option input[type="file"] {
+  max-width: 100%;
+  font: inherit;
+}
+.backup-save-status {
+  margin-block: 0 1rem;
+}
+.backup-page .recovery-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: .5rem 1.5rem;
+  border-color: var(--accent);
+  background: var(--notice);
+}
+.recovery-card h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+.recovery-card p {
+  margin-block: .35rem;
+  max-width: 70ch;
+}
+.backup-eyebrow {
+  color: var(--accent) !important;
+  font-size: .75rem !important;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.backup-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .65rem;
+}
+@media (max-width: 640px) {
+  .backup-options {
+    grid-template-columns: 1fr;
+  }
+  .backup-page .recovery-card {
+    grid-template-columns: 1fr;
+  }
+  .backup-actions {
+    align-items: stretch;
+  }
+}
+.import-file-label {
+  display: inline-block;
+  margin: .75rem .75rem .25rem 0;
+  font-weight: 600;
+}
+#import-progress-file {
+  max-width: 100%;
+}
+.import-comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.import-comparison section {
+  border: 1px solid var(--line);
+  border-radius: .25rem;
+  padding: .8rem;
+}
+.import-comparison h3 {
+  margin: 0 0 .5rem;
+  font-size: 1rem;
+}
+.import-comparison dl {
+  margin: 0;
+}
+.import-comparison dl div {
+  display: flex;
+  justify-content: space-between;
+  gap: .5rem;
+  padding-block: .25rem;
+}
+.import-comparison dd {
+  margin: 0;
+  font-weight: 700;
+}
+@media (max-width: 34rem) {
+  .import-comparison {
+    grid-template-columns: 1fr;
+  }
+}
+.backup-disclosure {
+  margin-block: 1.5rem 2rem;
+  border: 1px solid var(--line);
+  border-radius: .25rem;
+  background: var(--surface);
+}
+.backup-disclosure > summary {
+  min-height: 2.75rem;
+  padding: .65rem 1rem;
+  cursor: pointer;
+  font-weight: 650;
+}
+.backup-disclosure > summary:hover {
+  background: var(--paper);
+}
+.backup-disclosure[open] > summary {
+  border-bottom: 1px solid var(--line);
+}
+.backup-controls {
+  margin: 0;
+  padding: 1.25rem;
+}
+#recovery-controls:not([hidden]) + .backup-controls {
+  border-top: 1px solid var(--line);
+}
+.backup-controls h2 {
+  margin: 0 0 .5rem;
+  font-size: 1.15rem;
+}
+.backup-controls p {
+  max-width: 75ch;
+  color: var(--muted);
+  font-size: .9rem;
+}
+#export-progress {
+  min-height: 2.75rem;
+  padding: .6rem 1rem;
+  border: 1px solid var(--muted);
+  border-radius: .2rem;
+  cursor: pointer;
+  background: var(--surface);
+  color: var(--ink);
+}
+#backup-status {
+  overflow-wrap: anywhere;
+}
+#backup-status:empty {
+  display: none;
+}
