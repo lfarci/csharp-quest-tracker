@@ -80,3 +80,30 @@ test('activity icons distinguish types and preserve normal completion', async ({
   await page.locator('[data-challenge-id="hunting-the-manticore"] input').check();
   await expect(page.locator('#completed-count')).toHaveText('1 / 114');
 });
+
+test('activity color keys differ by type and adapt in dark mode', async ({ page }) => {
+  await page.goto('/index.html');
+  await expect(page.locator('#tracker')).toBeVisible();
+
+  const types = ['challenge', 'boss-battle', 'knowledge-check'];
+  const readColors = () => page.evaluate(types => types.map(type => {
+    const row = document.querySelector(`.challenge--${type}`);
+    const icon = row.querySelector('.activity-type-icon');
+    return {
+      icon: getComputedStyle(icon).color,
+      border: getComputedStyle(row).borderInlineStartColor,
+    };
+  }), types);
+
+  const light = await readColors();
+  expect(new Set(light.map(item => item.icon)).size).toBe(3);
+  for (const item of light) expect(item.border).toBe(item.icon);
+
+  await page.goto('/settings.html');
+  await page.locator('#theme-select').selectOption('dark');
+  await page.goto('/index.html');
+  const dark = await readColors();
+  expect(new Set(dark.map(item => item.icon)).size).toBe(3);
+  for (const item of dark) expect(item.border).toBe(item.icon);
+  expect(dark[0].icon).not.toBe(light[0].icon);
+});

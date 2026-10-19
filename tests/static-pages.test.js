@@ -119,3 +119,18 @@ test('MIT license uses standard text with third-party scope explained separately
   assert.match(rights, /sui generis database right/i);
   assert.match(rights, /original selection\/arrangement/i);
 });
+
+test('activity icons are local and carry their upstream license notice', async () => {
+  const html = await readProjectFile('index.html');
+  const svg = await readProjectFile('assets/icons/activity-types.svg');
+  const license = await readProjectFile('assets/licenses/lucide-LICENSE.txt');
+  const readme = await readProjectFile('README.md');
+
+  for (const type of ['challenge', 'boss-battle', 'knowledge-check']) {
+    assert.match(svg, new RegExp('<symbol id="' + type + '"'));
+    assert.ok(html.includes('activity-types.svg#' + type));
+  }
+  assert.match(license, /ISC License/);
+  assert.match(license, /Lucide Icons and Contributors/);
+  assert.match(readme, /lucide-LICENSE\.txt/);
+});

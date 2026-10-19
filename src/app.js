@@ -222,6 +222,7 @@ function renderChecklist() {
       checkbox.id = `challenge-${challenge.id}`;
       checkbox.checked = challenge.completed;
       const type = challenge.type ?? 'challenge';
+      item.classList.add(`challenge--${type}`);
       const icon = createActivityIcon(type);
       const typeLabel = document.createElement('span');
       typeLabel.className = 'sr-only';

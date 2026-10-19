@@ -35,4 +35,4 @@ For visual identification only, the project owner supplied **35 Boss Battle titl
 
 The owner listed **Amaroks** and **Getting Armed** on page 244, while the previously verified authoritative tracker catalog gives **page 245** for both. Keep the original catalog's page references unchanged.
 
-A locally hosted, original SVG symbol set depicts a sword, crossed swords, and a scroll. It does not copy the book's icon artwork.
+The activity icon symbols now use the open-source [Lucide](https://lucide.dev/) **sword**, **swords**, and **scroll-text** shapes (ISC-licensed; [complete upstream license included locally](../assets/licenses/lucide-LICENSE.txt)). Their outlines are paired with restrained blue, amber, and teal activity colors and a subtle row-edge accent; dark mode uses lighter contrasts. Neither icon nor color alone is required to understand the types: the legend names all three, and screen readers hear the type in each activity label. No book artwork is copied.

@@ -1,3 +1,10 @@
+/* Activity colors complement distinct icon shapes and accessible names. */
+:root {
+  --type-challenge: #365d89;
+  --type-boss-battle: #8b5d0f;
+  --type-knowledge-check: #236c6a;
+}
+
 /* Tracker interaction defaults */
 .filter-options label, .challenge-label {
   touch-action: manipulation;
@@ -326,7 +333,19 @@ progress::-moz-progress-bar {
   flex: 0 0 auto;
   width: 1.2rem;
   height: 1.2rem;
-  color: var(--ink);
+  color: var(--activity-color, var(--type-challenge));
+}
+
+.activity-type-icon--challenge {
+  --activity-color: var(--type-challenge);
+}
+
+.activity-type-icon--boss-battle {
+  --activity-color: var(--type-boss-battle);
+}
+
+.activity-type-icon--knowledge-check {
+  --activity-color: var(--type-knowledge-check);
 }
 
 .activity-legend .activity-type-icon {
@@ -334,8 +353,17 @@ progress::-moz-progress-bar {
   height: 1rem;
 }
 
-.activity-type-icon--boss-battle {
-  color: var(--accent);
+/* A thin row-edge key reinforces the icon color without making it the only cue. */
+.challenge--challenge {
+  --activity-color: var(--type-challenge);
+}
+
+.challenge--boss-battle {
+  --activity-color: var(--type-boss-battle);
+}
+
+.challenge--knowledge-check {
+  --activity-color: var(--type-knowledge-check);
 }
 
 /* Challenge rows and completion */
@@ -347,6 +375,10 @@ progress::-moz-progress-bar {
   border: 1px solid var(--line);
   border-radius: .45rem;
   box-shadow: 0 .5rem 1.25rem rgb(24 42 66 / 5%);
+}
+
+.challenge {
+  border-inline-start: 3px solid var(--activity-color);
 }
 
 .challenge + .challenge {
@@ -502,4 +534,19 @@ progress::-moz-progress-bar {
 
 #variable-award-error {
   font-weight: 600;
+}
+
+/* Make all three colors readable on both system and explicitly selected dark UI. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --type-challenge: #a4c9f1;
+    --type-boss-battle: #edd08b;
+    --type-knowledge-check: #83d5cb;
+  }
+}
+
+:root[data-theme="dark"] {
+  --type-challenge: #a4c9f1;
+  --type-boss-battle: #edd08b;
+  --type-knowledge-check: #83d5cb;
 }
