@@ -29,6 +29,6 @@ The three HTML entry points live at the repository root. JavaScript goes in `src
 
 Run `npm test` after source, markup or asset changes; keep existing behavior, browser accessibility, mobile display and light/dark appearance. Pull requests also run CI browser smoke tests for Chromium, Firefox and WebKit. Update the Pages assembly paths when public resources move.
 
-Original application code is MIT licensed, but book-derived catalog metadata requires separate reuse evidence (see `docs/metadata-rights.md` and issue #9). Do not contact the author or deploy without authorization. The Pages workflow is manual-only; do not trigger a deployment until metadata reuse is cleared and publication is explicitly authorized.
+Original application code is MIT licensed, but book-derived catalog metadata requires separate reuse evidence (see `docs/metadata-rights.md` and issue #9). Do not contact the author or deploy without authorization. The Pages workflow automatically deploys pushes to `main` and supports manual dispatch. Confirm metadata-reuse rights and publication authorization before merging changes that would be published.
 
 Read directory-local `AGENTS.md` guidance when working in a directory. Do not add placeholder directories or unused assets.

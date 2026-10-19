@@ -1,7 +1,10 @@
 name: Publish static site to GitHub Pages
 
-# Publication requires an explicit manual run after the rights prerequisite is met.
+# Deploy on updates to main, or allow an explicit manual deployment.
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions: {}
